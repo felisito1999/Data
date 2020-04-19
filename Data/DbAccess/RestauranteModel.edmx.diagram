@@ -17,7 +17,6 @@
         <EntityTypeShape EntityType="RestauranteModel.ProductoMenu" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="RestauranteModel.Provincia" Width="1.5" PointX="1.5" PointY="25.5" IsExpanded="true" />
         <EntityTypeShape EntityType="RestauranteModel.Rol" Width="1.5" PointX="3" PointY="22.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="RestauranteModel.Sucursal" Width="1.5" PointX="0.75" PointY="13.5" IsExpanded="true" />
         <EntityTypeShape EntityType="RestauranteModel.Usuario" Width="1.5" PointX="5.25" PointY="14.875" IsExpanded="true" />
         <AssociationConnector Association="RestauranteModel.FK_ProvinciasCiudades" ManuallyRouted="false" />
         <AssociationConnector Association="RestauranteModel.FK_ClientesOrdenes" ManuallyRouted="false" />
@@ -27,17 +26,13 @@
         <AssociationConnector Association="RestauranteModel.FK_EmpleadosOrdenes" ManuallyRouted="false" />
         <AssociationConnector Association="RestauranteModel.FK_EstadosEmpleados" ManuallyRouted="false" />
         <AssociationConnector Association="RestauranteModel.FK_PaisesEmpleados" ManuallyRouted="false" />
-        <AssociationConnector Association="RestauranteModel.FK_SucursalesEmpleados" ManuallyRouted="false" />
         <AssociationConnector Association="RestauranteModel.FK_UsuariosEmpleados" ManuallyRouted="false" />
         <AssociationConnector Association="RestauranteModel.FK_EstadosOrdenes" ManuallyRouted="false" />
         <AssociationConnector Association="RestauranteModel.FK_EstadosOrdenesDetalles" ManuallyRouted="false" />
         <AssociationConnector Association="RestauranteModel.FK_EstadosRoles" ManuallyRouted="false" />
         <AssociationConnector Association="RestauranteModel.FK_EstadosUsuarios" ManuallyRouted="false" />
         <AssociationConnector Association="RestauranteModel.FK_MenuesProductosMenues" ManuallyRouted="false" />
-        <AssociationConnector Association="RestauranteModel.FK_SucursalesMenues" ManuallyRouted="false" />
         <AssociationConnector Association="RestauranteModel.FK_OrdenesOrdenesDetalles" ManuallyRouted="false" />
-        <AssociationConnector Association="RestauranteModel.FK_PaisesSucursales" ManuallyRouted="false" />
-        <AssociationConnector Association="RestauranteModel.FK_ProvinciasSucursales" ManuallyRouted="false" />
         <AssociationConnector Association="RestauranteModel.FK_RolesUsuarios" ManuallyRouted="false" />
         <EntityTypeShape EntityType="RestauranteModel.Producto" Width="1.5" PointX="3" PointY="4.125" />
         <AssociationConnector Association="RestauranteModel.FK_CategoriasProductos" />
@@ -46,6 +41,11 @@
         <AssociationConnector Association="RestauranteModel.FK_ProductosProductosMenues" />
         <EntityTypeShape EntityType="RestauranteModel.ImagenProducto" Width="1.5" PointX="5.25" PointY="0.75" />
         <AssociationConnector Association="RestauranteModel.FK_ProductosImagenesProductos" />
+        <EntityTypeShape EntityType="RestauranteModel.Sucursal" Width="1.5" PointX="5.75" PointY="20.875" />
+        <AssociationConnector Association="RestauranteModel.FK_SucursalesEmpleados" />
+        <AssociationConnector Association="RestauranteModel.FK_SucursalesMenues" />
+        <AssociationConnector Association="RestauranteModel.FK_PaisesSucursales" />
+        <AssociationConnector Association="RestauranteModel.FK_ProvinciasSucursales" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

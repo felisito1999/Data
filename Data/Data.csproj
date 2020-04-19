@@ -155,6 +155,7 @@
     <Compile Include="Services\EmpleadoService.cs" />
     <Compile Include="Services\EstadoService.cs" />
     <Compile Include="Services\GetService.cs" />
+    <Compile Include="Services\ImagenProductoService.cs" />
     <Compile Include="Services\IModelViewModelConverter.cs" />
     <Compile Include="Services\ISingleModelSystemService.cs" />
     <Compile Include="Services\MenuService.cs" />

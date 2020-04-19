@@ -33,7 +33,7 @@ namespace Data.Services
         {
             using (var context = GetService.GetRestauranteEntityService())
             {
-                var sucursales = context.Sucursales.ToList();
+                var sucursales = context.Sucursales.ToList().Where(x => x.Borrado == false);
 
                 return sucursales;
             }
@@ -46,11 +46,23 @@ namespace Data.Services
 
         public void SoftDelete(int id)
         {
-            throw new NotImplementedException();
+            using (var context = GetService.GetRestauranteEntityService())
+            {
+                var sucursal = context.Sucursales.Find(id);
+                sucursal.Borrado = true;
+
+                context.SaveChanges();
+            }
         }
-        public void UpdateSingleObject(Sucursal objectType)
+        public void UpdateSingleObject(Sucursal sucursalNueva)
         {
-            throw new NotImplementedException();
+            using (var context = GetService.GetRestauranteEntityService())
+            {
+                var sucursalOriginal = context.Sucursales.Find(sucursalNueva.CodigoSucursal);
+                sucursalOriginal = sucursalNueva;
+
+                context.SaveChanges();
+            }
         }
         public Sucursal GetLastSucursal()
         {

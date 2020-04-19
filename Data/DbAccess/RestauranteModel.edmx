@@ -154,6 +154,7 @@
           <Property Name="DireccionSucursal" Type="varchar" MaxLength="200" />
           <Property Name="CodigoPais" Type="int" Nullable="false" />
           <Property Name="CodigoProvincia" Type="int" Nullable="false" />
+          <Property Name="Borrado" Type="bit" />
         </EntityType>
         <EntityType Name="Usuarios">
           <Key>
@@ -665,8 +666,8 @@
           <NavigationProperty Name="Ordenes" Relationship="Self.FK_EmpleadosOrdenes" FromRole="Empleados" ToRole="Ordenes" />
           <NavigationProperty Name="Estados" Relationship="Self.FK_EstadosEmpleados" FromRole="Empleados" ToRole="Estados" />
           <NavigationProperty Name="Paises" Relationship="Self.FK_PaisesEmpleados" FromRole="Empleados" ToRole="Paises" />
-          <NavigationProperty Name="Sucursales" Relationship="Self.FK_SucursalesEmpleados" FromRole="Empleados" ToRole="Sucursales" />
           <NavigationProperty Name="Usuarios" Relationship="Self.FK_UsuariosEmpleados" FromRole="Empleados" ToRole="Usuarios" />
+          <NavigationProperty Name="Sucursales" Relationship="RestauranteModel.FK_SucursalesEmpleados" FromRole="Empleado" ToRole="Sucursales" />
         </EntityType>
         <EntityType Name="Estado">
           <Key>
@@ -690,7 +691,7 @@
           <Property Name="CodigoSucursal" Type="Int32" Nullable="false" />
           <Property Name="Borrado" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="ProductosMenues" Relationship="Self.FK_MenuesProductosMenues" FromRole="Menues" ToRole="ProductosMenues" />
-          <NavigationProperty Name="Sucursales" Relationship="Self.FK_SucursalesMenues" FromRole="Menues" ToRole="Sucursales" />
+          <NavigationProperty Name="Sucursales" Relationship="RestauranteModel.FK_SucursalesMenues" FromRole="Menu" ToRole="Sucursales" />
         </EntityType>
         <EntityType Name="Orden">
           <Key>
@@ -732,7 +733,7 @@
           <Property Name="NombrePais" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Clientes" Relationship="Self.FK_PaisesClientes" FromRole="Paises" ToRole="Clientes" />
           <NavigationProperty Name="Empleados" Relationship="Self.FK_PaisesEmpleados" FromRole="Paises" ToRole="Empleados" />
-          <NavigationProperty Name="Sucursales" Relationship="Self.FK_PaisesSucursales" FromRole="Paises" ToRole="Sucursales" />
+          <NavigationProperty Name="Sucursales" Relationship="RestauranteModel.FK_PaisesSucursales" FromRole="Pais" ToRole="Sucursales" />
         </EntityType>
         <EntityType Name="ProductoMenu">
           <Key>
@@ -753,7 +754,7 @@
           <Property Name="CodigoProvincia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NombreProvincia" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Ciudades" Relationship="Self.FK_ProvinciasCiudades" FromRole="Provincias" ToRole="Ciudades" />
-          <NavigationProperty Name="Sucursales" Relationship="Self.FK_ProvinciasSucursales" FromRole="Provincias" ToRole="Sucursales" />
+          <NavigationProperty Name="Sucursales" Relationship="RestauranteModel.FK_ProvinciasSucursales" FromRole="Provincia" ToRole="Sucursales" />
         </EntityType>
         <EntityType Name="Rol">
           <Key>
@@ -765,20 +766,6 @@
           <Property Name="Borrado" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Estados" Relationship="Self.FK_EstadosRoles" FromRole="Roles" ToRole="Estados" />
           <NavigationProperty Name="Usuarios" Relationship="Self.FK_RolesUsuarios" FromRole="Roles" ToRole="Usuarios" />
-        </EntityType>
-        <EntityType Name="Sucursal">
-          <Key>
-            <PropertyRef Name="CodigoSucursal" />
-          </Key>
-          <Property Name="CodigoSucursal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NombreSucursal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DireccionSucursal" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="CodigoPais" Type="Int32" Nullable="false" />
-          <Property Name="CodigoProvincia" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Empleados" Relationship="Self.FK_SucursalesEmpleados" FromRole="Sucursales" ToRole="Empleados" />
-          <NavigationProperty Name="Menues" Relationship="Self.FK_SucursalesMenues" FromRole="Sucursales" ToRole="Menues" />
-          <NavigationProperty Name="Paises" Relationship="Self.FK_PaisesSucursales" FromRole="Sucursales" ToRole="Paises" />
-          <NavigationProperty Name="Provincias" Relationship="Self.FK_ProvinciasSucursales" FromRole="Sucursales" ToRole="Provincias" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -892,18 +879,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SucursalesEmpleados">
-          <End Role="Sucursales" Type="RestauranteModel.Sucursal" Multiplicity="1" />
-          <End Role="Empleados" Type="RestauranteModel.Empleado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sucursales">
-              <PropertyRef Name="CodigoSucursal" />
-            </Principal>
-            <Dependent Role="Empleados">
-              <PropertyRef Name="CodigoSucursal" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_UsuariosEmpleados">
           <End Role="Usuarios" Type="RestauranteModel.Usuario" Multiplicity="1" />
           <End Role="Empleados" Type="RestauranteModel.Empleado" Multiplicity="*" />
@@ -976,18 +951,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SucursalesMenues">
-          <End Role="Sucursales" Type="RestauranteModel.Sucursal" Multiplicity="1" />
-          <End Role="Menues" Type="RestauranteModel.Menu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sucursales">
-              <PropertyRef Name="CodigoSucursal" />
-            </Principal>
-            <Dependent Role="Menues">
-              <PropertyRef Name="CodigoSucursal" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_OrdenesOrdenesDetalles">
           <End Role="Ordenes" Type="RestauranteModel.Orden" Multiplicity="1" />
           <End Role="OrdenesDetalles" Type="RestauranteModel.OrdenDetalle" Multiplicity="*" />
@@ -997,30 +960,6 @@
             </Principal>
             <Dependent Role="OrdenesDetalles">
               <PropertyRef Name="CodigoOrden" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PaisesSucursales">
-          <End Role="Paises" Type="RestauranteModel.Pais" Multiplicity="1" />
-          <End Role="Sucursales" Type="RestauranteModel.Sucursal" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Paises">
-              <PropertyRef Name="CodigoPais" />
-            </Principal>
-            <Dependent Role="Sucursales">
-              <PropertyRef Name="CodigoPais" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProvinciasSucursales">
-          <End Role="Provincias" Type="RestauranteModel.Provincia" Multiplicity="1" />
-          <End Role="Sucursales" Type="RestauranteModel.Sucursal" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Provincias">
-              <PropertyRef Name="CodigoProvincia" />
-            </Principal>
-            <Dependent Role="Sucursales">
-              <PropertyRef Name="CodigoProvincia" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1049,7 +988,6 @@
           <EntitySet Name="ProductosMenues" EntityType="RestauranteModel.ProductoMenu" />
           <EntitySet Name="Provincias" EntityType="RestauranteModel.Provincia" />
           <EntitySet Name="Roles" EntityType="RestauranteModel.Rol" />
-          <EntitySet Name="Sucursales" EntityType="RestauranteModel.Sucursal" />
           <EntitySet Name="Usuarios" EntityType="RestauranteModel.Usuario" />
           <AssociationSet Name="FK_ProvinciasCiudades" Association="Self.FK_ProvinciasCiudades">
             <End Role="Provincias" EntitySet="Provincias" />
@@ -1083,10 +1021,6 @@
             <End Role="Paises" EntitySet="Paises" />
             <End Role="Empleados" EntitySet="Empleados" />
           </AssociationSet>
-          <AssociationSet Name="FK_SucursalesEmpleados" Association="Self.FK_SucursalesEmpleados">
-            <End Role="Sucursales" EntitySet="Sucursales" />
-            <End Role="Empleados" EntitySet="Empleados" />
-          </AssociationSet>
           <AssociationSet Name="FK_UsuariosEmpleados" Association="Self.FK_UsuariosEmpleados">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Empleados" EntitySet="Empleados" />
@@ -1111,21 +1045,9 @@
             <End Role="Menues" EntitySet="Menues" />
             <End Role="ProductosMenues" EntitySet="ProductosMenues" />
           </AssociationSet>
-          <AssociationSet Name="FK_SucursalesMenues" Association="Self.FK_SucursalesMenues">
-            <End Role="Sucursales" EntitySet="Sucursales" />
-            <End Role="Menues" EntitySet="Menues" />
-          </AssociationSet>
           <AssociationSet Name="FK_OrdenesOrdenesDetalles" Association="Self.FK_OrdenesOrdenesDetalles">
             <End Role="Ordenes" EntitySet="Ordenes" />
             <End Role="OrdenesDetalles" EntitySet="OrdenesDetalles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PaisesSucursales" Association="Self.FK_PaisesSucursales">
-            <End Role="Paises" EntitySet="Paises" />
-            <End Role="Sucursales" EntitySet="Sucursales" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProvinciasSucursales" Association="Self.FK_ProvinciasSucursales">
-            <End Role="Provincias" EntitySet="Provincias" />
-            <End Role="Sucursales" EntitySet="Sucursales" />
           </AssociationSet>
           <AssociationSet Name="FK_RolesUsuarios" Association="Self.FK_RolesUsuarios">
             <End Role="Roles" EntitySet="Roles" />
@@ -1174,6 +1096,23 @@
           <AssociationSet Name="FK_ProductosImagenesProductos" Association="RestauranteModel.FK_ProductosImagenesProductos">
             <End Role="Producto" EntitySet="Productos" />
             <End Role="ImagenesProductos" EntitySet="ImagenesProductos" />
+          </AssociationSet>
+          <EntitySet Name="Sucursales" EntityType="RestauranteModel.Sucursal" />
+          <AssociationSet Name="FK_SucursalesEmpleados" Association="RestauranteModel.FK_SucursalesEmpleados">
+            <End Role="Sucursales" EntitySet="Sucursales" />
+            <End Role="Empleado" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SucursalesMenues" Association="RestauranteModel.FK_SucursalesMenues">
+            <End Role="Sucursales" EntitySet="Sucursales" />
+            <End Role="Menu" EntitySet="Menues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaisesSucursales" Association="RestauranteModel.FK_PaisesSucursales">
+            <End Role="Pais" EntitySet="Paises" />
+            <End Role="Sucursales" EntitySet="Sucursales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProvinciasSucursales" Association="RestauranteModel.FK_ProvinciasSucursales">
+            <End Role="Provincia" EntitySet="Provincias" />
+            <End Role="Sucursales" EntitySet="Sucursales" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Producto">
@@ -1260,6 +1199,69 @@
             </Principal>
             <Dependent Role="ImagenesProductos">
               <PropertyRef Name="CodigoProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Sucursal">
+          <Key>
+            <PropertyRef Name="CodigoSucursal" />
+          </Key>
+          <Property Name="CodigoSucursal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreSucursal" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DireccionSucursal" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoPais" Type="Int32" Nullable="false" />
+          <Property Name="CodigoProvincia" Type="Int32" Nullable="false" />
+          <Property Name="Borrado" Type="Boolean" />
+          <NavigationProperty Name="Empleados" Relationship="RestauranteModel.FK_SucursalesEmpleados" FromRole="Sucursales" ToRole="Empleado" />
+          <NavigationProperty Name="Menues" Relationship="RestauranteModel.FK_SucursalesMenues" FromRole="Sucursales" ToRole="Menu" />
+          <NavigationProperty Name="Paises" Relationship="RestauranteModel.FK_PaisesSucursales" FromRole="Sucursales" ToRole="Pais" />
+          <NavigationProperty Name="Provincias" Relationship="RestauranteModel.FK_ProvinciasSucursales" FromRole="Sucursales" ToRole="Provincia" />
+        </EntityType>
+        <Association Name="FK_SucursalesEmpleados">
+          <End Type="RestauranteModel.Sucursal" Role="Sucursales" Multiplicity="1" />
+          <End Type="RestauranteModel.Empleado" Role="Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sucursales">
+              <PropertyRef Name="CodigoSucursal" />
+            </Principal>
+            <Dependent Role="Empleado">
+              <PropertyRef Name="CodigoSucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SucursalesMenues">
+          <End Type="RestauranteModel.Sucursal" Role="Sucursales" Multiplicity="1" />
+          <End Type="RestauranteModel.Menu" Role="Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sucursales">
+              <PropertyRef Name="CodigoSucursal" />
+            </Principal>
+            <Dependent Role="Menu">
+              <PropertyRef Name="CodigoSucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaisesSucursales">
+          <End Type="RestauranteModel.Pais" Role="Pais" Multiplicity="1" />
+          <End Type="RestauranteModel.Sucursal" Role="Sucursales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pais">
+              <PropertyRef Name="CodigoPais" />
+            </Principal>
+            <Dependent Role="Sucursales">
+              <PropertyRef Name="CodigoPais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProvinciasSucursales">
+          <End Type="RestauranteModel.Provincia" Role="Provincia" Multiplicity="1" />
+          <End Type="RestauranteModel.Sucursal" Role="Sucursales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincia">
+              <PropertyRef Name="CodigoProvincia" />
+            </Principal>
+            <Dependent Role="Sucursales">
+              <PropertyRef Name="CodigoProvincia" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1400,17 +1402,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Sucursales">
-            <EntityTypeMapping TypeName="RestauranteModel.Sucursal">
-              <MappingFragment StoreEntitySet="Sucursales">
-                <ScalarProperty Name="CodigoSucursal" ColumnName="CodigoSucursal" />
-                <ScalarProperty Name="NombreSucursal" ColumnName="NombreSucursal" />
-                <ScalarProperty Name="DireccionSucursal" ColumnName="DireccionSucursal" />
-                <ScalarProperty Name="CodigoPais" ColumnName="CodigoPais" />
-                <ScalarProperty Name="CodigoProvincia" ColumnName="CodigoProvincia" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Usuarios">
             <EntityTypeMapping TypeName="RestauranteModel.Usuario">
               <MappingFragment StoreEntitySet="Usuarios">
@@ -1447,6 +1438,18 @@
                 <ScalarProperty Name="CodigoProducto" ColumnName="CodigoProducto" />
                 <ScalarProperty Name="Imagen" ColumnName="Imagen" />
                 <ScalarProperty Name="CodigoImagenProducto" ColumnName="CodigoImagenProducto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sucursales">
+            <EntityTypeMapping TypeName="RestauranteModel.Sucursal">
+              <MappingFragment StoreEntitySet="Sucursales">
+                <ScalarProperty Name="Borrado" ColumnName="Borrado" />
+                <ScalarProperty Name="CodigoProvincia" ColumnName="CodigoProvincia" />
+                <ScalarProperty Name="CodigoPais" ColumnName="CodigoPais" />
+                <ScalarProperty Name="DireccionSucursal" ColumnName="DireccionSucursal" />
+                <ScalarProperty Name="NombreSucursal" ColumnName="NombreSucursal" />
+                <ScalarProperty Name="CodigoSucursal" ColumnName="CodigoSucursal" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

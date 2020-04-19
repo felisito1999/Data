@@ -36,7 +36,7 @@ namespace Data.DbAccess
         public virtual ICollection<Orden> Ordenes { get; set; }
         public virtual Estado Estados { get; set; }
         public virtual Pais Paises { get; set; }
-        public virtual Sucursal Sucursales { get; set; }
         public virtual Usuario Usuarios { get; set; }
+        public virtual Sucursal Sucursales { get; set; }
     }
 }

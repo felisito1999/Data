@@ -2,6 +2,7 @@
 using Data.Services;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -38,7 +39,23 @@ namespace Restaurante.Controllers
 
             using (var context = GetService.GetRestauranteEntityService().Database.BeginTransaction())
             {
-                //GetService.GetProductoMenuService()
+                try
+                {
+                    byte[] imagenPrincipal;
+                    using (MemoryStream memory = new MemoryStream())
+                    {
+                        viewModel.Archivo.InputStream.CopyTo(memory);
+
+                        imagenPrincipal = memory.ToArray();
+                    }
+                    //GetService.
+                        
+
+                }
+                catch (Exception)
+                {
+
+                }
             }
             return View();
         }

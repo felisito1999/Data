@@ -28,6 +28,7 @@ namespace Data.Models.ViewModels
                 return GetService.GetProvinciaService().FindById(CodigoProvincia);
             }
         }
+        [Required]
         [Display(Name = "Provincia:")]
         public int CodigoProvincia { get; set; }
     }

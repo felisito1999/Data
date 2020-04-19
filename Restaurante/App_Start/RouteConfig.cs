@@ -16,7 +16,7 @@ namespace Restaurante
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Sucursal", action = "SucursalList", id = UrlParameter.Optional }
+                defaults: new { controller = "Sucursal", action = "SucursalIndex", id = UrlParameter.Optional }
             );
         }
     }

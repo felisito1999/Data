@@ -26,6 +26,7 @@ namespace Data.DbAccess
         public string DireccionSucursal { get; set; }
         public int CodigoPais { get; set; }
         public int CodigoProvincia { get; set; }
+        public Nullable<bool> Borrado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Empleado> Empleados { get; set; }

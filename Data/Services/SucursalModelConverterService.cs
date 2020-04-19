@@ -38,6 +38,7 @@ namespace Data.Services
                 DireccionSucursal = viewModel.DireccionSucursal,
                 CodigoPais = viewModel.Pais.CodigoPais,
                 CodigoProvincia = viewModel.CodigoProvincia,
+                Provincias = GetService.GetProvinciaService().FindById(viewModel.CodigoProvincia)
             };
             return original;
         }
@@ -49,7 +50,14 @@ namespace Data.Services
 
         public SucursalViewModel ConvertToViewModel(Sucursal original)
         {
-            throw new NotImplementedException();
+            SucursalViewModel viewModel = new SucursalViewModel
+            {
+                CodigoSucursal = original.CodigoSucursal,
+                CodigoProvincia = original.CodigoProvincia,
+                NombreSucursal = original.NombreSucursal,
+                DireccionSucursal = original.DireccionSucursal
+            };
+            return viewModel;
         }
     }
 }

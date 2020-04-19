@@ -25,26 +25,8 @@ namespace Data.Models.ViewModels
         public string DescripcionProducto { get; set; }
         [Required]
         [Display(Name = "Imagen principal:")]
-        public byte[] Imagen
-        {
-            get
-            {
-                if (Archivo.ContentLength > 0)
-                {
-                    using (MemoryStream memory = new MemoryStream())
-                    {
-                        Archivo.InputStream.CopyTo(memory);
+        public byte[] Imagen { get; set; }
 
-                        byte[] imagen = memory.ToArray();
-                        return imagen;
-                    }
-                }
-                else
-                {
-                    return null;
-                }
-            }
-        }
         public Producto Producto { get; set; }
         [Required, FileExtensions(Extensions = "jpeg, png, jpg",
                 ErrorMessage = "Especificar una imagen")]

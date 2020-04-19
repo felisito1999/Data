@@ -4,11 +4,14 @@
     ViewBag.Title = "SucursalesIndex";
 }
 
-<h2>Lista de sucursales disponibles</h2>
+<h2>sucursales disponibles</h2>
 
-<p>
-    @Html.ActionLink("Agregar sucursal", "AgregarSucursal", "", new { @class = "btn btn-primary" })
-</p>
+@if (User.IsInRole("Administrador"))
+{
+    <p>
+        @Html.ActionLink("Agregar sucursal", "AgregarSucursal", "", new { @class = "btn btn-primary" })
+    </p>
+}
 <table class="table">
     <tr>
         <th>
@@ -45,8 +48,8 @@
                 @if (User.IsInRole("Administrador"))
                 {
                     @Html.ActionLink("Ver menu", "ProductoMenuList", "ProductoMenu", new { id = item.CodigoSucursal }, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Modificar sucursal", "SucursalUpdate", "Sucursal", new { id = item.CodigoSucursal }, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("BorrarSucursal", "BorrarSucursal", "Sucursal", new { id = item.CodigoSucursal }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Modificar sucursal", "UpdateSucursal", "Sucursal", new { id = item.CodigoSucursal }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("BorrarSucursal", "DeleteSucursal", "Sucursal", new { id = item.CodigoSucursal }, new { @class = "btn btn-primary" })
                 }
                 else
                 {

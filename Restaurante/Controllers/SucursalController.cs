@@ -41,7 +41,7 @@ namespace Restaurante.Controllers
                             Borrado = false
                         };
                         GetService.GetMenuService().Insert(menu);
-                        return RedirectToAction("SucursalIndex", "Sucursal");
+                        return View("SucursalIndex");
                     }
                 }
                 catch (Exception)
@@ -55,7 +55,39 @@ namespace Restaurante.Controllers
             }
         }
         [Authorize(Roles = "Administrador")]
-        public ActionResult DeleteSusursal(int id)
+        public ActionResult UpdateSucursal(int id)
+        {
+            try
+            {
+                var sucursalOriginal = GetService.GetSucursalService().FindById(id);
+                var sucursal = GetService.GetSucursalModelConverterService().ConvertToViewModel(sucursalOriginal);
+
+                return View(sucursal);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("SucursalIndex", "Sucursal");
+            }
+        }
+        [HttpPost]
+        [Authorize(Roles ="Administrador")]
+        public ActionResult UpdateSucursal(SucursalViewModel viewModel)
+        {
+            try
+            {
+                var sucursal = GetService.GetSucursalModelConverterService().ConvertFromViewModel(viewModel);
+                GetService.GetSucursalService().UpdateSingleObject(sucursal);
+
+                return RedirectToAction("SucursalIndex");
+            }
+            catch (Exception)
+            {
+                return View();
+            }
+
+        }
+        [Authorize(Roles = "Administrador")]
+        public ActionResult DeleteSucursal(int id)
         {
             if (ModelState.IsValid)
             {
@@ -66,12 +98,12 @@ namespace Restaurante.Controllers
                 }
                 catch (Exception)
                 {
-                    return View();
+                    return View("SucursalIndex");
                 }
             }
             else
             {
-                return View();
+                return View("SucursalIndex");
             }
         }
     }
