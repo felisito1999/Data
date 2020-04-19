@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Data.Models.ViewModels.SucursalViewModel>
+
+@{
+    ViewBag.Title = "Página principal";
+}
+
+<h2>Página principal</h2>
+
+<h4>Sucursales disponibles</h4>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NombreSucursal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pais)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Provincia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DireccionSucursal)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NombreSucursal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pais.NombrePais)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Provincia.NombreProvincia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DireccionSucursal)
+        </td>
+        <td>
+            @if (User.IsInRole("Administrador"))
+            {
+                @Html.ActionLink("VerMenu", "Edit", new { id = item.CodigoSucursal }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Modificar menu", "Details", new { id = item.CodigoSucursal }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Eliminar sucursal", "Delete", new { id = item.CodigoSucursal }, new { @class = "btn btn-primary" })
+            }
+            else
+            {
+                @Html.ActionLink("Details", "Details", "Product", new { id=item.CodigoSucursal }, null)
+            }
+
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,1476 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RestauranteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CategoriasProductos">
+          <Key>
+            <PropertyRef Name="CodigoCategoria" />
+          </Key>
+          <Property Name="CodigoCategoria" Type="int" Nullable="false" />
+          <Property Name="NombreCategoria" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ciudades">
+          <Key>
+            <PropertyRef Name="CodigoCiudad" />
+          </Key>
+          <Property Name="CodigoCiudad" Type="int" Nullable="false" />
+          <Property Name="NombreCiudad" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="CodigoProvincia" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="CodigoCliente" />
+          </Key>
+          <Property Name="CodigoCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreCliente" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="ApellidoCliente" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="date" Nullable="false" />
+          <Property Name="Sexo" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Telefono" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="CodigoPaisNacimiento" Type="int" Nullable="false" />
+          <Property Name="CodigoUsuario" Type="int" Nullable="false" />
+          <Property Name="CodigoEstado" Type="int" Nullable="false" />
+          <Property Name="Borrado" Type="bit" />
+        </EntityType>
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="CodigoEmpleado" />
+          </Key>
+          <Property Name="CodigoEmpleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreEmpleado" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="ApellidoEmpleado" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="date" Nullable="false" />
+          <Property Name="Sexo" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Telefono" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="CodigoPaisNacimiento" Type="int" Nullable="false" />
+          <Property Name="CodigoUsuario" Type="int" Nullable="false" />
+          <Property Name="CodigoSucursal" Type="int" Nullable="false" />
+          <Property Name="CodigoEstado" Type="int" Nullable="false" />
+          <Property Name="Borrado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Estados">
+          <Key>
+            <PropertyRef Name="CodigoEstado" />
+          </Key>
+          <Property Name="CodigoEstado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreEstado" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ImagenesProductos">
+          <Key>
+            <PropertyRef Name="CodigoImagenProducto" />
+          </Key>
+          <Property Name="CodigoImagenProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Imagen" Type="varbinary" MaxLength="1" Nullable="false" />
+          <Property Name="CodigoProducto" Type="int" Nullable="false" />
+          <Property Name="Borrado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Menues">
+          <Key>
+            <PropertyRef Name="CodigoMenu" />
+          </Key>
+          <Property Name="CodigoMenu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodigoSucursal" Type="int" Nullable="false" />
+          <Property Name="Borrado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ordenes">
+          <Key>
+            <PropertyRef Name="CodigoOrden" />
+          </Key>
+          <Property Name="CodigoOrden" Type="int" Nullable="false" />
+          <Property Name="CodigoCliente" Type="int" Nullable="false" />
+          <Property Name="CodigoEmpleado" Type="int" Nullable="false" />
+          <Property Name="FechaHora" Type="datetime" Nullable="false" />
+          <Property Name="CodigoEstado" Type="int" Nullable="false" />
+          <Property Name="Borrado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrdenesDetalles">
+          <Key>
+            <PropertyRef Name="CodigoOrdenDetalle" />
+          </Key>
+          <Property Name="CodigoOrdenDetalle" Type="int" Nullable="false" />
+          <Property Name="CodigoOrden" Type="int" Nullable="false" />
+          <Property Name="CodigoProducto" Type="int" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="Costo" Type="decimal" Precision="12" Scale="4" Nullable="false" />
+          <Property Name="PrecioVenta" Type="decimal" Precision="12" Scale="4" Nullable="false" />
+          <Property Name="CodigoEstado" Type="int" Nullable="false" />
+          <Property Name="Borrado" Type="bit" />
+        </EntityType>
+        <EntityType Name="Paises">
+          <Key>
+            <PropertyRef Name="CodigoPais" />
+          </Key>
+          <Property Name="CodigoPais" Type="int" Nullable="false" />
+          <Property Name="ISOPais" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="NombrePais" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Productos">
+          <Key>
+            <PropertyRef Name="CodigoProducto" />
+          </Key>
+          <Property Name="CodigoProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreProducto" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="DescripcionProducto" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Costo" Type="decimal" Precision="12" Scale="4" Nullable="false" />
+          <Property Name="CodigoCategoria" Type="int" Nullable="false" />
+          <Property Name="CodigoEstado" Type="int" Nullable="false" />
+          <Property Name="Borrado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductosMenues">
+          <Key>
+            <PropertyRef Name="CodigoProductoMenu" />
+          </Key>
+          <Property Name="CodigoProductoMenu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodigoProducto" Type="int" Nullable="false" />
+          <Property Name="CodigoMenu" Type="int" Nullable="false" />
+          <Property Name="Precio" Type="decimal" Precision="12" Scale="4" Nullable="false" />
+          <Property Name="Borrado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Provincias">
+          <Key>
+            <PropertyRef Name="CodigoProvincia" />
+          </Key>
+          <Property Name="CodigoProvincia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreProvincia" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="CodigoRol" />
+          </Key>
+          <Property Name="CodigoRol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreRol" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="CodigoEstado" Type="int" Nullable="false" />
+          <Property Name="Borrado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sucursales">
+          <Key>
+            <PropertyRef Name="CodigoSucursal" />
+          </Key>
+          <Property Name="CodigoSucursal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreSucursal" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DireccionSucursal" Type="varchar" MaxLength="200" />
+          <Property Name="CodigoPais" Type="int" Nullable="false" />
+          <Property Name="CodigoProvincia" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="CodigoUsuario" />
+          </Key>
+          <Property Name="CodigoUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreUsuario" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Clave" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Correo" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="CodigoRol" Type="int" Nullable="false" />
+          <Property Name="CodigoEstado" Type="int" Nullable="false" />
+          <Property Name="Borrado" Type="bit" />
+        </EntityType>
+        <Association Name="FK_CategoriasProductos">
+          <End Role="CategoriasProductos" Type="Self.CategoriasProductos" Multiplicity="1" />
+          <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoriasProductos">
+              <PropertyRef Name="CodigoCategoria" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="CodigoCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientesOrdenes">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="Ordenes" Type="Self.Ordenes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="CodigoCliente" />
+            </Principal>
+            <Dependent Role="Ordenes">
+              <PropertyRef Name="CodigoCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpleadosOrdenes">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="1" />
+          <End Role="Ordenes" Type="Self.Ordenes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="CodigoEmpleado" />
+            </Principal>
+            <Dependent Role="Ordenes">
+              <PropertyRef Name="CodigoEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EstadosClientes">
+          <End Role="Estados" Type="Self.Estados" Multiplicity="1" />
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estados">
+              <PropertyRef Name="CodigoEstado" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="CodigoEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EstadosEmpleados">
+          <End Role="Estados" Type="Self.Estados" Multiplicity="1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estados">
+              <PropertyRef Name="CodigoEstado" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="CodigoEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EstadosOrdenes">
+          <End Role="Estados" Type="Self.Estados" Multiplicity="1" />
+          <End Role="Ordenes" Type="Self.Ordenes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estados">
+              <PropertyRef Name="CodigoEstado" />
+            </Principal>
+            <Dependent Role="Ordenes">
+              <PropertyRef Name="CodigoEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EstadosOrdenesDetalles">
+          <End Role="Estados" Type="Self.Estados" Multiplicity="1" />
+          <End Role="OrdenesDetalles" Type="Self.OrdenesDetalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estados">
+              <PropertyRef Name="CodigoEstado" />
+            </Principal>
+            <Dependent Role="OrdenesDetalles">
+              <PropertyRef Name="CodigoEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EstadosProductos">
+          <End Role="Estados" Type="Self.Estados" Multiplicity="1" />
+          <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estados">
+              <PropertyRef Name="CodigoEstado" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="CodigoEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EstadosRoles">
+          <End Role="Estados" Type="Self.Estados" Multiplicity="1" />
+          <End Role="Roles" Type="Self.Roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estados">
+              <PropertyRef Name="CodigoEstado" />
+            </Principal>
+            <Dependent Role="Roles">
+              <PropertyRef Name="CodigoEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EstadosUsuarios">
+          <End Role="Estados" Type="Self.Estados" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estados">
+              <PropertyRef Name="CodigoEstado" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="CodigoEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuesProductosMenues">
+          <End Role="Menues" Type="Self.Menues" Multiplicity="1" />
+          <End Role="ProductosMenues" Type="Self.ProductosMenues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menues">
+              <PropertyRef Name="CodigoMenu" />
+            </Principal>
+            <Dependent Role="ProductosMenues">
+              <PropertyRef Name="CodigoMenu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdenesOrdenesDetalles">
+          <End Role="Ordenes" Type="Self.Ordenes" Multiplicity="1" />
+          <End Role="OrdenesDetalles" Type="Self.OrdenesDetalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ordenes">
+              <PropertyRef Name="CodigoOrden" />
+            </Principal>
+            <Dependent Role="OrdenesDetalles">
+              <PropertyRef Name="CodigoOrden" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaisesClientes">
+          <End Role="Paises" Type="Self.Paises" Multiplicity="1" />
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paises">
+              <PropertyRef Name="CodigoPais" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="CodigoPaisNacimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaisesEmpleados">
+          <End Role="Paises" Type="Self.Paises" Multiplicity="1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paises">
+              <PropertyRef Name="CodigoPais" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="CodigoPaisNacimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaisesSucursales">
+          <End Role="Paises" Type="Self.Paises" Multiplicity="1" />
+          <End Role="Sucursales" Type="Self.Sucursales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paises">
+              <PropertyRef Name="CodigoPais" />
+            </Principal>
+            <Dependent Role="Sucursales">
+              <PropertyRef Name="CodigoPais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductosImagenesProductos">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+          <End Role="ImagenesProductos" Type="Self.ImagenesProductos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="CodigoProducto" />
+            </Principal>
+            <Dependent Role="ImagenesProductos">
+              <PropertyRef Name="CodigoProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductosOrdenesDetalles">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+          <End Role="OrdenesDetalles" Type="Self.OrdenesDetalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="CodigoProducto" />
+            </Principal>
+            <Dependent Role="OrdenesDetalles">
+              <PropertyRef Name="CodigoProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductosProductosMenues">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+          <End Role="ProductosMenues" Type="Self.ProductosMenues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="CodigoProducto" />
+            </Principal>
+            <Dependent Role="ProductosMenues">
+              <PropertyRef Name="CodigoProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProvinciasCiudades">
+          <End Role="Provincias" Type="Self.Provincias" Multiplicity="1" />
+          <End Role="Ciudades" Type="Self.Ciudades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincias">
+              <PropertyRef Name="CodigoProvincia" />
+            </Principal>
+            <Dependent Role="Ciudades">
+              <PropertyRef Name="CodigoProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProvinciasSucursales">
+          <End Role="Provincias" Type="Self.Provincias" Multiplicity="1" />
+          <End Role="Sucursales" Type="Self.Sucursales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincias">
+              <PropertyRef Name="CodigoProvincia" />
+            </Principal>
+            <Dependent Role="Sucursales">
+              <PropertyRef Name="CodigoProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RolesUsuarios">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="CodigoRol" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="CodigoRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SucursalesEmpleados">
+          <End Role="Sucursales" Type="Self.Sucursales" Multiplicity="1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sucursales">
+              <PropertyRef Name="CodigoSucursal" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="CodigoSucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SucursalesMenues">
+          <End Role="Sucursales" Type="Self.Sucursales" Multiplicity="1" />
+          <End Role="Menues" Type="Self.Menues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sucursales">
+              <PropertyRef Name="CodigoSucursal" />
+            </Principal>
+            <Dependent Role="Menues">
+              <PropertyRef Name="CodigoSucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuariosClientes">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="CodigoUsuario" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="CodigoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuariosEmpleados">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="CodigoUsuario" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="CodigoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="sp_IngresarClientes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NombreCliente" Type="varchar" Mode="In" />
+          <Parameter Name="ApellidoCliente" Type="varchar" Mode="In" />
+          <Parameter Name="FechaNacimiento" Type="date" Mode="In" />
+          <Parameter Name="CodigoPaisNacimiento" Type="int" Mode="In" />
+          <Parameter Name="CodigoUsuario" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_IngresarEmpleados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NombreEmpleado" Type="varchar" Mode="In" />
+          <Parameter Name="ApellidoEmpleado" Type="varchar" Mode="In" />
+          <Parameter Name="FechaNacimiento" Type="date" Mode="In" />
+          <Parameter Name="CodigoPaisNacimiento" Type="int" Mode="In" />
+          <Parameter Name="CodigoUsuario" Type="int" Mode="In" />
+          <Parameter Name="CodigoSucursal" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_IngresarProductos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NombreProducto" Type="varchar" Mode="In" />
+          <Parameter Name="DescripcionProducto" Type="varchar" Mode="In" />
+          <Parameter Name="Costo" Type="decimal" Mode="In" />
+          <Parameter Name="PrecioVenta" Type="decimal" Mode="In" />
+          <Parameter Name="CodigoCategoria" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="RestauranteModelStoreContainer">
+          <EntitySet Name="CategoriasProductos" EntityType="Self.CategoriasProductos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ciudades" EntityType="Self.Ciudades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empleados" EntityType="Self.Empleados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Estados" EntityType="Self.Estados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ImagenesProductos" EntityType="Self.ImagenesProductos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menues" EntityType="Self.Menues" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ordenes" EntityType="Self.Ordenes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrdenesDetalles" EntityType="Self.OrdenesDetalles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Paises" EntityType="Self.Paises" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductosMenues" EntityType="Self.ProductosMenues" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Provincias" EntityType="Self.Provincias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sucursales" EntityType="Self.Sucursales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CategoriasProductos" Association="Self.FK_CategoriasProductos">
+            <End Role="CategoriasProductos" EntitySet="CategoriasProductos" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientesOrdenes" Association="Self.FK_ClientesOrdenes">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Ordenes" EntitySet="Ordenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpleadosOrdenes" Association="Self.FK_EmpleadosOrdenes">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Ordenes" EntitySet="Ordenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EstadosClientes" Association="Self.FK_EstadosClientes">
+            <End Role="Estados" EntitySet="Estados" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EstadosEmpleados" Association="Self.FK_EstadosEmpleados">
+            <End Role="Estados" EntitySet="Estados" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EstadosOrdenes" Association="Self.FK_EstadosOrdenes">
+            <End Role="Estados" EntitySet="Estados" />
+            <End Role="Ordenes" EntitySet="Ordenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EstadosOrdenesDetalles" Association="Self.FK_EstadosOrdenesDetalles">
+            <End Role="Estados" EntitySet="Estados" />
+            <End Role="OrdenesDetalles" EntitySet="OrdenesDetalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EstadosProductos" Association="Self.FK_EstadosProductos">
+            <End Role="Estados" EntitySet="Estados" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EstadosRoles" Association="Self.FK_EstadosRoles">
+            <End Role="Estados" EntitySet="Estados" />
+            <End Role="Roles" EntitySet="Roles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EstadosUsuarios" Association="Self.FK_EstadosUsuarios">
+            <End Role="Estados" EntitySet="Estados" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuesProductosMenues" Association="Self.FK_MenuesProductosMenues">
+            <End Role="Menues" EntitySet="Menues" />
+            <End Role="ProductosMenues" EntitySet="ProductosMenues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenesOrdenesDetalles" Association="Self.FK_OrdenesOrdenesDetalles">
+            <End Role="Ordenes" EntitySet="Ordenes" />
+            <End Role="OrdenesDetalles" EntitySet="OrdenesDetalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaisesClientes" Association="Self.FK_PaisesClientes">
+            <End Role="Paises" EntitySet="Paises" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaisesEmpleados" Association="Self.FK_PaisesEmpleados">
+            <End Role="Paises" EntitySet="Paises" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaisesSucursales" Association="Self.FK_PaisesSucursales">
+            <End Role="Paises" EntitySet="Paises" />
+            <End Role="Sucursales" EntitySet="Sucursales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductosImagenesProductos" Association="Self.FK_ProductosImagenesProductos">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="ImagenesProductos" EntitySet="ImagenesProductos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductosOrdenesDetalles" Association="Self.FK_ProductosOrdenesDetalles">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="OrdenesDetalles" EntitySet="OrdenesDetalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductosProductosMenues" Association="Self.FK_ProductosProductosMenues">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="ProductosMenues" EntitySet="ProductosMenues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProvinciasCiudades" Association="Self.FK_ProvinciasCiudades">
+            <End Role="Provincias" EntitySet="Provincias" />
+            <End Role="Ciudades" EntitySet="Ciudades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProvinciasSucursales" Association="Self.FK_ProvinciasSucursales">
+            <End Role="Provincias" EntitySet="Provincias" />
+            <End Role="Sucursales" EntitySet="Sucursales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RolesUsuarios" Association="Self.FK_RolesUsuarios">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SucursalesEmpleados" Association="Self.FK_SucursalesEmpleados">
+            <End Role="Sucursales" EntitySet="Sucursales" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SucursalesMenues" Association="Self.FK_SucursalesMenues">
+            <End Role="Sucursales" EntitySet="Sucursales" />
+            <End Role="Menues" EntitySet="Menues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuariosClientes" Association="Self.FK_UsuariosClientes">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuariosEmpleados" Association="Self.FK_UsuariosEmpleados">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RestauranteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CategoriaProducto">
+          <Key>
+            <PropertyRef Name="CodigoCategoria" />
+          </Key>
+          <Property Name="CodigoCategoria" Type="Int32" Nullable="false" />
+          <Property Name="NombreCategoria" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Productos" Relationship="RestauranteModel.FK_CategoriasProductos" FromRole="CategoriaProducto" ToRole="Productos" />
+        </EntityType>
+        <EntityType Name="Ciudad">
+          <Key>
+            <PropertyRef Name="CodigoCiudad" />
+          </Key>
+          <Property Name="CodigoCiudad" Type="Int32" Nullable="false" />
+          <Property Name="NombreCiudad" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CodigoProvincia" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Provincias" Relationship="Self.FK_ProvinciasCiudades" FromRole="Ciudades" ToRole="Provincias" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="CodigoCliente" />
+          </Key>
+          <Property Name="CodigoCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreCliente" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ApellidoCliente" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Sexo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CodigoPaisNacimiento" Type="Int32" Nullable="false" />
+          <Property Name="CodigoUsuario" Type="Int32" Nullable="false" />
+          <Property Name="CodigoEstado" Type="Int32" Nullable="false" />
+          <Property Name="Borrado" Type="Boolean" />
+          <NavigationProperty Name="Ordenes" Relationship="Self.FK_ClientesOrdenes" FromRole="Clientes" ToRole="Ordenes" />
+          <NavigationProperty Name="Estados" Relationship="Self.FK_EstadosClientes" FromRole="Clientes" ToRole="Estados" />
+          <NavigationProperty Name="Paises" Relationship="Self.FK_PaisesClientes" FromRole="Clientes" ToRole="Paises" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_UsuariosClientes" FromRole="Clientes" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Empleado">
+          <Key>
+            <PropertyRef Name="CodigoEmpleado" />
+          </Key>
+          <Property Name="CodigoEmpleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreEmpleado" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ApellidoEmpleado" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Sexo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CodigoPaisNacimiento" Type="Int32" Nullable="false" />
+          <Property Name="CodigoUsuario" Type="Int32" Nullable="false" />
+          <Property Name="CodigoSucursal" Type="Int32" Nullable="false" />
+          <Property Name="CodigoEstado" Type="Int32" Nullable="false" />
+          <Property Name="Borrado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Ordenes" Relationship="Self.FK_EmpleadosOrdenes" FromRole="Empleados" ToRole="Ordenes" />
+          <NavigationProperty Name="Estados" Relationship="Self.FK_EstadosEmpleados" FromRole="Empleados" ToRole="Estados" />
+          <NavigationProperty Name="Paises" Relationship="Self.FK_PaisesEmpleados" FromRole="Empleados" ToRole="Paises" />
+          <NavigationProperty Name="Sucursales" Relationship="Self.FK_SucursalesEmpleados" FromRole="Empleados" ToRole="Sucursales" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_UsuariosEmpleados" FromRole="Empleados" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Estado">
+          <Key>
+            <PropertyRef Name="CodigoEstado" />
+          </Key>
+          <Property Name="CodigoEstado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreEstado" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK_EstadosClientes" FromRole="Estados" ToRole="Clientes" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK_EstadosEmpleados" FromRole="Estados" ToRole="Empleados" />
+          <NavigationProperty Name="Ordenes" Relationship="Self.FK_EstadosOrdenes" FromRole="Estados" ToRole="Ordenes" />
+          <NavigationProperty Name="OrdenesDetalles" Relationship="Self.FK_EstadosOrdenesDetalles" FromRole="Estados" ToRole="OrdenesDetalles" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK_EstadosRoles" FromRole="Estados" ToRole="Roles" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_EstadosUsuarios" FromRole="Estados" ToRole="Usuarios" />
+          <NavigationProperty Name="Productos" Relationship="RestauranteModel.FK_EstadosProductos" FromRole="Estado" ToRole="Productos" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="CodigoMenu" />
+          </Key>
+          <Property Name="CodigoMenu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodigoSucursal" Type="Int32" Nullable="false" />
+          <Property Name="Borrado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ProductosMenues" Relationship="Self.FK_MenuesProductosMenues" FromRole="Menues" ToRole="ProductosMenues" />
+          <NavigationProperty Name="Sucursales" Relationship="Self.FK_SucursalesMenues" FromRole="Menues" ToRole="Sucursales" />
+        </EntityType>
+        <EntityType Name="Orden">
+          <Key>
+            <PropertyRef Name="CodigoOrden" />
+          </Key>
+          <Property Name="CodigoOrden" Type="Int32" Nullable="false" />
+          <Property Name="CodigoCliente" Type="Int32" Nullable="false" />
+          <Property Name="CodigoEmpleado" Type="Int32" Nullable="false" />
+          <Property Name="FechaHora" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CodigoEstado" Type="Int32" Nullable="false" />
+          <Property Name="Borrado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK_ClientesOrdenes" FromRole="Ordenes" ToRole="Clientes" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK_EmpleadosOrdenes" FromRole="Ordenes" ToRole="Empleados" />
+          <NavigationProperty Name="Estados" Relationship="Self.FK_EstadosOrdenes" FromRole="Ordenes" ToRole="Estados" />
+          <NavigationProperty Name="OrdenesDetalles" Relationship="Self.FK_OrdenesOrdenesDetalles" FromRole="Ordenes" ToRole="OrdenesDetalles" />
+        </EntityType>
+        <EntityType Name="OrdenDetalle">
+          <Key>
+            <PropertyRef Name="CodigoOrdenDetalle" />
+          </Key>
+          <Property Name="CodigoOrdenDetalle" Type="Int32" Nullable="false" />
+          <Property Name="CodigoOrden" Type="Int32" Nullable="false" />
+          <Property Name="CodigoProducto" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="Costo" Type="Decimal" Precision="12" Scale="4" Nullable="false" />
+          <Property Name="PrecioVenta" Type="Decimal" Precision="12" Scale="4" Nullable="false" />
+          <Property Name="CodigoEstado" Type="Int32" Nullable="false" />
+          <Property Name="Borrado" Type="Boolean" />
+          <NavigationProperty Name="Estados" Relationship="Self.FK_EstadosOrdenesDetalles" FromRole="OrdenesDetalles" ToRole="Estados" />
+          <NavigationProperty Name="Ordenes" Relationship="Self.FK_OrdenesOrdenesDetalles" FromRole="OrdenesDetalles" ToRole="Ordenes" />
+          <NavigationProperty Name="Productos" Relationship="RestauranteModel.FK_ProductosOrdenesDetalles" FromRole="OrdenDetalle" ToRole="Productos" />
+        </EntityType>
+        <EntityType Name="Pais">
+          <Key>
+            <PropertyRef Name="CodigoPais" />
+          </Key>
+          <Property Name="CodigoPais" Type="Int32" Nullable="false" />
+          <Property Name="ISOPais" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="NombrePais" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK_PaisesClientes" FromRole="Paises" ToRole="Clientes" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK_PaisesEmpleados" FromRole="Paises" ToRole="Empleados" />
+          <NavigationProperty Name="Sucursales" Relationship="Self.FK_PaisesSucursales" FromRole="Paises" ToRole="Sucursales" />
+        </EntityType>
+        <EntityType Name="ProductoMenu">
+          <Key>
+            <PropertyRef Name="CodigoProductoMenu" />
+          </Key>
+          <Property Name="CodigoProductoMenu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodigoProducto" Type="Int32" Nullable="false" />
+          <Property Name="CodigoMenu" Type="Int32" Nullable="false" />
+          <Property Name="Precio" Type="Decimal" Precision="12" Scale="4" Nullable="false" />
+          <Property Name="Borrado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Menues" Relationship="Self.FK_MenuesProductosMenues" FromRole="ProductosMenues" ToRole="Menues" />
+          <NavigationProperty Name="Productos" Relationship="RestauranteModel.FK_ProductosProductosMenues" FromRole="ProductoMenu" ToRole="Productos" />
+        </EntityType>
+        <EntityType Name="Provincia">
+          <Key>
+            <PropertyRef Name="CodigoProvincia" />
+          </Key>
+          <Property Name="CodigoProvincia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreProvincia" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Ciudades" Relationship="Self.FK_ProvinciasCiudades" FromRole="Provincias" ToRole="Ciudades" />
+          <NavigationProperty Name="Sucursales" Relationship="Self.FK_ProvinciasSucursales" FromRole="Provincias" ToRole="Sucursales" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="CodigoRol" />
+          </Key>
+          <Property Name="CodigoRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreRol" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CodigoEstado" Type="Int32" Nullable="false" />
+          <Property Name="Borrado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Estados" Relationship="Self.FK_EstadosRoles" FromRole="Roles" ToRole="Estados" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_RolesUsuarios" FromRole="Roles" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Sucursal">
+          <Key>
+            <PropertyRef Name="CodigoSucursal" />
+          </Key>
+          <Property Name="CodigoSucursal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreSucursal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DireccionSucursal" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoPais" Type="Int32" Nullable="false" />
+          <Property Name="CodigoProvincia" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK_SucursalesEmpleados" FromRole="Sucursales" ToRole="Empleados" />
+          <NavigationProperty Name="Menues" Relationship="Self.FK_SucursalesMenues" FromRole="Sucursales" ToRole="Menues" />
+          <NavigationProperty Name="Paises" Relationship="Self.FK_PaisesSucursales" FromRole="Sucursales" ToRole="Paises" />
+          <NavigationProperty Name="Provincias" Relationship="Self.FK_ProvinciasSucursales" FromRole="Sucursales" ToRole="Provincias" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="CodigoUsuario" />
+          </Key>
+          <Property Name="CodigoUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreUsuario" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Clave" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Correo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CodigoRol" Type="Int32" Nullable="false" />
+          <Property Name="CodigoEstado" Type="Int32" Nullable="false" />
+          <Property Name="Borrado" Type="Boolean" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK_UsuariosClientes" FromRole="Usuarios" ToRole="Clientes" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK_UsuariosEmpleados" FromRole="Usuarios" ToRole="Empleados" />
+          <NavigationProperty Name="Estados" Relationship="Self.FK_EstadosUsuarios" FromRole="Usuarios" ToRole="Estados" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK_RolesUsuarios" FromRole="Usuarios" ToRole="Roles" />
+        </EntityType>
+        <Association Name="FK_ProvinciasCiudades">
+          <End Role="Provincias" Type="RestauranteModel.Provincia" Multiplicity="1" />
+          <End Role="Ciudades" Type="RestauranteModel.Ciudad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincias">
+              <PropertyRef Name="CodigoProvincia" />
+            </Principal>
+            <Dependent Role="Ciudades">
+              <PropertyRef Name="CodigoProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientesOrdenes">
+          <End Role="Clientes" Type="RestauranteModel.Cliente" Multiplicity="1" />
+          <End Role="Ordenes" Type="RestauranteModel.Orden" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="CodigoCliente" />
+            </Principal>
+            <Dependent Role="Ordenes">
+              <PropertyRef Name="CodigoCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EstadosClientes">
+          <End Role="Estados" Type="RestauranteModel.Estado" Multiplicity="1" />
+          <End Role="Clientes" Type="RestauranteModel.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estados">
+              <PropertyRef Name="CodigoEstado" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="CodigoEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaisesClientes">
+          <End Role="Paises" Type="RestauranteModel.Pais" Multiplicity="1" />
+          <End Role="Clientes" Type="RestauranteModel.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paises">
+              <PropertyRef Name="CodigoPais" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="CodigoPaisNacimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuariosClientes">
+          <End Role="Usuarios" Type="RestauranteModel.Usuario" Multiplicity="1" />
+          <End Role="Clientes" Type="RestauranteModel.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="CodigoUsuario" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="CodigoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpleadosOrdenes">
+          <End Role="Empleados" Type="RestauranteModel.Empleado" Multiplicity="1" />
+          <End Role="Ordenes" Type="RestauranteModel.Orden" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="CodigoEmpleado" />
+            </Principal>
+            <Dependent Role="Ordenes">
+              <PropertyRef Name="CodigoEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EstadosEmpleados">
+          <End Role="Estados" Type="RestauranteModel.Estado" Multiplicity="1" />
+          <End Role="Empleados" Type="RestauranteModel.Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estados">
+              <PropertyRef Name="CodigoEstado" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="CodigoEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaisesEmpleados">
+          <End Role="Paises" Type="RestauranteModel.Pais" Multiplicity="1" />
+          <End Role="Empleados" Type="RestauranteModel.Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paises">
+              <PropertyRef Name="CodigoPais" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="CodigoPaisNacimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SucursalesEmpleados">
+          <End Role="Sucursales" Type="RestauranteModel.Sucursal" Multiplicity="1" />
+          <End Role="Empleados" Type="RestauranteModel.Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sucursales">
+              <PropertyRef Name="CodigoSucursal" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="CodigoSucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuariosEmpleados">
+          <End Role="Usuarios" Type="RestauranteModel.Usuario" Multiplicity="1" />
+          <End Role="Empleados" Type="RestauranteModel.Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="CodigoUsuario" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="CodigoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EstadosOrdenes">
+          <End Role="Estados" Type="RestauranteModel.Estado" Multiplicity="1" />
+          <End Role="Ordenes" Type="RestauranteModel.Orden" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estados">
+              <PropertyRef Name="CodigoEstado" />
+            </Principal>
+            <Dependent Role="Ordenes">
+              <PropertyRef Name="CodigoEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EstadosOrdenesDetalles">
+          <End Role="Estados" Type="RestauranteModel.Estado" Multiplicity="1" />
+          <End Role="OrdenesDetalles" Type="RestauranteModel.OrdenDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estados">
+              <PropertyRef Name="CodigoEstado" />
+            </Principal>
+            <Dependent Role="OrdenesDetalles">
+              <PropertyRef Name="CodigoEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EstadosRoles">
+          <End Role="Estados" Type="RestauranteModel.Estado" Multiplicity="1" />
+          <End Role="Roles" Type="RestauranteModel.Rol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estados">
+              <PropertyRef Name="CodigoEstado" />
+            </Principal>
+            <Dependent Role="Roles">
+              <PropertyRef Name="CodigoEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EstadosUsuarios">
+          <End Role="Estados" Type="RestauranteModel.Estado" Multiplicity="1" />
+          <End Role="Usuarios" Type="RestauranteModel.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estados">
+              <PropertyRef Name="CodigoEstado" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="CodigoEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuesProductosMenues">
+          <End Role="Menues" Type="RestauranteModel.Menu" Multiplicity="1" />
+          <End Role="ProductosMenues" Type="RestauranteModel.ProductoMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menues">
+              <PropertyRef Name="CodigoMenu" />
+            </Principal>
+            <Dependent Role="ProductosMenues">
+              <PropertyRef Name="CodigoMenu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SucursalesMenues">
+          <End Role="Sucursales" Type="RestauranteModel.Sucursal" Multiplicity="1" />
+          <End Role="Menues" Type="RestauranteModel.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sucursales">
+              <PropertyRef Name="CodigoSucursal" />
+            </Principal>
+            <Dependent Role="Menues">
+              <PropertyRef Name="CodigoSucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdenesOrdenesDetalles">
+          <End Role="Ordenes" Type="RestauranteModel.Orden" Multiplicity="1" />
+          <End Role="OrdenesDetalles" Type="RestauranteModel.OrdenDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ordenes">
+              <PropertyRef Name="CodigoOrden" />
+            </Principal>
+            <Dependent Role="OrdenesDetalles">
+              <PropertyRef Name="CodigoOrden" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaisesSucursales">
+          <End Role="Paises" Type="RestauranteModel.Pais" Multiplicity="1" />
+          <End Role="Sucursales" Type="RestauranteModel.Sucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paises">
+              <PropertyRef Name="CodigoPais" />
+            </Principal>
+            <Dependent Role="Sucursales">
+              <PropertyRef Name="CodigoPais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProvinciasSucursales">
+          <End Role="Provincias" Type="RestauranteModel.Provincia" Multiplicity="1" />
+          <End Role="Sucursales" Type="RestauranteModel.Sucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincias">
+              <PropertyRef Name="CodigoProvincia" />
+            </Principal>
+            <Dependent Role="Sucursales">
+              <PropertyRef Name="CodigoProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RolesUsuarios">
+          <End Role="Roles" Type="RestauranteModel.Rol" Multiplicity="1" />
+          <End Role="Usuarios" Type="RestauranteModel.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="CodigoRol" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="CodigoRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RestauranteEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CategoriasProductos" EntityType="RestauranteModel.CategoriaProducto" />
+          <EntitySet Name="Ciudades" EntityType="RestauranteModel.Ciudad" />
+          <EntitySet Name="Clientes" EntityType="RestauranteModel.Cliente" />
+          <EntitySet Name="Empleados" EntityType="RestauranteModel.Empleado" />
+          <EntitySet Name="Estados" EntityType="RestauranteModel.Estado" />
+          <EntitySet Name="Menues" EntityType="RestauranteModel.Menu" />
+          <EntitySet Name="Ordenes" EntityType="RestauranteModel.Orden" />
+          <EntitySet Name="OrdenesDetalles" EntityType="RestauranteModel.OrdenDetalle" />
+          <EntitySet Name="Paises" EntityType="RestauranteModel.Pais" />
+          <EntitySet Name="ProductosMenues" EntityType="RestauranteModel.ProductoMenu" />
+          <EntitySet Name="Provincias" EntityType="RestauranteModel.Provincia" />
+          <EntitySet Name="Roles" EntityType="RestauranteModel.Rol" />
+          <EntitySet Name="Sucursales" EntityType="RestauranteModel.Sucursal" />
+          <EntitySet Name="Usuarios" EntityType="RestauranteModel.Usuario" />
+          <AssociationSet Name="FK_ProvinciasCiudades" Association="Self.FK_ProvinciasCiudades">
+            <End Role="Provincias" EntitySet="Provincias" />
+            <End Role="Ciudades" EntitySet="Ciudades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientesOrdenes" Association="Self.FK_ClientesOrdenes">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Ordenes" EntitySet="Ordenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EstadosClientes" Association="Self.FK_EstadosClientes">
+            <End Role="Estados" EntitySet="Estados" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaisesClientes" Association="Self.FK_PaisesClientes">
+            <End Role="Paises" EntitySet="Paises" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuariosClientes" Association="Self.FK_UsuariosClientes">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpleadosOrdenes" Association="Self.FK_EmpleadosOrdenes">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Ordenes" EntitySet="Ordenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EstadosEmpleados" Association="Self.FK_EstadosEmpleados">
+            <End Role="Estados" EntitySet="Estados" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaisesEmpleados" Association="Self.FK_PaisesEmpleados">
+            <End Role="Paises" EntitySet="Paises" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SucursalesEmpleados" Association="Self.FK_SucursalesEmpleados">
+            <End Role="Sucursales" EntitySet="Sucursales" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuariosEmpleados" Association="Self.FK_UsuariosEmpleados">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EstadosOrdenes" Association="Self.FK_EstadosOrdenes">
+            <End Role="Estados" EntitySet="Estados" />
+            <End Role="Ordenes" EntitySet="Ordenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EstadosOrdenesDetalles" Association="Self.FK_EstadosOrdenesDetalles">
+            <End Role="Estados" EntitySet="Estados" />
+            <End Role="OrdenesDetalles" EntitySet="OrdenesDetalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EstadosRoles" Association="Self.FK_EstadosRoles">
+            <End Role="Estados" EntitySet="Estados" />
+            <End Role="Roles" EntitySet="Roles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EstadosUsuarios" Association="Self.FK_EstadosUsuarios">
+            <End Role="Estados" EntitySet="Estados" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuesProductosMenues" Association="Self.FK_MenuesProductosMenues">
+            <End Role="Menues" EntitySet="Menues" />
+            <End Role="ProductosMenues" EntitySet="ProductosMenues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SucursalesMenues" Association="Self.FK_SucursalesMenues">
+            <End Role="Sucursales" EntitySet="Sucursales" />
+            <End Role="Menues" EntitySet="Menues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenesOrdenesDetalles" Association="Self.FK_OrdenesOrdenesDetalles">
+            <End Role="Ordenes" EntitySet="Ordenes" />
+            <End Role="OrdenesDetalles" EntitySet="OrdenesDetalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaisesSucursales" Association="Self.FK_PaisesSucursales">
+            <End Role="Paises" EntitySet="Paises" />
+            <End Role="Sucursales" EntitySet="Sucursales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProvinciasSucursales" Association="Self.FK_ProvinciasSucursales">
+            <End Role="Provincias" EntitySet="Provincias" />
+            <End Role="Sucursales" EntitySet="Sucursales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RolesUsuarios" Association="Self.FK_RolesUsuarios">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <FunctionImport Name="sp_IngresarClientes">
+            <Parameter Name="NombreCliente" Mode="In" Type="String" />
+            <Parameter Name="ApellidoCliente" Mode="In" Type="String" />
+            <Parameter Name="FechaNacimiento" Mode="In" Type="DateTime" />
+            <Parameter Name="CodigoPaisNacimiento" Mode="In" Type="Int32" />
+            <Parameter Name="CodigoUsuario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_IngresarEmpleados">
+            <Parameter Name="NombreEmpleado" Mode="In" Type="String" />
+            <Parameter Name="ApellidoEmpleado" Mode="In" Type="String" />
+            <Parameter Name="FechaNacimiento" Mode="In" Type="DateTime" />
+            <Parameter Name="CodigoPaisNacimiento" Mode="In" Type="Int32" />
+            <Parameter Name="CodigoUsuario" Mode="In" Type="Int32" />
+            <Parameter Name="CodigoSucursal" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_IngresarProductos">
+            <Parameter Name="NombreProducto" Mode="In" Type="String" />
+            <Parameter Name="DescripcionProducto" Mode="In" Type="String" />
+            <Parameter Name="Costo" Mode="In" Type="Decimal" />
+            <Parameter Name="PrecioVenta" Mode="In" Type="Decimal" />
+            <Parameter Name="CodigoCategoria" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Productos" EntityType="RestauranteModel.Producto" />
+          <AssociationSet Name="FK_CategoriasProductos" Association="RestauranteModel.FK_CategoriasProductos">
+            <End Role="CategoriaProducto" EntitySet="CategoriasProductos" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EstadosProductos" Association="RestauranteModel.FK_EstadosProductos">
+            <End Role="Estado" EntitySet="Estados" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductosOrdenesDetalles" Association="RestauranteModel.FK_ProductosOrdenesDetalles">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="OrdenDetalle" EntitySet="OrdenesDetalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductosProductosMenues" Association="RestauranteModel.FK_ProductosProductosMenues">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="ProductoMenu" EntitySet="ProductosMenues" />
+          </AssociationSet>
+          <EntitySet Name="ImagenesProductos" EntityType="RestauranteModel.ImagenProducto" />
+          <AssociationSet Name="FK_ProductosImagenesProductos" Association="RestauranteModel.FK_ProductosImagenesProductos">
+            <End Role="Producto" EntitySet="Productos" />
+            <End Role="ImagenesProductos" EntitySet="ImagenesProductos" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="CodigoProducto" />
+          </Key>
+          <Property Name="CodigoProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreProducto" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DescripcionProducto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Costo" Type="Decimal" Nullable="false" Precision="12" Scale="4" />
+          <Property Name="CodigoCategoria" Type="Int32" Nullable="false" />
+          <Property Name="CodigoEstado" Type="Int32" Nullable="false" />
+          <Property Name="Borrado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CategoriasProductos" Relationship="RestauranteModel.FK_CategoriasProductos" FromRole="Productos" ToRole="CategoriaProducto" />
+          <NavigationProperty Name="Estados" Relationship="RestauranteModel.FK_EstadosProductos" FromRole="Productos" ToRole="Estado" />
+          <NavigationProperty Name="OrdenesDetalles" Relationship="RestauranteModel.FK_ProductosOrdenesDetalles" FromRole="Productos" ToRole="OrdenDetalle" />
+          <NavigationProperty Name="ProductosMenues" Relationship="RestauranteModel.FK_ProductosProductosMenues" FromRole="Productos" ToRole="ProductoMenu" />
+          <NavigationProperty Name="ImagenesProductos" Relationship="RestauranteModel.FK_ProductosImagenesProductos" FromRole="Producto" ToRole="ImagenesProductos" />
+        </EntityType>
+        <Association Name="FK_CategoriasProductos">
+          <End Type="RestauranteModel.CategoriaProducto" Role="CategoriaProducto" Multiplicity="1" />
+          <End Type="RestauranteModel.Producto" Role="Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoriaProducto">
+              <PropertyRef Name="CodigoCategoria" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="CodigoCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EstadosProductos">
+          <End Type="RestauranteModel.Estado" Role="Estado" Multiplicity="1" />
+          <End Type="RestauranteModel.Producto" Role="Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="CodigoEstado" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="CodigoEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductosOrdenesDetalles">
+          <End Type="RestauranteModel.Producto" Role="Productos" Multiplicity="1" />
+          <End Type="RestauranteModel.OrdenDetalle" Role="OrdenDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="CodigoProducto" />
+            </Principal>
+            <Dependent Role="OrdenDetalle">
+              <PropertyRef Name="CodigoProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductosProductosMenues">
+          <End Type="RestauranteModel.Producto" Role="Productos" Multiplicity="1" />
+          <End Type="RestauranteModel.ProductoMenu" Role="ProductoMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="CodigoProducto" />
+            </Principal>
+            <Dependent Role="ProductoMenu">
+              <PropertyRef Name="CodigoProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ImagenProducto">
+          <Key>
+            <PropertyRef Name="CodigoImagenProducto" />
+          </Key>
+          <Property Name="CodigoImagenProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Imagen" Type="Binary" Nullable="false" MaxLength="1" FixedLength="false" />
+          <Property Name="CodigoProducto" Type="Int32" Nullable="false" />
+          <Property Name="Borrado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Productos" Relationship="RestauranteModel.FK_ProductosImagenesProductos" FromRole="ImagenesProductos" ToRole="Producto" />
+        </EntityType>
+        <Association Name="FK_ProductosImagenesProductos">
+          <End Type="RestauranteModel.Producto" Role="Producto" Multiplicity="1" />
+          <End Type="RestauranteModel.ImagenProducto" Role="ImagenesProductos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="CodigoProducto" />
+            </Principal>
+            <Dependent Role="ImagenesProductos">
+              <PropertyRef Name="CodigoProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RestauranteModelStoreContainer" CdmEntityContainer="RestauranteEntities">
+          <EntitySetMapping Name="CategoriasProductos">
+            <EntityTypeMapping TypeName="RestauranteModel.CategoriaProducto">
+              <MappingFragment StoreEntitySet="CategoriasProductos">
+                <ScalarProperty Name="CodigoCategoria" ColumnName="CodigoCategoria" />
+                <ScalarProperty Name="NombreCategoria" ColumnName="NombreCategoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ciudades">
+            <EntityTypeMapping TypeName="RestauranteModel.Ciudad">
+              <MappingFragment StoreEntitySet="Ciudades">
+                <ScalarProperty Name="CodigoCiudad" ColumnName="CodigoCiudad" />
+                <ScalarProperty Name="NombreCiudad" ColumnName="NombreCiudad" />
+                <ScalarProperty Name="CodigoProvincia" ColumnName="CodigoProvincia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="RestauranteModel.Cliente">
+              <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="CodigoCliente" ColumnName="CodigoCliente" />
+                <ScalarProperty Name="NombreCliente" ColumnName="NombreCliente" />
+                <ScalarProperty Name="ApellidoCliente" ColumnName="ApellidoCliente" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="CodigoPaisNacimiento" ColumnName="CodigoPaisNacimiento" />
+                <ScalarProperty Name="CodigoUsuario" ColumnName="CodigoUsuario" />
+                <ScalarProperty Name="CodigoEstado" ColumnName="CodigoEstado" />
+                <ScalarProperty Name="Borrado" ColumnName="Borrado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empleados">
+            <EntityTypeMapping TypeName="RestauranteModel.Empleado">
+              <MappingFragment StoreEntitySet="Empleados">
+                <ScalarProperty Name="CodigoEmpleado" ColumnName="CodigoEmpleado" />
+                <ScalarProperty Name="NombreEmpleado" ColumnName="NombreEmpleado" />
+                <ScalarProperty Name="ApellidoEmpleado" ColumnName="ApellidoEmpleado" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="CodigoPaisNacimiento" ColumnName="CodigoPaisNacimiento" />
+                <ScalarProperty Name="CodigoUsuario" ColumnName="CodigoUsuario" />
+                <ScalarProperty Name="CodigoSucursal" ColumnName="CodigoSucursal" />
+                <ScalarProperty Name="CodigoEstado" ColumnName="CodigoEstado" />
+                <ScalarProperty Name="Borrado" ColumnName="Borrado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estados">
+            <EntityTypeMapping TypeName="RestauranteModel.Estado">
+              <MappingFragment StoreEntitySet="Estados">
+                <ScalarProperty Name="CodigoEstado" ColumnName="CodigoEstado" />
+                <ScalarProperty Name="NombreEstado" ColumnName="NombreEstado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menues">
+            <EntityTypeMapping TypeName="RestauranteModel.Menu">
+              <MappingFragment StoreEntitySet="Menues">
+                <ScalarProperty Name="CodigoMenu" ColumnName="CodigoMenu" />
+                <ScalarProperty Name="CodigoSucursal" ColumnName="CodigoSucursal" />
+                <ScalarProperty Name="Borrado" ColumnName="Borrado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ordenes">
+            <EntityTypeMapping TypeName="RestauranteModel.Orden">
+              <MappingFragment StoreEntitySet="Ordenes">
+                <ScalarProperty Name="CodigoOrden" ColumnName="CodigoOrden" />
+                <ScalarProperty Name="CodigoCliente" ColumnName="CodigoCliente" />
+                <ScalarProperty Name="CodigoEmpleado" ColumnName="CodigoEmpleado" />
+                <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
+                <ScalarProperty Name="CodigoEstado" ColumnName="CodigoEstado" />
+                <ScalarProperty Name="Borrado" ColumnName="Borrado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrdenesDetalles">
+            <EntityTypeMapping TypeName="RestauranteModel.OrdenDetalle">
+              <MappingFragment StoreEntitySet="OrdenesDetalles">
+                <ScalarProperty Name="CodigoOrdenDetalle" ColumnName="CodigoOrdenDetalle" />
+                <ScalarProperty Name="CodigoOrden" ColumnName="CodigoOrden" />
+                <ScalarProperty Name="CodigoProducto" ColumnName="CodigoProducto" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="PrecioVenta" ColumnName="PrecioVenta" />
+                <ScalarProperty Name="CodigoEstado" ColumnName="CodigoEstado" />
+                <ScalarProperty Name="Borrado" ColumnName="Borrado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Paises">
+            <EntityTypeMapping TypeName="RestauranteModel.Pais">
+              <MappingFragment StoreEntitySet="Paises">
+                <ScalarProperty Name="CodigoPais" ColumnName="CodigoPais" />
+                <ScalarProperty Name="ISOPais" ColumnName="ISOPais" />
+                <ScalarProperty Name="NombrePais" ColumnName="NombrePais" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductosMenues">
+            <EntityTypeMapping TypeName="RestauranteModel.ProductoMenu">
+              <MappingFragment StoreEntitySet="ProductosMenues">
+                <ScalarProperty Name="CodigoProductoMenu" ColumnName="CodigoProductoMenu" />
+                <ScalarProperty Name="CodigoProducto" ColumnName="CodigoProducto" />
+                <ScalarProperty Name="CodigoMenu" ColumnName="CodigoMenu" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Borrado" ColumnName="Borrado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Provincias">
+            <EntityTypeMapping TypeName="RestauranteModel.Provincia">
+              <MappingFragment StoreEntitySet="Provincias">
+                <ScalarProperty Name="CodigoProvincia" ColumnName="CodigoProvincia" />
+                <ScalarProperty Name="NombreProvincia" ColumnName="NombreProvincia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="RestauranteModel.Rol">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="CodigoRol" ColumnName="CodigoRol" />
+                <ScalarProperty Name="NombreRol" ColumnName="NombreRol" />
+                <ScalarProperty Name="CodigoEstado" ColumnName="CodigoEstado" />
+                <ScalarProperty Name="Borrado" ColumnName="Borrado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sucursales">
+            <EntityTypeMapping TypeName="RestauranteModel.Sucursal">
+              <MappingFragment StoreEntitySet="Sucursales">
+                <ScalarProperty Name="CodigoSucursal" ColumnName="CodigoSucursal" />
+                <ScalarProperty Name="NombreSucursal" ColumnName="NombreSucursal" />
+                <ScalarProperty Name="DireccionSucursal" ColumnName="DireccionSucursal" />
+                <ScalarProperty Name="CodigoPais" ColumnName="CodigoPais" />
+                <ScalarProperty Name="CodigoProvincia" ColumnName="CodigoProvincia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="RestauranteModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="CodigoUsuario" ColumnName="CodigoUsuario" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="CodigoRol" ColumnName="CodigoRol" />
+                <ScalarProperty Name="CodigoEstado" ColumnName="CodigoEstado" />
+                <ScalarProperty Name="Borrado" ColumnName="Borrado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_IngresarClientes" FunctionName="RestauranteModel.Store.sp_IngresarClientes" />
+          <FunctionImportMapping FunctionImportName="sp_IngresarEmpleados" FunctionName="RestauranteModel.Store.sp_IngresarEmpleados" />
+          <FunctionImportMapping FunctionImportName="sp_IngresarProductos" FunctionName="RestauranteModel.Store.sp_IngresarProductos" />
+          <EntitySetMapping Name="Productos">
+            <EntityTypeMapping TypeName="RestauranteModel.Producto">
+              <MappingFragment StoreEntitySet="Productos">
+                <ScalarProperty Name="Borrado" ColumnName="Borrado" />
+                <ScalarProperty Name="CodigoEstado" ColumnName="CodigoEstado" />
+                <ScalarProperty Name="CodigoCategoria" ColumnName="CodigoCategoria" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="DescripcionProducto" ColumnName="DescripcionProducto" />
+                <ScalarProperty Name="NombreProducto" ColumnName="NombreProducto" />
+                <ScalarProperty Name="CodigoProducto" ColumnName="CodigoProducto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ImagenesProductos">
+            <EntityTypeMapping TypeName="RestauranteModel.ImagenProducto">
+              <MappingFragment StoreEntitySet="ImagenesProductos">
+                <ScalarProperty Name="Borrado" ColumnName="Borrado" />
+                <ScalarProperty Name="CodigoProducto" ColumnName="CodigoProducto" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="CodigoImagenProducto" ColumnName="CodigoImagenProducto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

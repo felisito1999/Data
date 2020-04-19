@@ -1,0 +1,46 @@
+﻿
+@model IEnumerable<Data.Models.ViewModels.ProductoMenuListViewModel>
+
+@{
+    ViewBag.Title = "MenuPorSucursal";
+}
+
+<h2>MenuPorSucursal</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Producto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DescripcionProducto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Precio)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Producto.NombreProducto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescripcionProducto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+                @Html.ActionLink("Ordenar", "Edit", new { id = item.CodigoProductoMenu }, new { @class = "btn btn-primary" })
+            </td>
+        </tr>
+    }
+
+</table>
+

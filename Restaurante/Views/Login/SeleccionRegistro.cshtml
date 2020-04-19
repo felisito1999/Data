@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "SeleccionRegistro";
+}
+
+<h2 id="TituloSeleccionRegistro">Seleccion Registro</h2>
+
+<ul>
+    <li class="seleccionRegistro" id="linkRegistroCliente">@Html.ActionLink("Registrarse como un cliente", "RegistrarCliente", "Login", new { @class = "btn btn-primary" })</li>
+    <li class="seleccionRegistro" id="linkRegistroEmpleado">@Html.ActionLink("Registrarse para solicitar acceso como empleado", "RegistrarEmpleado", "Login", new { @class = "btn btn-primary" })</li>
+</ul>
