@@ -41,7 +41,7 @@ namespace Restaurante.Controllers
                             Borrado = false
                         };
                         GetService.GetMenuService().Insert(menu);
-                        return View("SucursalIndex");
+                        return RedirectToAction("SucursalIndex");
                     }
                 }
                 catch (Exception)

@@ -11,6 +11,7 @@
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    background-color: #bf9e95;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -26,4 +27,25 @@ select,
 textarea {
     max-width: 280px;
 }
+/*
+.container body-content {
+    background-color: #a14d43;
+}
+.col-lg-4 mb-4{
+
+}
+.card h-100{
+}
+.card-header{
+
+}
+.card-body{
+
+}
+.card-text{
+
+}
+.card-footer{
+
+}*/
 
