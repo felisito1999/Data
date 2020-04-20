@@ -1,9 +1,11 @@
 ﻿using Data.DbAccess;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace Data.Services
 {
@@ -29,19 +31,35 @@ namespace Data.Services
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ImagenProducto> ListSortedByGivenCategoryId(int idCategory)
+        public IEnumerable<ImagenProducto> ListSortedByGivenCategoryId(int idProducto)
         {
-            throw new NotImplementedException();
+            using (var context = GetService.GetRestauranteEntityService())
+            {
+                var imagenes = context.ImagenesProductos.ToList().Where(x => x.CodigoProducto == idProducto & x.Borrado == false);
+
+                return imagenes;
+            }
         }
 
         public void SoftDelete(int id)
         {
-            throw new NotImplementedException();
+            using (var context = GetService.GetRestauranteEntityService())
+            {
+                var imagen = context.ImagenesProductos.Find(id);
+                imagen.Borrado = true;
+            }
         }
 
         public void UpdateSingleObject(ImagenProducto objectType)
         {
             throw new NotImplementedException();
         }
+        //public Image byteArrayToImage(byte[] imgBytes)
+        //{
+        //    using (MemoryStream imgStream = new MemoryStream(imgBytes))
+        //    {
+        //        return Image.FromStream(imgStream);
+        //    }
+        //}
     }
 }

@@ -19,17 +19,26 @@ namespace Data.Services
             }
         }
 
-        public void Insert(Producto objectType)
+        public void Insert(Producto producto)
         {
-            throw new NotImplementedException();
+            using (var context = GetService.GetRestauranteEntityService())
+            {
+                context.Productos.Add(producto);
+                context.SaveChanges();
+            }
         }
 
         public IEnumerable<Producto> ListAll()
         {
-            throw new NotImplementedException();
+            using (var context = GetService.GetRestauranteEntityService())
+            {
+                var productos = context.Productos.ToList();
+
+                return productos;
+            }
         }
 
-        public IEnumerable<Producto> ListSortedByGivenCategoryId(int idCategory)
+        public IEnumerable<Producto> ListSortedByGivenCategoryId(int id)
         {
             throw new NotImplementedException();
         }

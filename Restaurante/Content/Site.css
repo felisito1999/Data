@@ -11,7 +11,7 @@
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
-    background-color: #bf9e95;
+    background-color: #ef9a9a;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -26,6 +26,83 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+#productoListImage {
+    float: left;
+    width: 25%;
+    height: 25%;
+    background-size: cover;
+}
+.navbar-header a {
+    color: black;
+    font-weight: 400;
+}
+.navbar-header a:hover {
+    color: whitesmoke;
+}
+#titleContainer {
+    display: inline;
+}
+#sucursalesListImage {
+    height: auto;
+    width: 10%;
+}
+#tituloSucursales {
+    text-align: center;
+    font-weight: bold;
+}
+#sucursalPanel {
+    border-width: thin;
+}
+#sucursalPanelHeading {
+    background: #ff8a80;
+    color: black;
+    font-weight: bold;
+}
+#sucursalPanelBody {
+    background: #ffcdd2;
+}
+#sucursalPanelFooter {
+    background: #ff8a80;
+    padding: 0px;
+}
+#btnVisualizarMenu {
+    background: #ff8a80;
+    color: black;
+    border-color: #ddd;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+    font-weight: bold;
+}
+#btnVisualizarMenu:hover{
+    color: whitesmoke;
+    font-weight: bold;
+}
+#navbar {
+    background: #ff8a80;
+}
+#navbarUl a{
+    color: black;
+    font-weight: 400;
+}
+#navbarRightUl a {
+    color: black;
+    font-weight: 400;
+}
+#navbarUl a:hover {
+    color: whitesmoke;
+}
+
+#navbarRightUl a:hover {
+    color: whitesmoke;
+}
+.label-sucursal{
+    font-weight: bold;
+}
+.label-producto{
+    font-weight: bold;
 }
 /*
 .container body-content {

@@ -39,13 +39,13 @@
         <AssociationConnector Association="RestauranteModel.FK_EstadosProductos" />
         <AssociationConnector Association="RestauranteModel.FK_ProductosOrdenesDetalles" />
         <AssociationConnector Association="RestauranteModel.FK_ProductosProductosMenues" />
-        <EntityTypeShape EntityType="RestauranteModel.ImagenProducto" Width="1.5" PointX="5.25" PointY="0.75" />
-        <AssociationConnector Association="RestauranteModel.FK_ProductosImagenesProductos" />
         <EntityTypeShape EntityType="RestauranteModel.Sucursal" Width="1.5" PointX="5.75" PointY="20.875" />
         <AssociationConnector Association="RestauranteModel.FK_SucursalesEmpleados" />
         <AssociationConnector Association="RestauranteModel.FK_SucursalesMenues" />
         <AssociationConnector Association="RestauranteModel.FK_PaisesSucursales" />
         <AssociationConnector Association="RestauranteModel.FK_ProvinciasSucursales" />
+        <EntityTypeShape EntityType="RestauranteModel.ImagenProducto" Width="1.5" PointX="5.25" PointY="0.75" />
+        <AssociationConnector Association="RestauranteModel.FK_ProductosImagenesProductos" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

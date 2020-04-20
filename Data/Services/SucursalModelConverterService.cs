@@ -20,8 +20,8 @@ namespace Data.Services
                     CodigoSucursal = item.CodigoSucursal,
                     NombreSucursal = item.NombreSucursal,
                     DireccionSucursal = item.DireccionSucursal,
-                    Pais = GetService.GetPaisService().FindById(item.CodigoPais),
-                    //Provincia = GetService.GetProvinciaService().FindById(item.CodigoProvincia)
+                    //Pais = GetService.GetPaisService().FindById(item.CodigoPais),
+                    Provincia = GetService.GetProvinciaService().FindById(item.CodigoProvincia)
                 };
 
                 viewModel.Add(model);
@@ -38,7 +38,8 @@ namespace Data.Services
                 DireccionSucursal = viewModel.DireccionSucursal,
                 CodigoPais = viewModel.Pais.CodigoPais,
                 CodigoProvincia = viewModel.CodigoProvincia,
-                Provincias = GetService.GetProvinciaService().FindById(viewModel.CodigoProvincia)
+                Provincias = GetService.GetProvinciaService().FindById(viewModel.CodigoProvincia),
+                Borrado = false
             };
             return original;
         }

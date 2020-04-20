@@ -85,9 +85,13 @@ namespace Data.Services
         {
             return new UsuarioLoginModelConverterService();
         }
-        public static ImagenProducto GetImagenProducto()
+        public static ImagenProductoService GetImagenProductoService()
         {
-            return new ImagenProducto();
+            return new ImagenProductoService();
+        }
+        public static ProductoModelConverterService GetProductoModelConverterService()
+        {
+            return new ProductoModelConverterService();
         }
     }
 }

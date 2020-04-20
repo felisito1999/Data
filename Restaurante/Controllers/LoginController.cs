@@ -48,7 +48,7 @@ namespace Restaurante.Controllers
             Session.Clear();
             FormsAuthentication.SignOut();
             TempData["LoginData"] = null;
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("SucursalIndex", "Sucursal");
         }
         public ActionResult SeleccionRegistro()
         {

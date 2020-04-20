@@ -4,8 +4,11 @@
     ViewBag.Title = "SucursalesIndex";
 }
 
-<h2>sucursales disponibles</h2>
-
+    <div id = "titleContainer">
+        <img id="sucursalesListImage"src="~/Content/Images/kisspng-fusion-cuisine-european-cuisine-restaurant-pizza-c-dining-vector-5ad9d0ef352779.1186250915242242392177.png" />
+        <h2 id="tituloSucursales">Sucursales disponibles</h2>
+    </div>
+<hr size="30"/>
 @if (User.IsInRole("Administrador"))
 {
     <p>
@@ -46,9 +49,9 @@
                 <td>
                     @if (User.IsInRole("Administrador"))
                     {
-                        @Html.ActionLink("Ver menu", "ProductoMenuList", "ProductoMenu", new { id = item.CodigoSucursal }, new { @class = "btn btn-primary" })
-                        @Html.ActionLink("Modificar sucursal", "UpdateSucursal", "Sucursal", new { id = item.CodigoSucursal }, new { @class = "btn btn-primary" })
-                        @Html.ActionLink("BorrarSucursal", "DeleteSucursal", "Sucursal", new { id = item.CodigoSucursal }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Ver menu", "ProductoMenuList", "ProductoMenu", new { id = item.CodigoSucursal }, new { @class = "btn btn-primary btn-block" })
+                        @Html.ActionLink("Modificar sucursal", "UpdateSucursal", "Sucursal", new { id = item.CodigoSucursal }, new { @class = "btn btn-primary btn-block" })
+                        @Html.ActionLink("Eliminar", "DeleteSucursal", "Sucursal", new { id = item.CodigoSucursal }, new { @class = "btn btn-primary btn-block" })
                     }
                     else
                     {
@@ -59,26 +62,62 @@
         }
     </table>
 }
-else
+else if (User.IsInRole("Cliente") | User.Identity.IsAuthenticated == false)
 {
     <div class="row">
         @foreach (var item in Model)
         {
-            <div class="col-lg-4 mb-4">
-                <div class="card h-100">
-                    <h4 class="card text-center">@Html.DisplayFor(modelItem => item.NombreSucursal)</h4>
-                    <div class="card-body">
-                        <p class="card-text">@Html.DisplayFor(modelItem => item.DireccionSucursal)</p>
-                        <p class="card-text">@Html.DisplayFor(modelItem => item.Provincia.NombreProvincia)</p>
-                        <p class="card-text">@Html.DisplayFor(modelItem => item.Pais.NombrePais)</p>
+
+            <div class = "col-md-4">
+                <div id ="sucursalPanel"class="panel panel-info">
+                    <div id="sucursalPanelHeading"class="panel-heading">@Html.DisplayFor(modelItem => item.NombreSucursal)</div>
+                    <div id="sucursalPanelBody" class="panel-body">
+                        <p>@Html.LabelFor(model => item.DireccionSucursal, htmlAttributes: new { @class = "label-sucursal" }) @Html.DisplayFor(modelItem => item.DireccionSucursal)</p>
+                        <hr size="10" />
+                        <p>@Html.LabelFor(model => item.Provincia, htmlAttributes: new { @class = "label-sucursal" }) @Html.DisplayFor(modelItem => item.Provincia.NombreProvincia)</p>
+                        <hr size="10" />
+                        <p>@Html.LabelFor(model => item.Pais, htmlAttributes: new { @class = "label-sucursal" }) @Html.DisplayFor(modelItem => item.Pais.NombrePais)</p>
                     </div>
-                    <div class="card-footer">
-                        @Html.ActionLink("Ver menu", "SucursalIndex", "Sucursal", "", new { @class = "btn btn-primary" })
+                    <div id="sucursalPanelFooter" class="panel-footer">
+                        @Html.ActionLink("Visualizar menu", "ProductoMenuList", "ProductoMenu", new { id = item.CodigoSucursal }, new { @class = "btn btn-primary btn-block", id = "btnVisualizarMenu"})
                     </div>
                 </div>
             </div>
         }
 
     </div>
+    @*<div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-4 mb-4">
+                    <div class="card h-100">
+                        <h4 class="card text-center">@Html.DisplayFor(modelItem => item.NombreSucursal)</h4>
+                        <div class="card-body">
+                            <p class="card-text">@Html.DisplayFor(modelItem => item.DireccionSucursal)</p>
+                            <p class="card-text">@Html.DisplayFor(modelItem => item.Provincia.NombreProvincia)</p>
+                            <p class="card-text">@Html.DisplayFor(modelItem => item.Pais.NombrePais)</p>
+                        </div>
+                        <div class="card-footer">
+                            @Html.ActionLink("Ver menu", "ProductoMenuList", "ProductoMenu", new { id = item.CodigoSucursal }, new { @class = "btn btn-primary" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">@Html.DisplayFor(modelItem => item.NombreSucursal)</div>
+                        <div class="panel-body">
+                            <p class="card-text">@Html.DisplayFor(modelItem => item.DireccionSucursal)</p>
+                            <p class="card-text">@Html.DisplayFor(modelItem => item.Provincia.NombreProvincia)</p>
+                            <p class="card-text">@Html.DisplayFor(modelItem => item.Pais.NombrePais)</p>
+                        </div>
+                        <div class="panel-footer">
+                            @Html.ActionLink("Ver menu", "ProductoMenuList", "ProductoMenu", new { id = item.CodigoSucursal }, new { @class = "btn btn-primary" })
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>*@
 }
 

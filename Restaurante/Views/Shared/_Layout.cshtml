@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Data.Services
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -8,7 +9,7 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div id="navbar"class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -19,15 +20,15 @@
                 @Html.ActionLink("Felix's Gorditos Place", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Pagina principal", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Sucursales", "Index", "Home")</li>
+                <ul id="navbarUl" class="nav navbar-nav">
+                    <li>@Html.ActionLink("Pagina principal", "SucursalIndex", "Sucursal")</li>
+                    <li>@Html.ActionLink("Sucursales", "SucursalIndex", "Sucursal")</li>
                     <li>@Html.ActionLink("Sobre nosotros", "About", "Home")</li>
                     <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
                 </ul>
                 @if (User.Identity.IsAuthenticated == false)
                 {
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul id="navbarRightUl" class="nav navbar-nav navbar-right">
                         <li>
                             @Html.ActionLink("Iniciar Sesión", "Login", "Login")
                         </li>
@@ -38,16 +39,42 @@
                 }
                 else
                 {
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            @Html.ActionLink("Bienvenido","DetalleUsuario","Login") @User.Identity.Name
-                        </li>
-                        <li>
-                            @Html.ActionLink("Log Out", "LogOut", "Login")
-                        </li>
-                    </ul>
-                }
+                    if (User.IsInRole("Administrador"))
+                    {
+                        <ul id="navbarRightUl" class="nav navbar-nav navbar-right">
+                            <li>
+                                @Html.ActionLink("Bienvenido administrador " + User.Identity.Name, "DetalleUsuario", "Login")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Log Out", "LogOut", "Login")
+                            </li>
+                        </ul>
+                    }
+                    else if (User.IsInRole("Cliente"))
+                    {
+                        <ul id="navbarRightUl" class="nav navbar-nav navbar-right">
+                            <li>
+                                @{
+                                    var cliente = GetService.GetClienteService().GetClienteFromUserName(User.Identity.Name);
+                                    string NombreCompletoUsuario = cliente.NombreCliente + " "
+                                        + GetService.GetClienteService().GetClienteFromUserName(User.Identity.Name).ApellidoCliente;
 
+                                    if (cliente.Sexo == "Masculino")
+                                    {
+                                        @Html.ActionLink("Bienvenido " + NombreCompletoUsuario, "DetalleUsuario", "Login");
+                                    }
+                                    else
+                                    {
+                                        @Html.ActionLink("Bienvenida " + NombreCompletoUsuario, "DetalleUsuario", "Login");
+                                    }
+                                }
+                            </li>
+                            <li>
+                                @Html.ActionLink("Log Out", "LogOut", "Login")
+                            </li>
+                        </ul>
+                    }
+                }                
             </div>
         </div>
     </div>

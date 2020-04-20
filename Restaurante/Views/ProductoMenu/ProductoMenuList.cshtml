@@ -4,11 +4,14 @@
     ViewBag.Title = "MenuPorSucursal";
 }
 
-<h2>MenuPorSucursal</h2>
+<h2>Menú</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@if (User.IsInRole("Administrador"))
+{
+    <p>
+        @Html.ActionLink("Agregar porducto", "SeleccionAgregarProducto")
+    </p>
+}
 <table class="table">
     <tr>
         <th>
@@ -36,7 +39,15 @@
                 @Html.DisplayFor(modelItem => item.Precio)
             </td>
             <td>
-                @Html.ActionLink("Ordenar", "Edit", new { id = item.CodigoProductoMenu }, new { @class = "btn btn-primary" })
+                @if (User.IsInRole("Cliente") | User.Identity.IsAuthenticated == false)
+                {
+                    @Html.ActionLink("Ordenar", "OrdenarProducto", "Orden", new { id = item.CodigoProductoMenu }, new { @class = "btn btn-primary btn-block" })
+                }
+                else
+                {
+                    @Html.ActionLink("Modificar", "OrdenarProducto", "Orden", new { id = item.CodigoProductoMenu }, new { @class = "btn btn-primary btn-block" })
+                    @Html.ActionLink("Eliminar", "OrdenarProducto", "Orden", new { id = item.CodigoProductoMenu }, new { @class = "btn btn-primary btn-block" })
+                }
             </td>
         </tr>
     }

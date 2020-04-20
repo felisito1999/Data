@@ -63,7 +63,7 @@
             <PropertyRef Name="CodigoImagenProducto" />
           </Key>
           <Property Name="CodigoImagenProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Imagen" Type="varbinary" MaxLength="1" Nullable="false" />
+          <Property Name="Imagen" Type="varbinary(max)" Nullable="false" />
           <Property Name="CodigoProducto" Type="int" Nullable="false" />
           <Property Name="Borrado" Type="bit" Nullable="false" />
         </EntityType>
@@ -1092,11 +1092,6 @@
             <End Role="Productos" EntitySet="Productos" />
             <End Role="ProductoMenu" EntitySet="ProductosMenues" />
           </AssociationSet>
-          <EntitySet Name="ImagenesProductos" EntityType="RestauranteModel.ImagenProducto" />
-          <AssociationSet Name="FK_ProductosImagenesProductos" Association="RestauranteModel.FK_ProductosImagenesProductos">
-            <End Role="Producto" EntitySet="Productos" />
-            <End Role="ImagenesProductos" EntitySet="ImagenesProductos" />
-          </AssociationSet>
           <EntitySet Name="Sucursales" EntityType="RestauranteModel.Sucursal" />
           <AssociationSet Name="FK_SucursalesEmpleados" Association="RestauranteModel.FK_SucursalesEmpleados">
             <End Role="Sucursales" EntitySet="Sucursales" />
@@ -1113,6 +1108,11 @@
           <AssociationSet Name="FK_ProvinciasSucursales" Association="RestauranteModel.FK_ProvinciasSucursales">
             <End Role="Provincia" EntitySet="Provincias" />
             <End Role="Sucursales" EntitySet="Sucursales" />
+          </AssociationSet>
+          <EntitySet Name="ImagenesProductos" EntityType="RestauranteModel.ImagenProducto" />
+          <AssociationSet Name="FK_ProductosImagenesProductos" Association="RestauranteModel.FK_ProductosImagenesProductos">
+            <End Role="Producto" EntitySet="Productos" />
+            <End Role="ImagenesProductos" EntitySet="ImagenesProductos" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Producto">
@@ -1180,28 +1180,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="ImagenProducto">
-          <Key>
-            <PropertyRef Name="CodigoImagenProducto" />
-          </Key>
-          <Property Name="CodigoImagenProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Imagen" Type="Binary" Nullable="false" MaxLength="1" FixedLength="false" />
-          <Property Name="CodigoProducto" Type="Int32" Nullable="false" />
-          <Property Name="Borrado" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Productos" Relationship="RestauranteModel.FK_ProductosImagenesProductos" FromRole="ImagenesProductos" ToRole="Producto" />
-        </EntityType>
-        <Association Name="FK_ProductosImagenesProductos">
-          <End Type="RestauranteModel.Producto" Role="Producto" Multiplicity="1" />
-          <End Type="RestauranteModel.ImagenProducto" Role="ImagenesProductos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Producto">
-              <PropertyRef Name="CodigoProducto" />
-            </Principal>
-            <Dependent Role="ImagenesProductos">
-              <PropertyRef Name="CodigoProducto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Sucursal">
           <Key>
             <PropertyRef Name="CodigoSucursal" />
@@ -1262,6 +1240,28 @@
             </Principal>
             <Dependent Role="Sucursales">
               <PropertyRef Name="CodigoProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ImagenProducto">
+          <Key>
+            <PropertyRef Name="CodigoImagenProducto" />
+          </Key>
+          <Property Name="CodigoImagenProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Imagen" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="CodigoProducto" Type="Int32" Nullable="false" />
+          <Property Name="Borrado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Productos" Relationship="RestauranteModel.FK_ProductosImagenesProductos" FromRole="ImagenesProductos" ToRole="Producto" />
+        </EntityType>
+        <Association Name="FK_ProductosImagenesProductos">
+          <End Type="RestauranteModel.Producto" Role="Producto" Multiplicity="1" />
+          <End Type="RestauranteModel.ImagenProducto" Role="ImagenesProductos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="CodigoProducto" />
+            </Principal>
+            <Dependent Role="ImagenesProductos">
+              <PropertyRef Name="CodigoProducto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1431,16 +1431,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ImagenesProductos">
-            <EntityTypeMapping TypeName="RestauranteModel.ImagenProducto">
-              <MappingFragment StoreEntitySet="ImagenesProductos">
-                <ScalarProperty Name="Borrado" ColumnName="Borrado" />
-                <ScalarProperty Name="CodigoProducto" ColumnName="CodigoProducto" />
-                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
-                <ScalarProperty Name="CodigoImagenProducto" ColumnName="CodigoImagenProducto" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Sucursales">
             <EntityTypeMapping TypeName="RestauranteModel.Sucursal">
               <MappingFragment StoreEntitySet="Sucursales">
@@ -1450,6 +1440,16 @@
                 <ScalarProperty Name="DireccionSucursal" ColumnName="DireccionSucursal" />
                 <ScalarProperty Name="NombreSucursal" ColumnName="NombreSucursal" />
                 <ScalarProperty Name="CodigoSucursal" ColumnName="CodigoSucursal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ImagenesProductos">
+            <EntityTypeMapping TypeName="RestauranteModel.ImagenProducto">
+              <MappingFragment StoreEntitySet="ImagenesProductos">
+                <ScalarProperty Name="Borrado" ColumnName="Borrado" />
+                <ScalarProperty Name="CodigoProducto" ColumnName="CodigoProducto" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="CodigoImagenProducto" ColumnName="CodigoImagenProducto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

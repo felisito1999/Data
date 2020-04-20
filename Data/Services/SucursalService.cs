@@ -59,8 +59,10 @@ namespace Data.Services
             using (var context = GetService.GetRestauranteEntityService())
             {
                 var sucursalOriginal = context.Sucursales.Find(sucursalNueva.CodigoSucursal);
-                sucursalOriginal = sucursalNueva;
-
+                sucursalOriginal.NombreSucursal = sucursalNueva.NombreSucursal;
+                sucursalOriginal.DireccionSucursal = sucursalNueva.DireccionSucursal;
+                sucursalOriginal.CodigoPais = sucursalNueva.CodigoPais;
+                sucursalOriginal.CodigoProvincia = sucursalNueva.CodigoProvincia;
                 context.SaveChanges();
             }
         }

@@ -28,7 +28,13 @@ namespace Restaurante.Controllers
             }
             return RedirectToAction("SucursalIndex", "Sucursal");
         }
-        public ActionResult AgregarProductoMenu(int? id)
+        [Authorize(Roles = "Administrador")]
+        public ActionResult SeleccionTipoAgregado()
+        {
+            return View();
+        }
+        [Authorize(Roles="Administrador")]
+        public ActionResult AgregarProductoMenu()
         {
             return View();
         }

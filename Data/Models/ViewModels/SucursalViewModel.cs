@@ -21,15 +21,9 @@ namespace Data.Models.ViewModels
         public string DireccionSucursal { get; set; }
         [Display(Name = "Pais:")]
         public Pais Pais { get; set; } = GetService.GetPaisService().FindById(65);
-        public Provincia Provincia
-        {
-            get
-            {
-                return GetService.GetProvinciaService().FindById(CodigoProvincia);
-            }
-        }
         [Required]
         [Display(Name = "Provincia:")]
         public int CodigoProvincia { get; set; }
+        public Provincia Provincia { get; set; } 
     }
 }

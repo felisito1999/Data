@@ -135,12 +135,14 @@
     <Compile Include="DbAccess\Usuario.cs">
       <DependentUpon>RestauranteModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OrdenEmpleado.cs" />
     <Compile Include="Models\ViewModels\ClienteViewModel.cs" />
     <Compile Include="Models\ViewModels\EmpleadoViewModel.cs" />
     <Compile Include="Models\ViewModels\EstadoViewModel.cs" />
     <Compile Include="Models\ViewModels\PaisViewModel.cs" />
     <Compile Include="Models\ViewModels\ProductoMenuListViewModel.cs" />
     <Compile Include="Models\ViewModels\ProductoMenuViewModel.cs" />
+    <Compile Include="Models\ViewModels\ProductoViewModel.cs" />
     <Compile Include="Models\ViewModels\ProvinciaViewModel.cs" />
     <Compile Include="Models\ViewModels\RegistrarUsuarioClienteViewModel.cs" />
     <Compile Include="Models\ViewModels\RolViewModel.cs" />
@@ -149,6 +151,7 @@
     <Compile Include="Models\ViewModels\UsuarioLoginViewModel.cs" />
     <Compile Include="Models\ViewModels\UsuarioViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CategoriaProductoService.cs" />
     <Compile Include="Services\ClienteModelConverterService.cs" />
     <Compile Include="Services\ClienteService.cs" />
     <Compile Include="Services\EmpleadoModelConverterService.cs" />
@@ -159,10 +162,12 @@
     <Compile Include="Services\IModelViewModelConverter.cs" />
     <Compile Include="Services\ISingleModelSystemService.cs" />
     <Compile Include="Services\MenuService.cs" />
+    <Compile Include="Services\OrdenService.cs" />
     <Compile Include="Services\PaisService.cs" />
     <Compile Include="Services\ProductoMenuListModelConverterService.cs" />
     <Compile Include="Services\ProductoMenuModelConverterService.cs" />
     <Compile Include="Services\ProductoMenuService.cs" />
+    <Compile Include="Services\ProductoModelConverterService.cs" />
     <Compile Include="Services\ProductoService.cs" />
     <Compile Include="Services\ProvinciaService.cs" />
     <Compile Include="Services\RegistroClienteModelConverterService.cs" />
