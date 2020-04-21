@@ -17,9 +17,9 @@ namespace Data.DbAccess
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Producto()
         {
-            this.OrdenesDetalles = new HashSet<OrdenDetalle>();
             this.ProductosMenues = new HashSet<ProductoMenu>();
             this.ImagenesProductos = new HashSet<ImagenProducto>();
+            this.OrdenesDetalles = new HashSet<OrdenDetalle>();
         }
     
         public int CodigoProducto { get; set; }
@@ -33,10 +33,10 @@ namespace Data.DbAccess
         public virtual CategoriaProducto CategoriasProductos { get; set; }
         public virtual Estado Estados { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrdenDetalle> OrdenesDetalles { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductoMenu> ProductosMenues { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ImagenProducto> ImagenesProductos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrdenDetalle> OrdenesDetalles { get; set; }
     }
 }

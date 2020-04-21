@@ -32,11 +32,11 @@ namespace Data.DbAccess
         public int CodigoEstado { get; set; }
         public bool Borrado { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Orden> Ordenes { get; set; }
         public virtual Estado Estados { get; set; }
         public virtual Pais Paises { get; set; }
         public virtual Usuario Usuarios { get; set; }
         public virtual Sucursal Sucursales { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Orden> Ordenes { get; set; }
     }
 }

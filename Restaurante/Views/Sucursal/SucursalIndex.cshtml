@@ -12,7 +12,7 @@
 @if (User.IsInRole("Administrador"))
 {
     <p>
-        @Html.ActionLink("Agregar sucursal", "AgregarSucursal", "", new { @class = "btn btn-primary" })
+        @Html.ActionLink("Agregar sucursal", "AgregarSucursal", "", new { @class = "btn btn-block", id = "botonFuncional" })
     </p>
     <table class="table">
         <tr>
@@ -47,16 +47,9 @@
                     @Html.DisplayFor(modelItem => item.DireccionSucursal)
                 </td>
                 <td>
-                    @if (User.IsInRole("Administrador"))
-                    {
-                        @Html.ActionLink("Ver menu", "ProductoMenuList", "ProductoMenu", new { id = item.CodigoSucursal }, new { @class = "btn btn-primary btn-block" })
-                        @Html.ActionLink("Modificar sucursal", "UpdateSucursal", "Sucursal", new { id = item.CodigoSucursal }, new { @class = "btn btn-primary btn-block" })
-                        @Html.ActionLink("Eliminar", "DeleteSucursal", "Sucursal", new { id = item.CodigoSucursal }, new { @class = "btn btn-primary btn-block" })
-                    }
-                    else
-                    {
-                        @Html.ActionLink("Ver menu", "ProductoMenuList", "ProductoMenu", new { id = item.CodigoSucursal }, new { @class = "btn btn-primary" })
-                    }
+                    @Html.ActionLink("Ver menu", "ProductoMenuList", "ProductoMenu", new { id = item.CodigoSucursal }, new { @class = "btn btn-block", id= "botonFuncional"})
+                    @Html.ActionLink("Modificar sucursal", "UpdateSucursal", "Sucursal", new { id = item.CodigoSucursal }, new { @class = "btn btn-block", id= "botonFuncional" })
+                    @Html.ActionLink("Eliminar", "DeleteSucursal", "Sucursal", new { id = item.CodigoSucursal }, new { @class = "btn btn-block", id= "botonFuncional" })
                 </td>
             </tr>
         }
@@ -64,22 +57,23 @@
 }
 else if (User.IsInRole("Cliente") | User.Identity.IsAuthenticated == false)
 {
-    <div class="row">
+    <div class="row row-no-gutters">
         @foreach (var item in Model)
         {
-
-            <div class = "col-md-4">
-                <div id ="sucursalPanel"class="panel panel-info">
-                    <div id="sucursalPanelHeading"class="panel-heading">@Html.DisplayFor(modelItem => item.NombreSucursal)</div>
-                    <div id="sucursalPanelBody" class="panel-body">
-                        <p>@Html.LabelFor(model => item.DireccionSucursal, htmlAttributes: new { @class = "label-sucursal" }) @Html.DisplayFor(modelItem => item.DireccionSucursal)</p>
-                        <hr size="10" />
-                        <p>@Html.LabelFor(model => item.Provincia, htmlAttributes: new { @class = "label-sucursal" }) @Html.DisplayFor(modelItem => item.Provincia.NombreProvincia)</p>
-                        <hr size="10" />
-                        <p>@Html.LabelFor(model => item.Pais, htmlAttributes: new { @class = "label-sucursal" }) @Html.DisplayFor(modelItem => item.Pais.NombrePais)</p>
-                    </div>
-                    <div id="sucursalPanelFooter" class="panel-footer">
-                        @Html.ActionLink("Visualizar menu", "ProductoMenuList", "ProductoMenu", new { id = item.CodigoSucursal }, new { @class = "btn btn-primary btn-block", id = "btnVisualizarMenu"})
+            <div class = "col-sm">
+                <div class="panel-group">
+                    <div id="sucursalPanel" class="panel">
+                        <div id="sucursalPanelHeading" class="panel-heading">@Html.DisplayFor(modelItem => item.NombreSucursal)</div>
+                        <div id="sucursalPanelBody" class="panel-body">
+                            <p>@Html.LabelFor(model => item.DireccionSucursal, htmlAttributes: new { @class = "label-sucursal" }) @Html.DisplayFor(modelItem => item.DireccionSucursal)</p>
+                            <hr size="10" />
+                            <p>@Html.LabelFor(model => item.Provincia, htmlAttributes: new { @class = "label-sucursal" }) @Html.DisplayFor(modelItem => item.Provincia.NombreProvincia)</p>
+                            <hr size="10" />
+                            <p>@Html.LabelFor(model => item.Pais, htmlAttributes: new { @class = "label-sucursal" }) @Html.DisplayFor(modelItem => item.Pais.NombrePais)</p>
+                        </div>
+                        <div id="sucursalPanelFooter" class="panel-footer">
+                            @Html.ActionLink("Visualizar menu", "ProductoMenuList", "ProductoMenu", new { id = item.CodigoSucursal }, new { @class = "btn btn-block", id = "btnVisualizarMenu" })
+                        </div>
                     </div>
                 </div>
             </div>

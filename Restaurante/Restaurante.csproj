@@ -146,6 +146,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\180827153512-cote-nyc-korean-steakhouse-12.jpg" />
+    <Content Include="Content\Images\272ddb80b6378ecaf212a06d3b4663a7.jpg" />
     <Content Include="Content\Images\kisspng-fusion-cuisine-european-cuisine-restaurant-pizza-c-dining-vector-5ad9d0ef352779.1186250915242242392177.png" />
     <Content Include="Content\Images\tenderloin-crop.jpg" />
     <Content Include="favicon.ico" />
@@ -171,6 +173,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\Images\cartoon-1299636_960_720.webp" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -186,6 +189,7 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\Scripts.js" />
     <Content Include="Scripts\src\index.js" />
     <Content Include="Scripts\src\methods\defaults.js" />
     <Content Include="Scripts\src\methods\destroy.js" />

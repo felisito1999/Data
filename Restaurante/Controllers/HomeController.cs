@@ -13,6 +13,7 @@ namespace Restaurante.Controllers
         {
             var sucursales = GetService.GetSucursalService().ListAll();
             var sucursalesViewModel = GetService.GetSucursalModelConverterService().ConvertfromListToViewModel(sucursales);
+
             return View(sucursalesViewModel);
         }
         public ActionResult MenuPorSucursal(int id)

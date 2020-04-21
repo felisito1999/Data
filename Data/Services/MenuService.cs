@@ -39,7 +39,7 @@ namespace Data.Services
             }
         }
 
-        public IEnumerable<Menu> ListSortedByGivenCategoryId(int idCategory)
+        public IEnumerable<Menu> ListSortedByGivenCategoryId(int idSucursal)
         {
             throw new NotImplementedException();
         }
@@ -62,7 +62,6 @@ namespace Data.Services
         {
             using (var context = GetService.GetRestauranteEntityService())
             {
-                var sucursal = GetService.GetSucursalService().FindById(idSucursal);
                 var menuSucursal = ListAll().Where(x => x.CodigoSucursal == idSucursal).SingleOrDefault();
 
                 return menuSucursal;

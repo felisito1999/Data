@@ -7,12 +7,12 @@
 <h2>ListaProductos</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Agregar producto", "AgregarProducto", "", new { @class = "btn btn-block", id = "botonFuncional" })
 </p>
 <table class="table">
     <tr>
         <th>
-            <p>Imagen:</p>
+            <p>Imagen principal:</p>
         </th>
         <th>
             @Html.DisplayNameFor(model => model.NombreProducto)
@@ -20,37 +20,31 @@
         <th>
             @Html.DisplayNameFor(model => model.DescripcionProducto)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CodigoCategoria)
-        </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @{ 
-                var base64 = Convert.ToBase64String(item.Imagen);
-                var imgSource = String.Format("data:image/gif;base64,{0}", base64);
-            }
-            <img id="productoListImage"src="@imgSrc" alt="Imagen de producto" />
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NombreProducto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DescripcionProducto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CodigoCategoria)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CodigoProducto }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CodigoProducto }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CodigoProducto })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @{
+                    var base64 = Convert.ToBase64String(item.Imagen);
+                    var imgSource = String.Format("data:image/gif;base64,{0}", base64);
+                }
+                <img class="img-rounded" id="productoListImage" src="@imgSource" alt="Imagen de producto" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreProducto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescripcionProducto)
+            </td>
+            <td>
+                @Html.ActionLink("Modificar", "ActualizarProducto", new { id = item.CodigoProducto }, new { @class = "btn btn-block", id = "botonFuncional" })
+                @Html.ActionLink("Eliminar producto", "BorrarProducto", new { id = item.CodigoProducto }, new { @class = "btn btn-block", id = "botonFuncional" })
+            </td>
+        </tr>
+    }
 
 </table>
 <div class="row">
@@ -61,19 +55,17 @@
             <div id="productoPanel" class="panel panel-info">
                 <div id="productoPanelHeading" class="panel-heading">@Html.DisplayFor(modelItem => item.NombreProducto)</div>
                 <div id="productoPanelBodyImage" class="panel-body">
-                    @{ 
+                    @{
                         var base64 = Convert.ToBase64String(item.Imagen);
                         var imgSource = String.Format("data:image/gif;base64,{0}", base64);
                     }
-                    <img src="@imgSource" alt="Imagen de producto" />
+                    <img id="productoListImage" src="@imgSource" alt="Imagen de producto" />
                 </div>
                 <div id="productoPanelBody" class="panel-body">
                     <p>@Html.LabelFor(model => item.DescripcionProducto, htmlAttributes: new { @class = "label-producto" }) @Html.DisplayFor(modelItem => item.DescripcionProducto)</p>
-                    <hr size="10" />
-                    <p>@Html.LabelFor(model => item.CodigoCategoria, htmlAttributes: new { @class = "label-producto" }) @Html.DisplayFor(modelItem => item.CodigoProducto)</p>
                 </div>
                 <div id="productoPanelFooter" class="panel-footer">
-                    @Html.ActionLink("Visualizar menu", "ProductoMenuList", "ProductoMenu", new { id = item.CodigoProducto }, new { @class = "btn btn-primary btn-block", id = "btnVisualizarMenu" })
+                    @Html.ActionLink("Ordenar", "Orden", "Orden", new { id = item.CodigoProducto }, new { @class = "btn btn-primary btn-block", id = "btnOrdenarProducto" })
                 </div>
             </div>
         </div>

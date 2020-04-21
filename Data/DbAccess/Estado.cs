@@ -19,11 +19,11 @@ namespace Data.DbAccess
         {
             this.Clientes = new HashSet<Cliente>();
             this.Empleados = new HashSet<Empleado>();
-            this.Ordenes = new HashSet<Orden>();
-            this.OrdenesDetalles = new HashSet<OrdenDetalle>();
             this.Roles = new HashSet<Rol>();
             this.Usuarios = new HashSet<Usuario>();
             this.Productos = new HashSet<Producto>();
+            this.Ordenes = new HashSet<Orden>();
+            this.OrdenesDetalles = new HashSet<OrdenDetalle>();
         }
     
         public int CodigoEstado { get; set; }
@@ -34,14 +34,14 @@ namespace Data.DbAccess
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Empleado> Empleados { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Orden> Ordenes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrdenDetalle> OrdenesDetalles { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Rol> Roles { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Usuario> Usuarios { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Producto> Productos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Orden> Ordenes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrdenDetalle> OrdenesDetalles { get; set; }
     }
 }

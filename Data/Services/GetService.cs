@@ -93,5 +93,13 @@ namespace Data.Services
         {
             return new ProductoModelConverterService();
         }
+        public static OrdenService GetOrdenService()
+        {
+            return new OrdenService();
+        }
+        public static OrdenDetalleService GetOrdenDetalleService()
+        {
+            return new OrdenDetalleService();
+        }
     }
 }

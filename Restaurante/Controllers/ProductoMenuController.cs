@@ -23,7 +23,7 @@ namespace Restaurante.Controllers
                 var menu = GetService.GetMenuService().GetMenuBySucursalId(id);
                 var productosMenues = GetService.GetProductoMenuService().ListSortedByGivenCategoryId(menu.CodigoMenu);
                 var productosMenuesView = GetService.GetProductoMenuListModelConverter().ConvertfromListToViewModel(productosMenues);
-
+                
                 return View(productosMenuesView);
             }
             return RedirectToAction("SucursalIndex", "Sucursal");
@@ -38,6 +38,7 @@ namespace Restaurante.Controllers
         {
             return View();
         }
+        [Authorize(Roles = "Administrador")]
         [HttpPost]
         public ActionResult AgregarProductoMenu(ProductoMenuViewModel viewModel)
         {
@@ -65,5 +66,6 @@ namespace Restaurante.Controllers
             }
             return View();
         }
+
     }
 }

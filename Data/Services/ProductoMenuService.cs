@@ -41,9 +41,12 @@ namespace Data.Services
 
         public IEnumerable<ProductoMenu> ListSortedByGivenCategoryId(int idMenu)
         {
-            var productos = ListAll().Where(x => x.CodigoMenu == idMenu);
+            using (var context = GetService.GetRestauranteEntityService())
+            {
+                var productos = context.ProductosMenues.ToList().Where(x => x.CodigoMenu == idMenu);
 
-            return productos;
+                return productos;
+            }
         }
 
         public void SoftDelete(int id)
@@ -54,6 +57,15 @@ namespace Data.Services
         public void UpdateSingleObject(ProductoMenu objectType)
         {
             throw new NotImplementedException();
+        }
+        public ProductoMenu GetProductoByMenuProductoId(int codigoMenu, int codigoProducto)
+        {
+            using (var context = GetService.GetRestauranteEntityService())
+            {
+                var productoMenu = context.ProductosMenues.ToList().Where(x => x.CodigoMenu == codigoMenu & x.CodigoProducto == codigoProducto).FirstOrDefault();
+
+                return productoMenu;
+            }
         }
     }
 }

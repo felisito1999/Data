@@ -33,8 +33,6 @@ namespace Data.DbAccess
         public virtual DbSet<Empleado> Empleados { get; set; }
         public virtual DbSet<Estado> Estados { get; set; }
         public virtual DbSet<Menu> Menues { get; set; }
-        public virtual DbSet<Orden> Ordenes { get; set; }
-        public virtual DbSet<OrdenDetalle> OrdenesDetalles { get; set; }
         public virtual DbSet<Pais> Paises { get; set; }
         public virtual DbSet<ProductoMenu> ProductosMenues { get; set; }
         public virtual DbSet<Provincia> Provincias { get; set; }
@@ -43,6 +41,8 @@ namespace Data.DbAccess
         public virtual DbSet<Producto> Productos { get; set; }
         public virtual DbSet<Sucursal> Sucursales { get; set; }
         public virtual DbSet<ImagenProducto> ImagenesProductos { get; set; }
+        public virtual DbSet<Orden> Ordenes { get; set; }
+        public virtual DbSet<OrdenDetalle> OrdenesDetalles { get; set; }
     
         public virtual int sp_IngresarClientes(string nombreCliente, string apellidoCliente, Nullable<System.DateTime> fechaNacimiento, Nullable<int> codigoPaisNacimiento, Nullable<int> codigoUsuario)
         {

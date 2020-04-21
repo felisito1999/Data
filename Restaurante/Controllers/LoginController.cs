@@ -28,7 +28,6 @@ namespace Restaurante.Controllers
                 if (authentication == true)
                 {
                     FormsAuthentication.SetAuthCookie(userInfo.NombreUsuario, false);
-                    TempData["LoginData"] = userInfo.NombreUsuario;
                     
                     return RedirectToAction("SucursalIndex", "Sucursal");
                 }
@@ -47,7 +46,6 @@ namespace Restaurante.Controllers
             Session.Abandon();
             Session.Clear();
             FormsAuthentication.SignOut();
-            TempData["LoginData"] = null;
             return RedirectToAction("SucursalIndex", "Sucursal");
         }
         public ActionResult SeleccionRegistro()

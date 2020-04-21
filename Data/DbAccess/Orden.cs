@@ -23,6 +23,7 @@ namespace Data.DbAccess
         public int CodigoOrden { get; set; }
         public int CodigoCliente { get; set; }
         public int CodigoEmpleado { get; set; }
+        public int CodigoSucursal { get; set; }
         public System.DateTime FechaHora { get; set; }
         public int CodigoEstado { get; set; }
         public bool Borrado { get; set; }
@@ -32,5 +33,6 @@ namespace Data.DbAccess
         public virtual Estado Estados { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrdenDetalle> OrdenesDetalles { get; set; }
+        public virtual Sucursal Sucursales { get; set; }
     }
 }

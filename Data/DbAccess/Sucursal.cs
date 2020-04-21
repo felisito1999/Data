@@ -19,6 +19,7 @@ namespace Data.DbAccess
         {
             this.Empleados = new HashSet<Empleado>();
             this.Menues = new HashSet<Menu>();
+            this.Ordenes = new HashSet<Orden>();
         }
     
         public int CodigoSucursal { get; set; }
@@ -34,5 +35,7 @@ namespace Data.DbAccess
         public virtual ICollection<Menu> Menues { get; set; }
         public virtual Pais Paises { get; set; }
         public virtual Provincia Provincias { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Orden> Ordenes { get; set; }
     }
 }

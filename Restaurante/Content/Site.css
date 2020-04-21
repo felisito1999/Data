@@ -11,7 +11,7 @@
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
-    background-color: #ef9a9a;
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -27,48 +27,114 @@ select,
 textarea {
     max-width: 280px;
 }
-#productoListImage {
-    float: left;
-    width: 25%;
-    height: 25%;
-    background-size: cover;
+#botonFuncional {
+    background: #3E4551;
+    border-color: #3E4551;
+    color: white;
+    font-weight: bold;
 }
+#botonFuncionalSeleccionRegistro {
+    background: #3E4551;
+    border-color: #3E4551;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+#botonFuncionalSeleccionRegistro:hover {
+    color: whitesmoke;
+    border-color: whitesmoke;
+    background: #555a66;
+    font-weight: bolder;
+}
+.table {
+    background: #555a66;
+    color: white;
+    border-radius: 3px,3px;
+}
+#botonFuncional:hover {
+    color: whitesmoke;
+    border-color: whitesmoke;
+    background: #555a66;
+    font-weight: bolder;
+}
+/*#productoListImage {
+    float: none;
+    max-width: 384px;
+    max-height: 216px;
+    min-height: 144px;
+    max-width: 256px;
+    display: block;
+    background-size: cover;
+}*/
 .navbar-header a {
-    color: black;
+    color: white;
     font-weight: 400;
 }
 .navbar-header a:hover {
     color: whitesmoke;
 }
-#titleContainer {
+.titleContainer {
     display: inline;
+    /*background: #3E4551;*/
 }
 #sucursalesListImage {
     height: auto;
     width: 10%;
+    display: inline;
 }
 #tituloSucursales {
     text-align: center;
     font-weight: bold;
+    color: white;
+}
+#tituloMenu {
+    text-align: center;
+    font-weight: bold;
+    color: white;
 }
 #sucursalPanel {
     border-width: thin;
 }
 #sucursalPanelHeading {
-    background: #ff8a80;
-    color: black;
+    background: #3E4551;
+    color: white;
     font-weight: bold;
+    border-color: #3E4551;
 }
 #sucursalPanelBody {
-    background: #ffcdd2;
+    background: #4B515D;
+    color: white;
+    border-color: #4B515D;
 }
 #sucursalPanelFooter {
-    background: #ff8a80;
+    background: #3E4551;
     padding: 0px;
+    color: white;
+    border-color: #4B515D;
+}
+#productoPanel {
+    border-width: thin;
+}
+#productoPanelHeading {
+    background: #3E4551;
+    color: white;
+    font-weight: bold;
+    border-color: #4B515D;
+}
+#productoPanelBody {
+    background: #4B515D;
+    color: white;
+    border-color: #4B515D;
+}
+#productoPanelFooter {
+    background: #3E4551;
+    padding: 0px;
+    color: white;
+    border-color: #4B515D;
 }
 #btnVisualizarMenu {
-    background: #ff8a80;
-    color: black;
+    background: #3E4551;
+    color: white;
     border-color: #ddd;
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
@@ -76,33 +142,58 @@ textarea {
     border-top-left-radius: 0px;
     font-weight: bold;
 }
-#btnVisualizarMenu:hover{
-    color: whitesmoke;
+#btnOrdenarProducto {
+    background: #3E4551;
+    border-color: #ddd;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
     font-weight: bold;
+    color: white;
+}
+#btnOrdenarProducto:hover {
+    color: whitesmoke;
+    border-color: whitesmoke;
+    background: #555a66;
+    font-weight: bolder;
+}
+#btnVisualizarMenu:hover {
+    color: whitesmoke;
+    border-color: whitesmoke;
+    background: #555a66;
+    font-weight: bolder;
 }
 #navbar {
-    background: #ff8a80;
+    background: #3E4551;
 }
 #navbarUl a{
-    color: black;
+    color: white;
     font-weight: 400;
 }
 #navbarRightUl a {
-    color: black;
+    color: white;
     font-weight: 400;
+}
+#navbarRightUl a:hover {
+    background: #555a66;
 }
 #navbarUl a:hover {
     color: whitesmoke;
+    background: #555a66;
 }
 
 #navbarRightUl a:hover {
     color: whitesmoke;
 }
-.label-sucursal{
+.label-sucursal {
     font-weight: bold;
+    color: white;
+    min-height: 30px;
 }
-.label-producto{
+.label-producto {
     font-weight: bold;
+    color: white;
 }
 /*
 .container body-content {
@@ -125,4 +216,7 @@ textarea {
 .card-footer{
 
 }*/
-
+#productoListImage {
+    max-width: 256px;
+    max-height: 144px;
+}

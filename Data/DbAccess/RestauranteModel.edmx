@@ -79,9 +79,10 @@
           <Key>
             <PropertyRef Name="CodigoOrden" />
           </Key>
-          <Property Name="CodigoOrden" Type="int" Nullable="false" />
+          <Property Name="CodigoOrden" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CodigoCliente" Type="int" Nullable="false" />
           <Property Name="CodigoEmpleado" Type="int" Nullable="false" />
+          <Property Name="CodigoSucursal" Type="int" Nullable="false" />
           <Property Name="FechaHora" Type="datetime" Nullable="false" />
           <Property Name="CodigoEstado" Type="int" Nullable="false" />
           <Property Name="Borrado" Type="bit" Nullable="false" />
@@ -90,7 +91,7 @@
           <Key>
             <PropertyRef Name="CodigoOrdenDetalle" />
           </Key>
-          <Property Name="CodigoOrdenDetalle" Type="int" Nullable="false" />
+          <Property Name="CodigoOrdenDetalle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CodigoOrden" Type="int" Nullable="false" />
           <Property Name="CodigoProducto" Type="int" Nullable="false" />
           <Property Name="Cantidad" Type="int" Nullable="false" />
@@ -444,6 +445,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SucursalesOrdenes">
+          <End Role="Sucursales" Type="Self.Sucursales" Multiplicity="1" />
+          <End Role="Ordenes" Type="Self.Ordenes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sucursales">
+              <PropertyRef Name="CodigoSucursal" />
+            </Principal>
+            <Dependent Role="Ordenes">
+              <PropertyRef Name="CodigoSucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UsuariosClientes">
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
           <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
@@ -599,6 +612,10 @@
             <End Role="Sucursales" EntitySet="Sucursales" />
             <End Role="Menues" EntitySet="Menues" />
           </AssociationSet>
+          <AssociationSet Name="FK_SucursalesOrdenes" Association="Self.FK_SucursalesOrdenes">
+            <End Role="Sucursales" EntitySet="Sucursales" />
+            <End Role="Ordenes" EntitySet="Ordenes" />
+          </AssociationSet>
           <AssociationSet Name="FK_UsuariosClientes" Association="Self.FK_UsuariosClientes">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Clientes" EntitySet="Clientes" />
@@ -643,10 +660,10 @@
           <Property Name="CodigoUsuario" Type="Int32" Nullable="false" />
           <Property Name="CodigoEstado" Type="Int32" Nullable="false" />
           <Property Name="Borrado" Type="Boolean" />
-          <NavigationProperty Name="Ordenes" Relationship="Self.FK_ClientesOrdenes" FromRole="Clientes" ToRole="Ordenes" />
           <NavigationProperty Name="Estados" Relationship="Self.FK_EstadosClientes" FromRole="Clientes" ToRole="Estados" />
           <NavigationProperty Name="Paises" Relationship="Self.FK_PaisesClientes" FromRole="Clientes" ToRole="Paises" />
           <NavigationProperty Name="Usuarios" Relationship="Self.FK_UsuariosClientes" FromRole="Clientes" ToRole="Usuarios" />
+          <NavigationProperty Name="Ordenes" Relationship="RestauranteModel.FK_ClientesOrdenes" FromRole="Cliente" ToRole="Ordenes" />
         </EntityType>
         <EntityType Name="Empleado">
           <Key>
@@ -663,11 +680,11 @@
           <Property Name="CodigoSucursal" Type="Int32" Nullable="false" />
           <Property Name="CodigoEstado" Type="Int32" Nullable="false" />
           <Property Name="Borrado" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Ordenes" Relationship="Self.FK_EmpleadosOrdenes" FromRole="Empleados" ToRole="Ordenes" />
           <NavigationProperty Name="Estados" Relationship="Self.FK_EstadosEmpleados" FromRole="Empleados" ToRole="Estados" />
           <NavigationProperty Name="Paises" Relationship="Self.FK_PaisesEmpleados" FromRole="Empleados" ToRole="Paises" />
           <NavigationProperty Name="Usuarios" Relationship="Self.FK_UsuariosEmpleados" FromRole="Empleados" ToRole="Usuarios" />
           <NavigationProperty Name="Sucursales" Relationship="RestauranteModel.FK_SucursalesEmpleados" FromRole="Empleado" ToRole="Sucursales" />
+          <NavigationProperty Name="Ordenes" Relationship="RestauranteModel.FK_EmpleadosOrdenes" FromRole="Empleado" ToRole="Ordenes" />
         </EntityType>
         <EntityType Name="Estado">
           <Key>
@@ -677,11 +694,11 @@
           <Property Name="NombreEstado" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Clientes" Relationship="Self.FK_EstadosClientes" FromRole="Estados" ToRole="Clientes" />
           <NavigationProperty Name="Empleados" Relationship="Self.FK_EstadosEmpleados" FromRole="Estados" ToRole="Empleados" />
-          <NavigationProperty Name="Ordenes" Relationship="Self.FK_EstadosOrdenes" FromRole="Estados" ToRole="Ordenes" />
-          <NavigationProperty Name="OrdenesDetalles" Relationship="Self.FK_EstadosOrdenesDetalles" FromRole="Estados" ToRole="OrdenesDetalles" />
           <NavigationProperty Name="Roles" Relationship="Self.FK_EstadosRoles" FromRole="Estados" ToRole="Roles" />
           <NavigationProperty Name="Usuarios" Relationship="Self.FK_EstadosUsuarios" FromRole="Estados" ToRole="Usuarios" />
           <NavigationProperty Name="Productos" Relationship="RestauranteModel.FK_EstadosProductos" FromRole="Estado" ToRole="Productos" />
+          <NavigationProperty Name="Ordenes" Relationship="RestauranteModel.FK_EstadosOrdenes" FromRole="Estado" ToRole="Ordenes" />
+          <NavigationProperty Name="OrdenesDetalles" Relationship="RestauranteModel.FK_EstadosOrdenesDetalles" FromRole="Estado" ToRole="OrdenesDetalles" />
         </EntityType>
         <EntityType Name="Menu">
           <Key>
@@ -692,37 +709,6 @@
           <Property Name="Borrado" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="ProductosMenues" Relationship="Self.FK_MenuesProductosMenues" FromRole="Menues" ToRole="ProductosMenues" />
           <NavigationProperty Name="Sucursales" Relationship="RestauranteModel.FK_SucursalesMenues" FromRole="Menu" ToRole="Sucursales" />
-        </EntityType>
-        <EntityType Name="Orden">
-          <Key>
-            <PropertyRef Name="CodigoOrden" />
-          </Key>
-          <Property Name="CodigoOrden" Type="Int32" Nullable="false" />
-          <Property Name="CodigoCliente" Type="Int32" Nullable="false" />
-          <Property Name="CodigoEmpleado" Type="Int32" Nullable="false" />
-          <Property Name="FechaHora" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CodigoEstado" Type="Int32" Nullable="false" />
-          <Property Name="Borrado" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Clientes" Relationship="Self.FK_ClientesOrdenes" FromRole="Ordenes" ToRole="Clientes" />
-          <NavigationProperty Name="Empleados" Relationship="Self.FK_EmpleadosOrdenes" FromRole="Ordenes" ToRole="Empleados" />
-          <NavigationProperty Name="Estados" Relationship="Self.FK_EstadosOrdenes" FromRole="Ordenes" ToRole="Estados" />
-          <NavigationProperty Name="OrdenesDetalles" Relationship="Self.FK_OrdenesOrdenesDetalles" FromRole="Ordenes" ToRole="OrdenesDetalles" />
-        </EntityType>
-        <EntityType Name="OrdenDetalle">
-          <Key>
-            <PropertyRef Name="CodigoOrdenDetalle" />
-          </Key>
-          <Property Name="CodigoOrdenDetalle" Type="Int32" Nullable="false" />
-          <Property Name="CodigoOrden" Type="Int32" Nullable="false" />
-          <Property Name="CodigoProducto" Type="Int32" Nullable="false" />
-          <Property Name="Cantidad" Type="Int32" Nullable="false" />
-          <Property Name="Costo" Type="Decimal" Precision="12" Scale="4" Nullable="false" />
-          <Property Name="PrecioVenta" Type="Decimal" Precision="12" Scale="4" Nullable="false" />
-          <Property Name="CodigoEstado" Type="Int32" Nullable="false" />
-          <Property Name="Borrado" Type="Boolean" />
-          <NavigationProperty Name="Estados" Relationship="Self.FK_EstadosOrdenesDetalles" FromRole="OrdenesDetalles" ToRole="Estados" />
-          <NavigationProperty Name="Ordenes" Relationship="Self.FK_OrdenesOrdenesDetalles" FromRole="OrdenesDetalles" ToRole="Ordenes" />
-          <NavigationProperty Name="Productos" Relationship="RestauranteModel.FK_ProductosOrdenesDetalles" FromRole="OrdenDetalle" ToRole="Productos" />
         </EntityType>
         <EntityType Name="Pais">
           <Key>
@@ -795,18 +781,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ClientesOrdenes">
-          <End Role="Clientes" Type="RestauranteModel.Cliente" Multiplicity="1" />
-          <End Role="Ordenes" Type="RestauranteModel.Orden" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Clientes">
-              <PropertyRef Name="CodigoCliente" />
-            </Principal>
-            <Dependent Role="Ordenes">
-              <PropertyRef Name="CodigoCliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_EstadosClientes">
           <End Role="Estados" Type="RestauranteModel.Estado" Multiplicity="1" />
           <End Role="Clientes" Type="RestauranteModel.Cliente" Multiplicity="*" />
@@ -840,18 +814,6 @@
             </Principal>
             <Dependent Role="Clientes">
               <PropertyRef Name="CodigoUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EmpleadosOrdenes">
-          <End Role="Empleados" Type="RestauranteModel.Empleado" Multiplicity="1" />
-          <End Role="Ordenes" Type="RestauranteModel.Orden" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Empleados">
-              <PropertyRef Name="CodigoEmpleado" />
-            </Principal>
-            <Dependent Role="Ordenes">
-              <PropertyRef Name="CodigoEmpleado" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -891,30 +853,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_EstadosOrdenes">
-          <End Role="Estados" Type="RestauranteModel.Estado" Multiplicity="1" />
-          <End Role="Ordenes" Type="RestauranteModel.Orden" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Estados">
-              <PropertyRef Name="CodigoEstado" />
-            </Principal>
-            <Dependent Role="Ordenes">
-              <PropertyRef Name="CodigoEstado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EstadosOrdenesDetalles">
-          <End Role="Estados" Type="RestauranteModel.Estado" Multiplicity="1" />
-          <End Role="OrdenesDetalles" Type="RestauranteModel.OrdenDetalle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Estados">
-              <PropertyRef Name="CodigoEstado" />
-            </Principal>
-            <Dependent Role="OrdenesDetalles">
-              <PropertyRef Name="CodigoEstado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_EstadosRoles">
           <End Role="Estados" Type="RestauranteModel.Estado" Multiplicity="1" />
           <End Role="Roles" Type="RestauranteModel.Rol" Multiplicity="*" />
@@ -951,18 +889,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OrdenesOrdenesDetalles">
-          <End Role="Ordenes" Type="RestauranteModel.Orden" Multiplicity="1" />
-          <End Role="OrdenesDetalles" Type="RestauranteModel.OrdenDetalle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Ordenes">
-              <PropertyRef Name="CodigoOrden" />
-            </Principal>
-            <Dependent Role="OrdenesDetalles">
-              <PropertyRef Name="CodigoOrden" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_RolesUsuarios">
           <End Role="Roles" Type="RestauranteModel.Rol" Multiplicity="1" />
           <End Role="Usuarios" Type="RestauranteModel.Usuario" Multiplicity="*" />
@@ -982,8 +908,6 @@
           <EntitySet Name="Empleados" EntityType="RestauranteModel.Empleado" />
           <EntitySet Name="Estados" EntityType="RestauranteModel.Estado" />
           <EntitySet Name="Menues" EntityType="RestauranteModel.Menu" />
-          <EntitySet Name="Ordenes" EntityType="RestauranteModel.Orden" />
-          <EntitySet Name="OrdenesDetalles" EntityType="RestauranteModel.OrdenDetalle" />
           <EntitySet Name="Paises" EntityType="RestauranteModel.Pais" />
           <EntitySet Name="ProductosMenues" EntityType="RestauranteModel.ProductoMenu" />
           <EntitySet Name="Provincias" EntityType="RestauranteModel.Provincia" />
@@ -992,10 +916,6 @@
           <AssociationSet Name="FK_ProvinciasCiudades" Association="Self.FK_ProvinciasCiudades">
             <End Role="Provincias" EntitySet="Provincias" />
             <End Role="Ciudades" EntitySet="Ciudades" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ClientesOrdenes" Association="Self.FK_ClientesOrdenes">
-            <End Role="Clientes" EntitySet="Clientes" />
-            <End Role="Ordenes" EntitySet="Ordenes" />
           </AssociationSet>
           <AssociationSet Name="FK_EstadosClientes" Association="Self.FK_EstadosClientes">
             <End Role="Estados" EntitySet="Estados" />
@@ -1009,10 +929,6 @@
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Clientes" EntitySet="Clientes" />
           </AssociationSet>
-          <AssociationSet Name="FK_EmpleadosOrdenes" Association="Self.FK_EmpleadosOrdenes">
-            <End Role="Empleados" EntitySet="Empleados" />
-            <End Role="Ordenes" EntitySet="Ordenes" />
-          </AssociationSet>
           <AssociationSet Name="FK_EstadosEmpleados" Association="Self.FK_EstadosEmpleados">
             <End Role="Estados" EntitySet="Estados" />
             <End Role="Empleados" EntitySet="Empleados" />
@@ -1025,14 +941,6 @@
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Empleados" EntitySet="Empleados" />
           </AssociationSet>
-          <AssociationSet Name="FK_EstadosOrdenes" Association="Self.FK_EstadosOrdenes">
-            <End Role="Estados" EntitySet="Estados" />
-            <End Role="Ordenes" EntitySet="Ordenes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EstadosOrdenesDetalles" Association="Self.FK_EstadosOrdenesDetalles">
-            <End Role="Estados" EntitySet="Estados" />
-            <End Role="OrdenesDetalles" EntitySet="OrdenesDetalles" />
-          </AssociationSet>
           <AssociationSet Name="FK_EstadosRoles" Association="Self.FK_EstadosRoles">
             <End Role="Estados" EntitySet="Estados" />
             <End Role="Roles" EntitySet="Roles" />
@@ -1044,10 +952,6 @@
           <AssociationSet Name="FK_MenuesProductosMenues" Association="Self.FK_MenuesProductosMenues">
             <End Role="Menues" EntitySet="Menues" />
             <End Role="ProductosMenues" EntitySet="ProductosMenues" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrdenesOrdenesDetalles" Association="Self.FK_OrdenesOrdenesDetalles">
-            <End Role="Ordenes" EntitySet="Ordenes" />
-            <End Role="OrdenesDetalles" EntitySet="OrdenesDetalles" />
           </AssociationSet>
           <AssociationSet Name="FK_RolesUsuarios" Association="Self.FK_RolesUsuarios">
             <End Role="Roles" EntitySet="Roles" />
@@ -1084,10 +988,6 @@
             <End Role="Estado" EntitySet="Estados" />
             <End Role="Productos" EntitySet="Productos" />
           </AssociationSet>
-          <AssociationSet Name="FK_ProductosOrdenesDetalles" Association="RestauranteModel.FK_ProductosOrdenesDetalles">
-            <End Role="Productos" EntitySet="Productos" />
-            <End Role="OrdenDetalle" EntitySet="OrdenesDetalles" />
-          </AssociationSet>
           <AssociationSet Name="FK_ProductosProductosMenues" Association="RestauranteModel.FK_ProductosProductosMenues">
             <End Role="Productos" EntitySet="Productos" />
             <End Role="ProductoMenu" EntitySet="ProductosMenues" />
@@ -1114,6 +1014,36 @@
             <End Role="Producto" EntitySet="Productos" />
             <End Role="ImagenesProductos" EntitySet="ImagenesProductos" />
           </AssociationSet>
+          <EntitySet Name="Ordenes" EntityType="RestauranteModel.Orden" />
+          <EntitySet Name="OrdenesDetalles" EntityType="RestauranteModel.OrdenDetalle" />
+          <AssociationSet Name="FK_ClientesOrdenes" Association="RestauranteModel.FK_ClientesOrdenes">
+            <End Role="Cliente" EntitySet="Clientes" />
+            <End Role="Ordenes" EntitySet="Ordenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpleadosOrdenes" Association="RestauranteModel.FK_EmpleadosOrdenes">
+            <End Role="Empleado" EntitySet="Empleados" />
+            <End Role="Ordenes" EntitySet="Ordenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EstadosOrdenes" Association="RestauranteModel.FK_EstadosOrdenes">
+            <End Role="Estado" EntitySet="Estados" />
+            <End Role="Ordenes" EntitySet="Ordenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EstadosOrdenesDetalles" Association="RestauranteModel.FK_EstadosOrdenesDetalles">
+            <End Role="Estado" EntitySet="Estados" />
+            <End Role="OrdenesDetalles" EntitySet="OrdenesDetalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenesOrdenesDetalles" Association="RestauranteModel.FK_OrdenesOrdenesDetalles">
+            <End Role="Ordenes" EntitySet="Ordenes" />
+            <End Role="OrdenesDetalles" EntitySet="OrdenesDetalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SucursalesOrdenes" Association="RestauranteModel.FK_SucursalesOrdenes">
+            <End Role="Sucursal" EntitySet="Sucursales" />
+            <End Role="Ordenes" EntitySet="Ordenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductosOrdenesDetalles" Association="RestauranteModel.FK_ProductosOrdenesDetalles">
+            <End Role="Producto" EntitySet="Productos" />
+            <End Role="OrdenesDetalles" EntitySet="OrdenesDetalles" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Producto">
           <Key>
@@ -1128,9 +1058,9 @@
           <Property Name="Borrado" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="CategoriasProductos" Relationship="RestauranteModel.FK_CategoriasProductos" FromRole="Productos" ToRole="CategoriaProducto" />
           <NavigationProperty Name="Estados" Relationship="RestauranteModel.FK_EstadosProductos" FromRole="Productos" ToRole="Estado" />
-          <NavigationProperty Name="OrdenesDetalles" Relationship="RestauranteModel.FK_ProductosOrdenesDetalles" FromRole="Productos" ToRole="OrdenDetalle" />
           <NavigationProperty Name="ProductosMenues" Relationship="RestauranteModel.FK_ProductosProductosMenues" FromRole="Productos" ToRole="ProductoMenu" />
           <NavigationProperty Name="ImagenesProductos" Relationship="RestauranteModel.FK_ProductosImagenesProductos" FromRole="Producto" ToRole="ImagenesProductos" />
+          <NavigationProperty Name="OrdenesDetalles" Relationship="RestauranteModel.FK_ProductosOrdenesDetalles" FromRole="Producto" ToRole="OrdenesDetalles" />
         </EntityType>
         <Association Name="FK_CategoriasProductos">
           <End Type="RestauranteModel.CategoriaProducto" Role="CategoriaProducto" Multiplicity="1" />
@@ -1153,18 +1083,6 @@
             </Principal>
             <Dependent Role="Productos">
               <PropertyRef Name="CodigoEstado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProductosOrdenesDetalles">
-          <End Type="RestauranteModel.Producto" Role="Productos" Multiplicity="1" />
-          <End Type="RestauranteModel.OrdenDetalle" Role="OrdenDetalle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Productos">
-              <PropertyRef Name="CodigoProducto" />
-            </Principal>
-            <Dependent Role="OrdenDetalle">
-              <PropertyRef Name="CodigoProducto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1194,6 +1112,7 @@
           <NavigationProperty Name="Menues" Relationship="RestauranteModel.FK_SucursalesMenues" FromRole="Sucursales" ToRole="Menu" />
           <NavigationProperty Name="Paises" Relationship="RestauranteModel.FK_PaisesSucursales" FromRole="Sucursales" ToRole="Pais" />
           <NavigationProperty Name="Provincias" Relationship="RestauranteModel.FK_ProvinciasSucursales" FromRole="Sucursales" ToRole="Provincia" />
+          <NavigationProperty Name="Ordenes" Relationship="RestauranteModel.FK_SucursalesOrdenes" FromRole="Sucursal" ToRole="Ordenes" />
         </EntityType>
         <Association Name="FK_SucursalesEmpleados">
           <End Type="RestauranteModel.Sucursal" Role="Sucursales" Multiplicity="1" />
@@ -1261,6 +1180,123 @@
               <PropertyRef Name="CodigoProducto" />
             </Principal>
             <Dependent Role="ImagenesProductos">
+              <PropertyRef Name="CodigoProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Orden">
+          <Key>
+            <PropertyRef Name="CodigoOrden" />
+          </Key>
+          <Property Name="CodigoOrden" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodigoCliente" Type="Int32" Nullable="false" />
+          <Property Name="CodigoEmpleado" Type="Int32" Nullable="false" />
+          <Property Name="CodigoSucursal" Type="Int32" Nullable="false" />
+          <Property Name="FechaHora" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CodigoEstado" Type="Int32" Nullable="false" />
+          <Property Name="Borrado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Clientes" Relationship="RestauranteModel.FK_ClientesOrdenes" FromRole="Ordenes" ToRole="Cliente" />
+          <NavigationProperty Name="Empleados" Relationship="RestauranteModel.FK_EmpleadosOrdenes" FromRole="Ordenes" ToRole="Empleado" />
+          <NavigationProperty Name="Estados" Relationship="RestauranteModel.FK_EstadosOrdenes" FromRole="Ordenes" ToRole="Estado" />
+          <NavigationProperty Name="OrdenesDetalles" Relationship="RestauranteModel.FK_OrdenesOrdenesDetalles" FromRole="Ordenes" ToRole="OrdenesDetalles" />
+          <NavigationProperty Name="Sucursales" Relationship="RestauranteModel.FK_SucursalesOrdenes" FromRole="Ordenes" ToRole="Sucursal" />
+        </EntityType>
+        <EntityType Name="OrdenDetalle">
+          <Key>
+            <PropertyRef Name="CodigoOrdenDetalle" />
+          </Key>
+          <Property Name="CodigoOrdenDetalle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodigoOrden" Type="Int32" Nullable="false" />
+          <Property Name="CodigoProducto" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="Costo" Type="Decimal" Nullable="false" Precision="12" Scale="4" />
+          <Property Name="PrecioVenta" Type="Decimal" Nullable="false" Precision="12" Scale="4" />
+          <Property Name="CodigoEstado" Type="Int32" Nullable="false" />
+          <Property Name="Borrado" Type="Boolean" />
+          <NavigationProperty Name="Estados" Relationship="RestauranteModel.FK_EstadosOrdenesDetalles" FromRole="OrdenesDetalles" ToRole="Estado" />
+          <NavigationProperty Name="Ordenes" Relationship="RestauranteModel.FK_OrdenesOrdenesDetalles" FromRole="OrdenesDetalles" ToRole="Ordenes" />
+          <NavigationProperty Name="Productos" Relationship="RestauranteModel.FK_ProductosOrdenesDetalles" FromRole="OrdenesDetalles" ToRole="Producto" />
+        </EntityType>
+        <Association Name="FK_ClientesOrdenes">
+          <End Type="RestauranteModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="RestauranteModel.Orden" Role="Ordenes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="CodigoCliente" />
+            </Principal>
+            <Dependent Role="Ordenes">
+              <PropertyRef Name="CodigoCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpleadosOrdenes">
+          <End Type="RestauranteModel.Empleado" Role="Empleado" Multiplicity="1" />
+          <End Type="RestauranteModel.Orden" Role="Ordenes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="CodigoEmpleado" />
+            </Principal>
+            <Dependent Role="Ordenes">
+              <PropertyRef Name="CodigoEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EstadosOrdenes">
+          <End Type="RestauranteModel.Estado" Role="Estado" Multiplicity="1" />
+          <End Type="RestauranteModel.Orden" Role="Ordenes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="CodigoEstado" />
+            </Principal>
+            <Dependent Role="Ordenes">
+              <PropertyRef Name="CodigoEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EstadosOrdenesDetalles">
+          <End Type="RestauranteModel.Estado" Role="Estado" Multiplicity="1" />
+          <End Type="RestauranteModel.OrdenDetalle" Role="OrdenesDetalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="CodigoEstado" />
+            </Principal>
+            <Dependent Role="OrdenesDetalles">
+              <PropertyRef Name="CodigoEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdenesOrdenesDetalles">
+          <End Type="RestauranteModel.Orden" Role="Ordenes" Multiplicity="1" />
+          <End Type="RestauranteModel.OrdenDetalle" Role="OrdenesDetalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ordenes">
+              <PropertyRef Name="CodigoOrden" />
+            </Principal>
+            <Dependent Role="OrdenesDetalles">
+              <PropertyRef Name="CodigoOrden" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SucursalesOrdenes">
+          <End Type="RestauranteModel.Sucursal" Role="Sucursal" Multiplicity="1" />
+          <End Type="RestauranteModel.Orden" Role="Ordenes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sucursal">
+              <PropertyRef Name="CodigoSucursal" />
+            </Principal>
+            <Dependent Role="Ordenes">
+              <PropertyRef Name="CodigoSucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductosOrdenesDetalles">
+          <End Type="RestauranteModel.Producto" Role="Producto" Multiplicity="1" />
+          <End Type="RestauranteModel.OrdenDetalle" Role="OrdenesDetalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="CodigoProducto" />
+            </Principal>
+            <Dependent Role="OrdenesDetalles">
               <PropertyRef Name="CodigoProducto" />
             </Dependent>
           </ReferentialConstraint>
@@ -1334,32 +1370,6 @@
               <MappingFragment StoreEntitySet="Menues">
                 <ScalarProperty Name="CodigoMenu" ColumnName="CodigoMenu" />
                 <ScalarProperty Name="CodigoSucursal" ColumnName="CodigoSucursal" />
-                <ScalarProperty Name="Borrado" ColumnName="Borrado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Ordenes">
-            <EntityTypeMapping TypeName="RestauranteModel.Orden">
-              <MappingFragment StoreEntitySet="Ordenes">
-                <ScalarProperty Name="CodigoOrden" ColumnName="CodigoOrden" />
-                <ScalarProperty Name="CodigoCliente" ColumnName="CodigoCliente" />
-                <ScalarProperty Name="CodigoEmpleado" ColumnName="CodigoEmpleado" />
-                <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
-                <ScalarProperty Name="CodigoEstado" ColumnName="CodigoEstado" />
-                <ScalarProperty Name="Borrado" ColumnName="Borrado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="OrdenesDetalles">
-            <EntityTypeMapping TypeName="RestauranteModel.OrdenDetalle">
-              <MappingFragment StoreEntitySet="OrdenesDetalles">
-                <ScalarProperty Name="CodigoOrdenDetalle" ColumnName="CodigoOrdenDetalle" />
-                <ScalarProperty Name="CodigoOrden" ColumnName="CodigoOrden" />
-                <ScalarProperty Name="CodigoProducto" ColumnName="CodigoProducto" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-                <ScalarProperty Name="Costo" ColumnName="Costo" />
-                <ScalarProperty Name="PrecioVenta" ColumnName="PrecioVenta" />
-                <ScalarProperty Name="CodigoEstado" ColumnName="CodigoEstado" />
                 <ScalarProperty Name="Borrado" ColumnName="Borrado" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1450,6 +1460,33 @@
                 <ScalarProperty Name="CodigoProducto" ColumnName="CodigoProducto" />
                 <ScalarProperty Name="Imagen" ColumnName="Imagen" />
                 <ScalarProperty Name="CodigoImagenProducto" ColumnName="CodigoImagenProducto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ordenes">
+            <EntityTypeMapping TypeName="RestauranteModel.Orden">
+              <MappingFragment StoreEntitySet="Ordenes">
+                <ScalarProperty Name="Borrado" ColumnName="Borrado" />
+                <ScalarProperty Name="CodigoEstado" ColumnName="CodigoEstado" />
+                <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
+                <ScalarProperty Name="CodigoSucursal" ColumnName="CodigoSucursal" />
+                <ScalarProperty Name="CodigoEmpleado" ColumnName="CodigoEmpleado" />
+                <ScalarProperty Name="CodigoCliente" ColumnName="CodigoCliente" />
+                <ScalarProperty Name="CodigoOrden" ColumnName="CodigoOrden" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrdenesDetalles">
+            <EntityTypeMapping TypeName="RestauranteModel.OrdenDetalle">
+              <MappingFragment StoreEntitySet="OrdenesDetalles">
+                <ScalarProperty Name="Borrado" ColumnName="Borrado" />
+                <ScalarProperty Name="CodigoEstado" ColumnName="CodigoEstado" />
+                <ScalarProperty Name="PrecioVenta" ColumnName="PrecioVenta" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="CodigoProducto" ColumnName="CodigoProducto" />
+                <ScalarProperty Name="CodigoOrden" ColumnName="CodigoOrden" />
+                <ScalarProperty Name="CodigoOrdenDetalle" ColumnName="CodigoOrdenDetalle" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

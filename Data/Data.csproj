@@ -162,6 +162,7 @@
     <Compile Include="Services\IModelViewModelConverter.cs" />
     <Compile Include="Services\ISingleModelSystemService.cs" />
     <Compile Include="Services\MenuService.cs" />
+    <Compile Include="Services\OrdenDetalleService.cs" />
     <Compile Include="Services\OrdenService.cs" />
     <Compile Include="Services\PaisService.cs" />
     <Compile Include="Services\ProductoMenuListModelConverterService.cs" />
