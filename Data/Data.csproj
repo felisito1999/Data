@@ -180,7 +180,7 @@
     <Compile Include="Services\RegistroClienteModelConverterService.cs" />
     <Compile Include="Services\RegistroEmpleadoModelConverterService.cs" />
     <Compile Include="Services\RegistroUsuarioModelClienteConverterService.cs" />
-    <Compile Include="Services\RegistroUsuarioModelEmpleadosConverterSerivce.cs" />
+    <Compile Include="Services\RegistroUsuarioEmpleadosConverterSerivce.cs" />
     <Compile Include="Services\RolService.cs" />
     <Compile Include="Services\SexoService.cs" />
     <Compile Include="Services\SucursalModelConverterService.cs" />

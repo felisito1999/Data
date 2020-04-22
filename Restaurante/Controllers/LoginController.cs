@@ -89,7 +89,38 @@ namespace Restaurante.Controllers
         }
         public ActionResult RegistrarEmpleado()
         {
-            return View();
+            RegistrarUsuarioEmpleadoViewModel registro = new RegistrarUsuarioEmpleadoViewModel();
+            return View(registro);
+        }
+        [HttpPost]
+        public ActionResult RegistrarEmpleado(RegistrarUsuarioEmpleadoViewModel registroEmpleado)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var transaction = GetService.GetRestauranteEntityService().Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var usuario = GetService.GetRegistroUsuarioEmpleadosConverterSerivce().ConvertFromViewModel(registroEmpleado);
+                        var empleado = GetService.GetRegistroEmpleadoModelConverterService().ConvertFromViewModel(registroEmpleado);
+
+                        GetService.GetUsuarioService().Insert(usuario);
+                        GetService.GetEmpleadoService().Insert(empleado);
+                        transaction.Commit();
+
+                        return Redirect("~/");
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
+                        return View();
+                    }
+                }
+            }
+            else
+            {
+                return View();
+            }
         }
     }
 }

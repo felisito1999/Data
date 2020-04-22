@@ -121,5 +121,13 @@ namespace Data.Services
         {
             return new ImagenViewModelConverterService();
         }
+        public static RegistroUsuarioEmpleadosConverterSerivce GetRegistroUsuarioEmpleadosConverterSerivce()
+        {
+            return new RegistroUsuarioEmpleadosConverterSerivce();
+        }
+        public static RegistroEmpleadoModelConverterService GetRegistroEmpleadoModelConverterService()
+        {
+            return new RegistroEmpleadoModelConverterService();
+        }
     }
 }

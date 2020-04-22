@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Data.Services
 {
-    public class RegistroUsuarioModelEmpleadosConverterSerivce : IModelViewModelConverter<Usuario, RegistrarUsuarioEmpleadoViewModel>
+    public class RegistroUsuarioEmpleadosConverterSerivce : IModelViewModelConverter<Usuario, RegistrarUsuarioEmpleadoViewModel>
     {
         public IEnumerable<RegistrarUsuarioEmpleadoViewModel> ConvertfromListToViewModel(IEnumerable<Usuario> original)
         {
@@ -17,7 +17,16 @@ namespace Data.Services
 
         public Usuario ConvertFromViewModel(RegistrarUsuarioEmpleadoViewModel viewModel)
         {
-            throw new NotImplementedException();
+            Usuario usuario = new Usuario
+            {
+                NombreUsuario = viewModel.NombreUsuario,
+                Clave = viewModel.Clave,
+                Correo = viewModel.Correo,
+                CodigoRol = 3,
+                CodigoEstado = 4,
+                Borrado = false
+            };
+            return usuario;
         }
 
         public IEnumerable<Usuario> ConvertListFromViewModel(IEnumerable<RegistrarUsuarioEmpleadoViewModel> viewModel)

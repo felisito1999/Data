@@ -150,6 +150,7 @@
     <Content Include="Content\Images\180827153512-cote-nyc-korean-steakhouse-12.jpg" />
     <Content Include="Content\Images\272ddb80b6378ecaf212a06d3b4663a7.jpg" />
     <Content Include="Content\Images\kisspng-fusion-cuisine-european-cuisine-restaurant-pizza-c-dining-vector-5ad9d0ef352779.1186250915242242392177.png" />
+    <Content Include="Content\Images\pinpng.com-crm-icon-png-3834939.png" />
     <Content Include="Content\Images\tenderloin-crop.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -298,6 +299,7 @@
     <Content Include="Views\Producto\ActualizarProducto.cshtml" />
     <Content Include="Views\Imagen\VerGaleriaDeProducto.cshtml" />
     <Content Include="Views\Imagen\AgregarImagenAproducto.cshtml" />
+    <Content Include="Views\Login\RegistrarEmpleado.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

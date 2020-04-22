@@ -74,7 +74,8 @@ textarea {
     color: whitesmoke;
 }
 .titleContainer {
-    display: inline;
+    display: inline-block;
+    color = white;
     /*background: #3E4551;*/
 }
 #sucursalesListImage {
