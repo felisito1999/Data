@@ -17,11 +17,16 @@ namespace Data.Models.ViewModels
         [Display(Name = "Nombre del producto:")]
         public string NombreProducto { get; set; }
         [Required]
-        [Display(Name= "Descripcion del producto")]
+        [Display(Name = "Descripcion del producto")]
         public string DescripcionProducto { get; set; }
+        [Required]
+        [Display(Name = "Costo:")]
+        public decimal Costo { get; set; }
         public byte[] Imagen { get; set; }
-        [Required, FileExtensions(Extensions = "jpeg, png, jpg",
-                ErrorMessage = "Especificar una imagen")]
+        [Required]
+        [DataType(DataType.Upload)]
+        [Display(Name = "Seleccionar imagen:")]
+        [FileExtensions(Extensions ="jpg,heif", ErrorMessage = "Debe subir un archivo jpg/jpeg o heif")]
         public HttpPostedFileBase ArchivoImagen { get; set; }
         public int CodigoCategoria { get; set; }
         public ImagenProducto ImagenProducto { get; set; }

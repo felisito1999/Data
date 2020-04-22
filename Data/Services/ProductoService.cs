@@ -52,5 +52,14 @@ namespace Data.Services
         {
             throw new NotImplementedException();
         }
+        public Producto GetLastProducto()
+        {
+            using(var context = GetService.GetRestauranteEntityService())
+            {
+                var producto = context.Productos.ToList().LastOrDefault();
+
+                return producto;
+            }
+        }
     }
 }

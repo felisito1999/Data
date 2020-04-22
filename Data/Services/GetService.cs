@@ -85,10 +85,10 @@ namespace Data.Services
         {
             return new UsuarioLoginModelConverterService();
         }
-        public static ImagenProductoService GetImagenProductoService()
-        {
-            return new ImagenProductoService();
-        }
+        //public static ImagenProductoService GetImagenProductoService()
+        //{
+        //    return new ImagenProductoService();
+        //}
         public static ProductoModelConverterService GetProductoModelConverterService()
         {
             return new ProductoModelConverterService();
@@ -100,6 +100,22 @@ namespace Data.Services
         public static OrdenDetalleService GetOrdenDetalleService()
         {
             return new OrdenDetalleService();
+        }
+        public static ImagenProductoViewModelConverterService GetImagenProductoViewModelService()
+        {
+            return new ImagenProductoViewModelConverterService();
+        }
+        public static ImagenService GetImagenService()
+        {
+            return new ImagenService();
+        }
+        public static CategoriaProductoService GetCategoriaProductoService()
+        {
+            return new CategoriaProductoService();
+        }
+        public static ProductoProductoMenuModelConverterService GetProductoProductoMenuModelConverterService()
+        {
+            return new ProductoProductoMenuModelConverterService();
         }
     }
 }

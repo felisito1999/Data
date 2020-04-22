@@ -32,12 +32,13 @@ namespace Data.Models.ViewModels
                 ErrorMessage = "Especificar una imagen")]
         public HttpPostedFileBase Archivo { get; set; }
         [Required]
+        [Display(Name = "Costo:")]
+        public decimal Costo { get; set; }
+        [Required]
         [Display(Name = "Precios (RD$):")]
         public decimal Precio { get; set; }
         public ImagenProducto Imagenes { get; set; }
-        [Display(Name = "Sucursal:")]
-        [Required]
-        public int CodigoSucursal { get; set; }
+        public int CodigoMenu { get; set; }
         public Menu Menu { get; set; }
     }
 }

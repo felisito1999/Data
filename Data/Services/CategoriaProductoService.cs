@@ -21,7 +21,12 @@ namespace Data.Services
 
         public IEnumerable<CategoriaProducto> ListAll()
         {
-            throw new NotImplementedException();
+            using (var context = GetService.GetRestauranteEntityService())
+            {
+                var categoriasProductos = context.CategoriasProductos.ToList();
+
+                return categoriasProductos;
+            }
         }
 
         public IEnumerable<CategoriaProducto> ListSortedByGivenCategoryId(int idCategory)

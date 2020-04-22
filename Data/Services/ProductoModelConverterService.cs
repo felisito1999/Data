@@ -2,6 +2,7 @@
 using Data.Models.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace Data.Services
                     CodigoProducto = item.CodigoProducto,
                     NombreProducto = item.NombreProducto,
                     DescripcionProducto = item.DescripcionProducto,
-                    Imagen = GetService.GetImagenProductoService().ListSortedByGivenCategoryId(item.CodigoProducto).FirstOrDefault().Imagen,
+                    Imagen = GetService.GetImagenService().ListSortedByGivenCategoryId(item.CodigoProducto).FirstOrDefault().Imagen,
                     CodigoCategoria = item.CodigoCategoria
                 };
                 viewModel.Add(productoViewModel);
@@ -31,14 +32,21 @@ namespace Data.Services
 
         public Producto ConvertFromViewModel(ProductoViewModel viewModel)
         {
-            throw new NotImplementedException();
+            Producto producto = new Producto
+            {
+                NombreProducto = viewModel.NombreProducto,
+                DescripcionProducto = viewModel.DescripcionProducto,
+                CodigoCategoria = viewModel.CodigoCategoria,
+                Costo = viewModel.Costo,
+                CodigoEstado = 5,
+                Borrado = false
+            };
+            return producto;
         }
-
         public IEnumerable<Producto> ConvertListFromViewModel(IEnumerable<ProductoViewModel> viewModel)
         {
             throw new NotImplementedException();
         }
-
         public ProductoViewModel ConvertToViewModel(Producto original)
         {
             throw new NotImplementedException();

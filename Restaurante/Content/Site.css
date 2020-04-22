@@ -195,6 +195,9 @@ textarea {
     font-weight: bold;
     color: white;
 }
+.form-horizontal label {
+    color: white;
+}
 /*
 .container body-content {
     background-color: #a14d43;
@@ -219,4 +222,8 @@ textarea {
 #productoListImage {
     max-width: 256px;
     max-height: 144px;
+    background: #4B515D;
 }
+/*#productoPanelBodyImage {
+    background: #4B515D;
+}*/

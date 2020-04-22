@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Data.Models.ViewModels.ProductoMenuViewModel>
+@using Data.Services
+@{
+    ViewBag.Title = "AgregarProductoSucursal";
+}
+
+<h2>Agregar sucursal a la sucursal @GetService.GetSucursalService().FindById(ViewBag.CodigoSucursal).NombreSucursal</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NombreProducto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DescripcionProducto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Costo)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreProducto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescripcionProducto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Costo)
+            </td>
+            <td>
+                @Html.ActionLink("Seleccionar producto", "AgregarProductoSeleccionadoSucursal", new { idProducto = item.CodigoProducto, idSucursal = ViewBag.CodigoSucursal})
+            </td>
+        </tr>
+    }
+</table>
+
+
+

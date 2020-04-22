@@ -20,7 +20,7 @@ namespace Data.Services
                 {
                     CodigoProductoMenu = item.CodigoProductoMenu,
                     CodigoProducto = item.CodigoProducto,
-                    ImagenPrincipal = GetService.GetImagenProductoService().ListSortedByGivenCategoryId(item.CodigoProducto).FirstOrDefault().Imagen,
+                    ImagenPrincipal = GetService.GetImagenService().ListSortedByGivenCategoryId(item.CodigoProducto).FirstOrDefault().Imagen,
                     Producto = GetService.GetProductoService().FindById(item.CodigoProducto),
                     Precio = item.Precio
                 };

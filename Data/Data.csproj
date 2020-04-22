@@ -158,7 +158,9 @@
     <Compile Include="Services\EmpleadoService.cs" />
     <Compile Include="Services\EstadoService.cs" />
     <Compile Include="Services\GetService.cs" />
-    <Compile Include="Services\ImagenProductoService.cs" />
+    <Compile Include="Services\OldImagenProductoService.cs" />
+    <Compile Include="Services\ImagenProductoViewModelConverterService.cs" />
+    <Compile Include="Services\ImagenService.cs" />
     <Compile Include="Services\IModelViewModelConverter.cs" />
     <Compile Include="Services\ISingleModelSystemService.cs" />
     <Compile Include="Services\MenuService.cs" />
@@ -169,6 +171,7 @@
     <Compile Include="Services\ProductoMenuModelConverterService.cs" />
     <Compile Include="Services\ProductoMenuService.cs" />
     <Compile Include="Services\ProductoModelConverterService.cs" />
+    <Compile Include="Services\ProductoProductoMenuModelConverterService.cs" />
     <Compile Include="Services\ProductoService.cs" />
     <Compile Include="Services\ProvinciaService.cs" />
     <Compile Include="Services\RegistroClienteModelConverterService.cs" />

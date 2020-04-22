@@ -17,15 +17,15 @@ namespace Data.Services
 
         public ProductoMenu ConvertFromViewModel(ProductoMenuViewModel viewModel)
         {
-            //ProductoMenu productoMenu = new ProductoMenu
-            //{
-            //    CodigoProductoMenu = viewModel.CodigoProductoMenu,
-            //    CodigoProducto = viewModel.CodigoProducto,
-            //    Precio = viewModel.Precio,
-            //    CodigoMenu = viewModel.Men
-
-            //}
-            throw new NotImplementedException();
+            ProductoMenu productoMenu = new ProductoMenu
+            {
+                CodigoProductoMenu = viewModel.CodigoProductoMenu,
+                CodigoProducto = viewModel.CodigoProducto,
+                Precio = viewModel.Precio,
+                CodigoMenu = viewModel.CodigoMenu,
+                Borrado = false
+            };
+            return productoMenu;
         }
 
         public IEnumerable<ProductoMenu> ConvertListFromViewModel(IEnumerable<ProductoMenuViewModel> viewModel)
