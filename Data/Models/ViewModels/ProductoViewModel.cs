@@ -27,6 +27,8 @@ namespace Data.Models.ViewModels
         [DataType(DataType.Upload)]
         [Display(Name = "Seleccionar imagen:")]
         public HttpPostedFileBase ArchivoImagen { get; set; }
+        [Required]
+        [Display(Name = "Categoria:")]
         public int CodigoCategoria { get; set; }
         public ImagenProducto ImagenProducto { get; set; }
         public CategoriaProducto Categoria { get; set; }

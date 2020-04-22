@@ -40,6 +40,7 @@
                 @Html.DisplayFor(modelItem => item.DescripcionProducto)
             </td>
             <td>
+                @Html.ActionLink("Agregar imagenes a la galeria de iamgenes", "AgregarImagenesGaleria", "Producto", new { id = item.CodigoProducto }, new { @class = "btn btn-block", id = "botonFuncional"})
                 @Html.ActionLink("Modificar", "ActualizarProducto", new { id = item.CodigoProducto }, new { @class = "btn btn-block", id = "botonFuncional" })
                 @Html.ActionLink("Eliminar producto", "BorrarProducto", new { id = item.CodigoProducto }, new { @class = "btn btn-block", id = "botonFuncional" })
             </td>

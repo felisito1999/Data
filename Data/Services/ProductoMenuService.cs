@@ -65,7 +65,7 @@ namespace Data.Services
             using (var context = GetService.GetRestauranteEntityService())
             {
                 var producto = context.ProductosMenues.Find(productoMenu.CodigoProductoMenu);
-                producto = productoMenu;
+                producto.Precio = productoMenu.Precio;
 
                 context.SaveChanges();
             }

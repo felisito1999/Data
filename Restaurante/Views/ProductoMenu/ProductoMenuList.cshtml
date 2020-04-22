@@ -42,7 +42,7 @@
                     @Html.DisplayFor(modelItem => item.Precio)
                 </td>
                 <td>
-                    @Html.ActionLink("Modificar producto", "ModificarProductoMenu", new { id = item.CodigoProductoMenu }, new { @class = "btn btn-primary btn-block", id = "botonFuncional" })
+                    @Html.ActionLink("Modificar precio de producto", "ModificarProductoMenu", new { id = item.CodigoProductoMenu }, new { @class = "btn btn-primary btn-block", id = "botonFuncional" })
                     @Html.ActionLink("Eliminar producto de sucursal", "BorrarProductoSeleccionadoSucursal", new { id = item.CodigoProductoMenu, idSucursal = ViewBag.CodigoSucursal }, new { @class = "btn btn-block", id = "botonFuncional"})
                 </td>
             </tr>

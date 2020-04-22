@@ -11,7 +11,12 @@ namespace Data.Services
     {
         public CategoriaProducto FindById(int id)
         {
-            throw new NotImplementedException();
+            using (var context = GetService.GetRestauranteEntityService())
+            {
+                var categoria = context.CategoriasProductos.Find(id);
+
+                return categoria;
+            }
         }
 
         public void Insert(CategoriaProducto objectType)

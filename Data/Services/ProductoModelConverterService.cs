@@ -49,7 +49,15 @@ namespace Data.Services
         }
         public ProductoViewModel ConvertToViewModel(Producto original)
         {
-            throw new NotImplementedException();
+            ProductoViewModel productoView = new ProductoViewModel
+            {
+                CodigoProducto = original.CodigoProducto,
+                NombreProducto = original.NombreProducto,
+                DescripcionProducto = original.DescripcionProducto,
+                Costo = original.Costo,
+                CodigoCategoria = original.CodigoCategoria
+            };
+            return productoView;
         }
     }
 }

@@ -120,14 +120,32 @@ namespace Restaurante.Controllers
         [Authorize(Roles = "Administrador")]
         public ActionResult ActualizarProducto(int id)
         {
-            var producto = GetService.GetProductoMenuService();
-            return View();
+            var producto = GetService.GetProductoService().FindById(id);
+            var productoView = GetService.GetProductoModelConverterService().ConvertToViewModel(producto);
+            return View(productoView);
         }
         [Authorize(Roles = "Administrador")]
         [HttpPost]
-        public ActionResult ActualizarProducto(ProductoViewModel producto)
+        public ActionResult ActualizarProducto(ProductoViewModel productoView)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var producto = GetService.GetProductoModelConverterService().ConvertFromViewModel(productoView);
+
+                    GetService.GetProductoService().UpdateSingleObject()
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            }
+            else
+            {
+
+            }
         }
         [Authorize(Roles = "Administrador")]
         [HttpPost]

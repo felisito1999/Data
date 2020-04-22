@@ -48,9 +48,12 @@ namespace Data.Services
             throw new NotImplementedException();
         }
 
-        public void UpdateSingleObject(Producto objectType)
+        public void UpdateSingleObject(Producto producto)
         {
-            throw new NotImplementedException();
+            using (var context = GetService.GetRestauranteEntityService())
+            {
+
+            }
         }
         public Producto GetLastProducto()
         {
