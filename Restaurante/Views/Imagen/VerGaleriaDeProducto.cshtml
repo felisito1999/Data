@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Data.Models.ViewModels.ImagenProductoViewModel>
+
+@{
+    ViewBag.Title = "VerGaleriaDeProducto";
+}
+
+<h2 class="titleContainer">Ver galeria de producto</h2>
+<hr size="10"/>
+
+<div class="row">
+    @foreach (var modelItem in Model)
+    {
+        <div class="col-sm-6 col-md-3">
+            <a href="#" class="thumbnail">
+                @{ 
+                    var base64 = Convert.ToBase64String(modelItem.Imagen);
+                    var imageSource = String.Format("data:image/gif;base64,{0}", base64);
+                }
+                <img class="img-responsive" id="productoListImage" src="@imageSource" alt="Generic placeholder thumbnail">
+            </a>
+        </div>
+    }
+</div>

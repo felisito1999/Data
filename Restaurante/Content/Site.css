@@ -219,6 +219,9 @@ textarea {
 .card-footer{
 
 }*/
+#productoPanelBodyImage {
+    background: #4B515D;
+}
 #productoListImage {
     max-width: 256px;
     max-height: 144px;

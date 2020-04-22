@@ -73,6 +73,7 @@
                     </div>
                     <div id="productoPanelFooter" class="panel-footer">
                         @Html.ActionLink("Ordenar", "OrdenarProducto", "Orden", new { idProducto = item.CodigoProducto, idSucursal = GetService.GetMenuService().FindById(GetService.GetProductoMenuService().FindById(item.CodigoProductoMenu).CodigoMenu).CodigoSucursal }, new { @class = "btn btn-primary btn-block", id = "btnOrdenarProducto" })
+                        @Html.ActionLink("Mostrar galeria de fotos","VerGaleriaDeProducto","Imagen" , new { idProducto = item.CodigoProducto}, new { @class = "btn btn-primary btn-block", id = "btnOrdenarProducto" })
                     </div>
                 </div>
             </div>

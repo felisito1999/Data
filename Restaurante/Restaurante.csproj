@@ -129,6 +129,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImagenController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\OrdenController.cs" />
@@ -295,6 +296,7 @@
     <Content Include="Views\ProductoMenu\AgregarProductoSeleccionadoSucursal.cshtml" />
     <Content Include="Views\ProductoMenu\ModificarProductoMenu.cshtml" />
     <Content Include="Views\Producto\ActualizarProducto.cshtml" />
+    <Content Include="Views\Imagen\VerGaleriaDeProducto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

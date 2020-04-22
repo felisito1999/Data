@@ -14,9 +14,16 @@ namespace Restaurante.Controllers
         [Authorize(Roles = "Administrador")]
         public ActionResult ListaProductos()
         {
-            var productos = GetService.GetProductoService().ListAll();
-            var productosView = GetService.GetProductoModelConverterService().ConvertfromListToViewModel(productos);
-            return View(productosView);
+            try
+            {
+                var productos = GetService.GetProductoService().ListAll();
+                var productosView = GetService.GetProductoModelConverterService().ConvertfromListToViewModel(productos);
+                return View(productosView);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("SucursalIndex", "Sucursal");
+            }
         }
         [Authorize(Roles = "Administrador")]
         public ActionResult AgregarProducto()

@@ -139,6 +139,7 @@
     <Compile Include="Models\ViewModels\ClienteViewModel.cs" />
     <Compile Include="Models\ViewModels\EmpleadoViewModel.cs" />
     <Compile Include="Models\ViewModels\EstadoViewModel.cs" />
+    <Compile Include="Models\ViewModels\ImagenProductoViewModel.cs" />
     <Compile Include="Models\ViewModels\PaisViewModel.cs" />
     <Compile Include="Models\ViewModels\ProductoMenuListViewModel.cs" />
     <Compile Include="Models\ViewModels\ProductoMenuViewModel.cs" />
@@ -158,6 +159,7 @@
     <Compile Include="Services\EmpleadoService.cs" />
     <Compile Include="Services\EstadoService.cs" />
     <Compile Include="Services\GetService.cs" />
+    <Compile Include="Services\ImagenViewModelConverterService.cs" />
     <Compile Include="Services\OldImagenProductoService.cs" />
     <Compile Include="Services\ImagenProductoViewModelConverterService.cs" />
     <Compile Include="Services\ImagenService.cs" />

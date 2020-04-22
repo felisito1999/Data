@@ -117,5 +117,9 @@ namespace Data.Services
         {
             return new ProductoProductoMenuModelConverterService();
         }
+        public static ImagenViewModelConverterService GetImagenViewModelConverterService()
+        {
+            return new ImagenViewModelConverterService();
+        }
     }
 }

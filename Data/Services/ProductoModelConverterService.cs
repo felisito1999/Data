@@ -21,6 +21,7 @@ namespace Data.Services
                 {
                     CodigoProducto = item.CodigoProducto,
                     NombreProducto = item.NombreProducto,
+                    Costo = item.Costo,
                     DescripcionProducto = item.DescripcionProducto,
                     Imagen = GetService.GetImagenService().ListSortedByGivenCategoryId(item.CodigoProducto).FirstOrDefault().Imagen,
                     CodigoCategoria = item.CodigoCategoria

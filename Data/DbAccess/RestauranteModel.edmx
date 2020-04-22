@@ -113,7 +113,7 @@
             <PropertyRef Name="CodigoProducto" />
           </Key>
           <Property Name="CodigoProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NombreProducto" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="NombreProducto" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="DescripcionProducto" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Costo" Type="decimal" Precision="12" Scale="4" Nullable="false" />
           <Property Name="CodigoCategoria" Type="int" Nullable="false" />
@@ -1050,7 +1050,7 @@
             <PropertyRef Name="CodigoProducto" />
           </Key>
           <Property Name="CodigoProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NombreProducto" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="NombreProducto" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="DescripcionProducto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Costo" Type="Decimal" Nullable="false" Precision="12" Scale="4" />
           <Property Name="CodigoCategoria" Type="Int32" Nullable="false" />
