@@ -68,8 +68,9 @@ namespace Restaurante.Controllers
         [Authorize(Roles = "Administrador")]
         public ActionResult AgregarProductoSucursal(int id)
         {
-            var productos = GetService.GetProductoService().ListAll();
-            var productosView = GetService.GetProductoProductoMenuModelConverterService().ConvertfromListToViewModel(productos);
+            var menu = GetService.GetMenuService().GetMenuBySucursalId(id);
+            var productoMenuNotInSucursalMenu = GetService.GetProductoService().GetProductosNotInSucursalMenu(id, menu.CodigoMenu);
+            var productosView = GetService.GetProductoProductoMenuModelConverterService().ConvertfromListToViewModel(productoMenuNotInSucursalMenu);
             ViewBag.CodigoSucursal = GetService.GetSucursalService().FindById(id).CodigoSucursal;
             return View(productosView);
         }

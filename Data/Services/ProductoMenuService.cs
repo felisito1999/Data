@@ -43,7 +43,7 @@ namespace Data.Services
         {
             using (var context = GetService.GetRestauranteEntityService())
             {
-                var productos = context.ProductosMenues.ToList().Where(x => x.CodigoMenu == idMenu);
+                var productos = context.ProductosMenues.ToList().Where(x => x.CodigoMenu == idMenu & x.Borrado == false);
 
                 return productos;
             }
@@ -58,7 +58,7 @@ namespace Data.Services
         {
             throw new NotImplementedException();
         }
-        public ProductoMenu GetProductoByMenuProductoId(int codigoMenu, int codigoProducto)
+        public ProductoMenu GetProductoMenuByMenuIdProductoId(int codigoMenu, int codigoProducto)
         {
             using (var context = GetService.GetRestauranteEntityService())
             {

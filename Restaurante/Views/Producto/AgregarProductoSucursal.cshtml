@@ -32,7 +32,7 @@
                 @Html.DisplayFor(modelItem => item.Costo)
             </td>
             <td>
-                @Html.ActionLink("Seleccionar producto", "AgregarProductoSeleccionadoSucursal", new { idProducto = item.CodigoProducto, idSucursal = ViewBag.CodigoSucursal})
+                @Html.ActionLink("Seleccionar producto", "AgregarProductoSeleccionadoSucursal", new { idProducto = item.CodigoProducto, idSucursal = ViewBag.CodigoSucursal}, )
             </td>
         </tr>
     }

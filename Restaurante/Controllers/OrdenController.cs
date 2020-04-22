@@ -18,7 +18,7 @@ namespace Restaurante.Controllers
             {
                 var producto = GetService.GetProductoService().FindById(idProducto);
                 var menu = GetService.GetMenuService().GetMenuBySucursalId(idSucursal);
-                var productoMenu = GetService.GetProductoMenuService().GetProductoByMenuProductoId(menu.CodigoMenu, producto.CodigoProducto);
+                var productoMenu = GetService.GetProductoMenuService().GetProductoMenuByMenuIdProductoId(menu.CodigoMenu, producto.CodigoProducto);
                 var empleado = GetService.GetOrdenService().SeleccionarEmpleadoMenorCantidadOrdenPendiente(idSucursal);
                 var cliente = GetService.GetClienteService().GetClienteFromUserName(User.Identity.Name);
                 Orden orden = new Orden

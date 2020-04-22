@@ -23,49 +23,38 @@ namespace Restaurante.Controllers
                 var menu = GetService.GetMenuService().GetMenuBySucursalId(id);
                 var productosMenues = GetService.GetProductoMenuService().ListSortedByGivenCategoryId(menu.CodigoMenu);
                 var productosMenuesView = GetService.GetProductoMenuListModelConverter().ConvertfromListToViewModel(productosMenues);
-                
+                ViewBag.CodigoSucursal = id;
                 return View(productosMenuesView);
             }
             return RedirectToAction("SucursalIndex", "Sucursal");
         }
-        [Authorize(Roles = "Administrador")]
-        public ActionResult SeleccionTipoAgregado()
-        {
-            return View();
-        }
-        [Authorize(Roles="Administrador")]
-        public ActionResult AgregarProductoMenu()
-        {
-            return View();
-        }
-        [Authorize(Roles = "Administrador")]
-        [HttpPost]
-        public ActionResult AgregarProductoMenu(ProductoMenuViewModel viewModel)
-        {
-            var productoMenu = GetService.GetProductoMenuModelConverterService().ConvertFromViewModel(viewModel);
+        //[Authorize(Roles = "Administrador")]
+        //[HttpPost]
+        //public ActionResult AgregarProductoMenu(ProductoMenuViewModel viewModel)
+        //{
+        //    var productoMenu = GetService.GetProductoMenuModelConverterService().ConvertFromViewModel(viewModel);
 
-            using (var context = GetService.GetRestauranteEntityService().Database.BeginTransaction())
-            {
-                try
-                {
-                    byte[] imagenPrincipal;
-                    using (MemoryStream memory = new MemoryStream())
-                    {
-                        viewModel.Archivo.InputStream.CopyTo(memory);
+        //    using (var context = GetService.GetRestauranteEntityService().Database.BeginTransaction())
+        //    {
+        //        try
+        //        {
+        //            byte[] imagenPrincipal;
+        //            using (MemoryStream memory = new MemoryStream())
+        //            {
+        //                viewModel.Archivo.InputStream.CopyTo(memory);
 
-                        imagenPrincipal = memory.ToArray();
-                    }
-                    //GetService.
+        //                imagenPrincipal = memory.ToArray();
+        //            }
+        //            //GetService.
                         
 
-                }
-                catch (Exception)
-                {
+        //        }
+        //        catch (Exception)
+        //        {
 
-                }
-            }
-            return View();
-        }
-
+        //        }
+        //    }
+        //    return View();
+        //}
     }
 }
