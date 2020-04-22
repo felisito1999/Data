@@ -13,7 +13,7 @@
 @if (User.IsInRole("Administrador"))
 {
     <p>
-        @Html.ActionLink("Agregar porducto existente a sucursal", "AgregarProductoSucursal","Producto", new { id = ViewBag.CodigoSucursal } , new { @class = "btn btn-lg btn-block", id = "botonFuncional"})
+        @Html.ActionLink("Agregar producto existente a sucursal", "AgregarProductoSucursal","ProductoMenu", new { id = ViewBag.CodigoSucursal } , new { @class = "btn btn-block", id = "botonFuncional"})
     </p>
     <table class="table">
         <tr>
@@ -42,8 +42,8 @@
                     @Html.DisplayFor(modelItem => item.Precio)
                 </td>
                 <td>
-                    @Html.ActionLink("Modificar producto", "OrdenarProducto", "Orden", new { id = item.CodigoProductoMenu }, new { @class = "btn btn-primary btn-block", id = "botonFuncional" })
-                    @Html.ActionLink("Eliminar producto de sucursal", "OrdenarProducto", "Orden", new { id = item.CodigoProductoMenu }, new { @class = "btn btn-primary btn-block", id = "botonFuncional"})
+                    @Html.ActionLink("Modificar producto", "ModificarProductoMenu", new { id = item.CodigoProductoMenu }, new { @class = "btn btn-primary btn-block", id = "botonFuncional" })
+                    @Html.ActionLink("Eliminar producto de sucursal", "BorrarProductoSeleccionadoSucursal", new { id = item.CodigoProductoMenu, idSucursal = ViewBag.CodigoSucursal }, new { @class = "btn btn-block", id = "botonFuncional"})
                 </td>
             </tr>
         }

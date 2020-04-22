@@ -72,5 +72,14 @@ namespace Data.Services
 
             return lastSucursal;
         }
+        public Sucursal GetSucursalByMenuId(int id)
+        {
+            using (var context = GetService.GetRestauranteEntityService())
+            {
+                var sucursal = context.Menues.Where(x => x.CodigoSucursal == id).SingleOrDefault().Sucursales;
+
+                return sucursal;
+            }
+        }
     }
 }

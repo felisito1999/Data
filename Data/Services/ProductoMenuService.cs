@@ -51,12 +51,24 @@ namespace Data.Services
 
         public void SoftDelete(int id)
         {
-            throw new NotImplementedException();
+            using (var context = GetService.GetRestauranteEntityService())
+            {
+                var productoMenu = context.ProductosMenues.Find(id);
+                productoMenu.Borrado = true;
+
+                context.SaveChanges();
+            }
         }
 
-        public void UpdateSingleObject(ProductoMenu objectType)
+        public void UpdateSingleObject(ProductoMenu productoMenu)
         {
-            throw new NotImplementedException();
+            using (var context = GetService.GetRestauranteEntityService())
+            {
+                var producto = context.ProductosMenues.Find(productoMenu.CodigoProductoMenu);
+                producto = productoMenu;
+
+                context.SaveChanges();
+            }
         }
         public ProductoMenu GetProductoMenuByMenuIdProductoId(int codigoMenu, int codigoProducto)
         {

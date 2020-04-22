@@ -69,46 +69,58 @@ namespace Restaurante.Controllers
         public ActionResult AgregarProductoSucursal(int id)
         {
             var menu = GetService.GetMenuService().GetMenuBySucursalId(id);
-            var productoMenuNotInSucursalMenu = GetService.GetProductoService().GetProductosNotInSucursalMenu(id, menu.CodigoMenu);
+            var productoMenuNotInSucursalMenu = GetService.GetProductoService().GetProductosNotInSucursalMenu(menu.CodigoMenu);
             var productosView = GetService.GetProductoProductoMenuModelConverterService().ConvertfromListToViewModel(productoMenuNotInSucursalMenu);
             ViewBag.CodigoSucursal = GetService.GetSucursalService().FindById(id).CodigoSucursal;
             return View(productosView);
         }
         [Authorize(Roles = "Administrador")]
-        [HttpPost]
         public ActionResult AgregarProductoSeleccionadoSucursal(int idProducto, int idSucursal)
         {
             var menu = GetService.GetMenuService().GetMenuBySucursalId(idSucursal);
             var producto = GetService.GetProductoService().FindById(idProducto);
             var productoView = GetService.GetProductoProductoMenuModelConverterService().ConvertToViewModel(producto);
+
             productoView.CodigoMenu = menu.CodigoMenu;
+            productoView.CodigoProducto = producto.CodigoProducto;
 
             return View(productoView);
         }
+        [Authorize(Roles = "Administrador")]
+        [HttpPost]
         public ActionResult AgregarProductoSeleccionadoSucursal(ProductoMenuViewModel productoMenuView)
         {
-            if (ModelState.IsValid)
+            try
             {
-                try
-                {
-                    var productoMenu = GetService.GetProductoMenuModelConverterService().ConvertFromViewModel(productoMenuView);
-                    GetService.GetProductoMenuService().Insert(productoMenu);
-                }
-                catch (Exception)
-                {
+                var productoMenu = GetService.GetProductoMenuModelConverterService().ConvertFromViewModel(productoMenuView);
+                var menu = GetService.GetMenuService().FindById(productoMenu.CodigoMenu);
+                GetService.GetProductoMenuService().Insert(productoMenu);
 
-                    throw;
-                }
+                return RedirectToAction("ProductoMenuList", "ProductoMenu", new { id = menu.CodigoSucursal });
             }
-            else
+            catch (Exception)
             {
-
+                return View();
             }
-            return View();
+        }
+        [Authorize(Roles = "Administrador")]
+        public ActionResult BorrarProductoSeleccionadoSucursal(int id, int idSucursal)
+        {
+            try
+            {
+                GetService.GetProductoMenuService().SoftDelete(id);
+
+                return RedirectToAction("ProductoMenuList", "ProductoMenu", new { id = idSucursal });
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("ProductoMenuList", "ProductoMenu", new { id = idSucursal }); ;
+            }
         }
         [Authorize(Roles = "Administrador")]
         public ActionResult ActualizarProducto(int id)
         {
+            var producto = GetService.GetProductoMenuService();
             return View();
         }
         [Authorize(Roles = "Administrador")]

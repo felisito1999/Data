@@ -35,7 +35,17 @@ namespace Data.Services
 
         public ProductoMenuViewModel ConvertToViewModel(ProductoMenu original)
         {
-            throw new NotImplementedException();
+            ProductoMenuViewModel productoMenuView = new ProductoMenuViewModel
+            {
+                CodigoProductoMenu = original.CodigoProductoMenu,
+                CodigoProducto = original.CodigoProducto,
+                NombreProducto = GetService.GetProductoService().FindById(original.CodigoProducto).NombreProducto,
+                DescripcionProducto = GetService.GetProductoService().FindById(original.CodigoProducto).DescripcionProducto,
+                Costo = GetService.GetProductoService().FindById(original.CodigoProducto).Costo,
+                CodigoMenu = original.CodigoMenu,
+                Precio = original.Precio,
+            };
+            return productoMenuView;
         }
     }
 }

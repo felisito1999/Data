@@ -30,7 +30,13 @@ namespace Data.Services
 
         public Producto ConvertFromViewModel(ProductoMenuViewModel viewModel)
         {
-            throw new NotImplementedException();
+            Producto productoMenu = new Producto
+            {
+                NombreProducto = viewModel.NombreProducto,
+                DescripcionProducto = viewModel.DescripcionProducto,
+                CodigoProducto = viewModel.CodigoProducto
+            };
+            return productoMenu;
         }
 
         public IEnumerable<Producto> ConvertListFromViewModel(IEnumerable<ProductoMenuViewModel> viewModel)
@@ -44,7 +50,8 @@ namespace Data.Services
             {
                 CodigoProducto = original.CodigoProducto,
                 NombreProducto = original.NombreProducto,
-                DescripcionProducto = original.DescripcionProducto
+                DescripcionProducto = original.DescripcionProducto,
+                Costo = original.Costo
             };
             return productoMenu;
         }

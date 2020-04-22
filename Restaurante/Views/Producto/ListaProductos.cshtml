@@ -47,27 +47,4 @@
     }
 
 </table>
-<div class="row">
-    @foreach (var item in Model)
-    {
 
-        <div class="col-md-4">
-            <div id="productoPanel" class="panel panel-info">
-                <div id="productoPanelHeading" class="panel-heading">@Html.DisplayFor(modelItem => item.NombreProducto)</div>
-                <div id="productoPanelBodyImage" class="panel-body">
-                    @{
-                        var base64 = Convert.ToBase64String(item.Imagen);
-                        var imgSource = String.Format("data:image/gif;base64,{0}", base64);
-                    }
-                    <img id="productoListImage" src="@imgSource" alt="Imagen de producto" />
-                </div>
-                <div id="productoPanelBody" class="panel-body">
-                    <p>@Html.LabelFor(model => item.DescripcionProducto, htmlAttributes: new { @class = "label-producto" }) @Html.DisplayFor(modelItem => item.DescripcionProducto)</p>
-                </div>
-                <div id="productoPanelFooter" class="panel-footer">
-                    @Html.ActionLink("Ordenar", "Orden", "Orden", new { id = item.CodigoProducto }, new { @class = "btn btn-primary btn-block", id = "btnOrdenarProducto" })
-                </div>
-            </div>
-        </div>
-    }
-</div>

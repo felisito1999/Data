@@ -291,8 +291,9 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Producto\ListaProductos.cshtml" />
     <Content Include="Views\Producto\AgregarProducto.cshtml" />
-    <Content Include="Views\Producto\AgregarProductoSucursal.cshtml" />
-    <Content Include="Views\Producto\AgregarProductoSeleccionadoSucursal.cshtml" />
+    <Content Include="Views\ProductoMenu\AgregarProductoSucursal.cshtml" />
+    <Content Include="Views\ProductoMenu\AgregarProductoSeleccionadoSucursal.cshtml" />
+    <Content Include="Views\ProductoMenu\ModificarProductoMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

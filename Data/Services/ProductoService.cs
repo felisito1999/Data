@@ -61,18 +61,17 @@ namespace Data.Services
                 return producto;
             }
         }
-        public List<Producto> GetProductosNotInSucursalMenu(int idSucursal, int idMenu)
+        public List<Producto> GetProductosNotInSucursalMenu(int idMenu)
         {
             var productos = GetService.GetRestauranteEntityService().Productos.ToList().Where(x => x.Borrado == false);
-            var menu = GetService.GetMenuService().GetMenuBySucursalId(idSucursal);
-            var sucursalProductoMenu = GetService.GetProductoMenuService().ListSortedByGivenCategoryId(menu.CodigoMenu).Where(x => x.Borrado == false);
+            var sucursalProductoMenu = GetService.GetProductoMenuService().ListSortedByGivenCategoryId(idMenu).Where(x => x.Borrado == false);
 
             List<Producto> productosNotInSucursalMenu = new List<Producto>();
 
             foreach (var item in productos)
             {
                 Producto producto = new Producto();
-                if (sucursalProductoMenu.Where(x => x.CodigoProducto == item.CodigoProducto) == null)
+                if (sucursalProductoMenu.Where(x => x.CodigoProducto == item.CodigoProducto).Count() == 0)
                 {
                     producto = item;
                     productosNotInSucursalMenu.Add(producto);

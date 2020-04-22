@@ -4,7 +4,7 @@
     ViewBag.Title = "AgregarProductoSucursal";
 }
 
-<h2>Agregar sucursal a la sucursal @GetService.GetSucursalService().FindById(ViewBag.CodigoSucursal).NombreSucursal</h2>
+<h2>Agregar producto a la sucursal @GetService.GetSucursalService().FindById(ViewBag.CodigoSucursal).NombreSucursal</h2>
 
 <table class="table">
     <tr>
@@ -32,7 +32,7 @@
                 @Html.DisplayFor(modelItem => item.Costo)
             </td>
             <td>
-                @Html.ActionLink("Seleccionar producto", "AgregarProductoSeleccionadoSucursal", new { idProducto = item.CodigoProducto, idSucursal = ViewBag.CodigoSucursal}, )
+                @Html.ActionLink("Seleccionar producto", "AgregarProductoSeleccionadoSucursal", new { idProducto = item.CodigoProducto, idSucursal = ViewBag.CodigoSucursal}, new { @class = "btn btn-block", id = "botonFuncional"})
             </td>
         </tr>
     }

@@ -26,7 +26,6 @@ namespace Data.Models.ViewModels
         [Required]
         [DataType(DataType.Upload)]
         [Display(Name = "Seleccionar imagen:")]
-        [FileExtensions(Extensions ="jpg,heif", ErrorMessage = "Debe subir un archivo jpg/jpeg o heif")]
         public HttpPostedFileBase ArchivoImagen { get; set; }
         public int CodigoCategoria { get; set; }
         public ImagenProducto ImagenProducto { get; set; }
