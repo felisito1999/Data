@@ -21,7 +21,7 @@ namespace Data.Services
             {
                 NombreEmpleado = viewModel.NombreEmpleado,
                 ApellidoEmpleado = viewModel.ApellidoEmpleado,
-                CodigoEstado = 3,
+                CodigoEstado = 4,
                 CodigoPaisNacimiento = viewModel.CodigoPais,
                 CodigoSucursal = viewModel.CodigoSucursal,
                 FechaNacimiento = viewModel.FechaNacimiento,

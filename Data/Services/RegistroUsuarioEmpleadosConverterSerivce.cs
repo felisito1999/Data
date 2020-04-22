@@ -23,7 +23,7 @@ namespace Data.Services
                 Clave = viewModel.Clave,
                 Correo = viewModel.Correo,
                 CodigoRol = 3,
-                CodigoEstado = 4,
+                CodigoEstado = 10,
                 Borrado = false
             };
             return usuario;

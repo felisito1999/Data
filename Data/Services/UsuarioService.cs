@@ -82,7 +82,7 @@ namespace Data.Services
                 var empleadoInactivo = GetService.GetEmpleadoService().CheckEmpleadoIsInactivo(username);
                 var loginInfo = context.Usuarios.ToList().Where(x => (x.NombreUsuario == username | x.Correo == username) & x.Clave == hashPassword & x.Estados.NombreEstado == "Usuario activo").SingleOrDefault();
 
-                if (loginInfo == null | empleadoInactivo == true)
+                if (loginInfo == null || empleadoInactivo == true )
                 {
                     return false;
                 }

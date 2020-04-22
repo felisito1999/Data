@@ -4,7 +4,10 @@
     ViewBag.Title = "AgregarProducto";
 }
 
-<h2>AgregarProducto</h2>
+    <div class="titleContainer">
+        <h2>Agregar Producto</h2>
+
+    </div>
 
 @using (Html.BeginForm("AgregarProducto", "Producto", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -54,7 +57,7 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+            <input type="submit" value="Agregar producto" class="btn btn-default" />
         </div>
     </div>
 </div>

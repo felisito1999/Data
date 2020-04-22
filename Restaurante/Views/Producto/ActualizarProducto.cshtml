@@ -4,14 +4,15 @@
     ViewBag.Title = "ActualizarProducto";
 }
 
-<h2>ActualizarProducto</h2>
+    <div class="titleContainer">
+        <h2>Actualizar Producto</h2>
+    </div>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>ProductoViewModel</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.CodigoProducto)
@@ -49,12 +50,9 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Actualizar producto" class="btn btn-block" id="botonFuncional" />
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

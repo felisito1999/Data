@@ -18,21 +18,22 @@ namespace Restaurante.Controllers
         [Authorize(Roles = "Administrador")]
         public ActionResult EmpleadosEsperandoActivacion()
         {
-            EmpleadoViewModel empleadoView = new EmpleadoViewModel();
-            return View(empleadoView);
+            var empleadosInactivos = GetService.GetEmpleadoService().GetEmpleadosInactivos();
+            var empleadosInactivosView = GetService.GetEmpleadoConverterService().ConvertfromListToViewModel(empleadosInactivos);
+            return View(empleadosInactivosView);
         }
         [Authorize(Roles = "Administrador")]
-        [HttpPost]
         public ActionResult ActivarEmpleado(int idEmpleado)
         {
             try
             {
-                GetService.
+                GetService.GetEmpleadoService().GrantPermissionToEmpleado(idEmpleado);
+
+                return RedirectToAction("EmpleadosEsperandoActivacion");
             }
             catch (Exception)
             {
-
-                throw;
+                return RedirectToAction("EmpleadosEsperandoActicacion");
             }
         }
     }

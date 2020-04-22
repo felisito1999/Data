@@ -11,22 +11,23 @@ namespace Restaurante.Controllers
     public class OrdenController : Controller
     {
         // GET: Orden
-        [Authorize]
+        [Authorize(Roles = "Cliente")]
         public ActionResult OrdenarProducto(int idProducto, int idSucursal)
         {
+            //
             try
             {
                 var producto = GetService.GetProductoService().FindById(idProducto);
                 var menu = GetService.GetMenuService().GetMenuBySucursalId(idSucursal);
                 var productoMenu = GetService.GetProductoMenuService().GetProductoMenuByMenuIdProductoId(menu.CodigoMenu, producto.CodigoProducto);
-                var empleado = GetService.GetOrdenService().SeleccionarEmpleadoMenorCantidadOrdenPendiente(idSucursal);
+                var empleadoAsignado = GetService.GetOrdenService().SeleccionarEmpleadoMenorCantidadOrdenPendiente(idSucursal);
                 var cliente = GetService.GetClienteService().GetClienteFromUserName(User.Identity.Name);
                 Orden orden = new Orden
                 {
                     CodigoEstado = 1024,
                     Borrado = false,
                     CodigoCliente = cliente.CodigoCliente,
-                    CodigoEmpleado = empleado.CodigoEmpleado,
+                    CodigoEmpleado = empleadoAsignado.CodigoEmpleado,
                     CodigoSucursal = idSucursal,
                     FechaHora = DateTime.Now
                 };
@@ -49,6 +50,10 @@ namespace Restaurante.Controllers
                 return View();
                 throw;
             }
+        }
+        public ActionResult OrdenListaClientes()
+        {
+
         }
     }
 }

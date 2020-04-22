@@ -129,5 +129,9 @@ namespace Data.Services
         {
             return new RegistroEmpleadoModelConverterService();
         }
+        public static EmpleadoModelConverterService GetEmpleadoConverterService()
+        {
+            return new EmpleadoModelConverterService();
+        }
     }
 }

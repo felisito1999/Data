@@ -24,17 +24,37 @@
                 {
                     <ul id="navbarUl" class="nav navbar-nav">
                         <li>@Html.ActionLink("Pagina principal", "SucursalIndex", "Sucursal")</li>
+                        <li>@Html.ActionLink("Empleados", "EmpleadosEsperandoActivacion", "Empleado")</li>
                         <li>@Html.ActionLink("Sucursales", "SucursalIndex", "Sucursal")</li>
                         <li>@Html.ActionLink("Productos", "ListaProductos", "Producto")</li>
                         <li>@Html.ActionLink("Sobre nosotros", "About", "Home")</li>
                         <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
                     </ul>
                 }
-                else if (User.IsInRole("Cliente") | User.Identity.IsAuthenticated == false)
+                else if (User.IsInRole("Cliente"))
                 {
                     <ul id="navbarUl" class="nav navbar-nav">
                         <li>@Html.ActionLink("Pagina principal", "SucursalIndex", "Sucursal")</li>
                         <li>@Html.ActionLink("Sucursales", "SucursalIndex", "Sucursal")</li>
+                        <li>@Html.ActionLink("Historial de ordenes", "HistorialOrdenes", "Orden")</li>
+                        <li>@Html.ActionLink("Sobre nosotros", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+                    </ul>
+                }
+                else if (User.Identity.IsAuthenticated == false)
+                {
+                    <ul id="navbarUl" class="nav navbar-nav">
+                        <li>@Html.ActionLink("Pagina principal", "SucursalIndex", "Sucursal")</li>
+                        <li>@Html.ActionLink("Sucursales", "SucursalIndex", "Sucursal")</li>
+                        <li>@Html.ActionLink("Sobre nosotros", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+                    </ul>
+                }
+                else
+                {
+                    <ul id="navbarUl" class="nav navbar-nav">
+                        <li>@Html.ActionLink("Pagina principal", "SucursalIndex", "Sucursal")</li>
+                        <li>@Html.ActionLink("Mis ordenes asignadas", "OrdenesEmpleado", "Orden")</li>
                         <li>@Html.ActionLink("Sobre nosotros", "About", "Home")</li>
                         <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
                     </ul>
@@ -94,7 +114,7 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
+        <footer class="titleContainer">
             <p>&copy; @DateTime.Now.Year - El mejor restaurante del mundo, según los expertos</p>
         </footer>
     </div>

@@ -12,7 +12,21 @@ namespace Data.Services
     {
         public IEnumerable<EmpleadoViewModel> ConvertfromListToViewModel(IEnumerable<Empleado> original)
         {
-            throw new NotImplementedException();
+            List<EmpleadoViewModel> empleadosView = new List<EmpleadoViewModel>();
+
+            foreach(var item in original)
+            {
+                EmpleadoViewModel view = new EmpleadoViewModel
+                {
+                    CodigoEmpleado = item.CodigoEmpleado,
+                    NombreEmpleado = item.NombreEmpleado,
+                    ApellidoEmpleado = item.ApellidoEmpleado,
+                    CodigoUsuario = item.CodigoUsuario,
+                    Usuario = GetService.GetUsuarioService().FindById(item.CodigoUsuario)
+                };
+                empleadosView.Add(view);
+            }
+            return empleadosView;
         }
 
         public Empleado ConvertFromViewModel(EmpleadoViewModel viewModel)

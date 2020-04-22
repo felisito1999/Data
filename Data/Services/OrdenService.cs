@@ -62,7 +62,7 @@ namespace Data.Services
         public Empleado SeleccionarEmpleadoMenorCantidadOrdenPendiente(int idSucursal)
         {
 
-            var empleados = GetService.GetEmpleadoService().ListAll().Where(x => x.CodigoEstado == 3 & GetService.GetUsuarioService().FindById(x.CodigoUsuario).CodigoEstado == 10);
+            var empleados = GetService.GetEmpleadoService().ListAll().Where(x => x.CodigoEstado == 3 & GetService.GetUsuarioService().FindById(x.CodigoUsuario).CodigoEstado == 10 & x.CodigoSucursal == idSucursal & x.CodigoEstado == 3);
             int iteracion = 0;
             int minOrdenes = 0;
             int minOrdenesCodigoEmpleado = 0;

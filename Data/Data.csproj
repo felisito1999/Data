@@ -135,7 +135,6 @@
     <Compile Include="DbAccess\Usuario.cs">
       <DependentUpon>RestauranteModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\OrdenEmpleado.cs" />
     <Compile Include="Models\ViewModels\ClienteViewModel.cs" />
     <Compile Include="Models\ViewModels\EmpleadoViewModel.cs" />
     <Compile Include="Models\ViewModels\EstadoViewModel.cs" />

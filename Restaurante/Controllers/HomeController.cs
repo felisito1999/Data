@@ -31,14 +31,14 @@ namespace Restaurante.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Información sobre la empresa.";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Página de contacto, para que estemos más cerca de ti.";
 
             return View();
         }

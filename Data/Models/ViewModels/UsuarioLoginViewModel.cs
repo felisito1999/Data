@@ -10,7 +10,7 @@ namespace Data.Models.ViewModels
     public class UsuarioLoginViewModel
     {
         [Required]
-        [Display(Name = "Correo electrónico o nombre de usuario:")]
+        [Display(Name = "Nombre de usuario:")]
         [MaxLength(25)]
         public string NombreUsuario { get; set; }
         [Required]

@@ -5,7 +5,9 @@
     ViewBag.Title = "Iniciar sesión";
 }
 
-<h2>Login</h2>
+    <div class="titleContainer">
+        <h2>Inicia sesión</h2>
+    </div>
 
 @using (Html.BeginForm())
 {
@@ -32,7 +34,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Iniciar sesión" class="btn btn-default" />
+                <input type="submit" value="Iniciar sesión" class="btn btn-block" id="botonFuncional" />
             </div>
         </div>
     </div>
@@ -40,6 +42,6 @@
 
 <div>
 
-    @Html.ActionLink("Regresar a la página principal", "Index", "Home", "", new { @class = "btn btn-primary" })
+    @Html.ActionLink("Regresar a la página principal", "SucursalIndex", "Sucursal", "", new { @class = "btn btn-block", id = "botonFuncional" })
 </div>
 

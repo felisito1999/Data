@@ -69,9 +69,16 @@ namespace Data.Services
             using (var context = GetService.GetRestauranteEntityService())
             {
                 var usuario = GetService.GetUsuarioService().FindUserByUsername(username);
-                var empleado = context.Empleados.Where(x => x.CodigoUsuario == usuario.CodigoUsuario).SingleOrDefault();
 
-                return empleado;
+                if (usuario != null)
+                {
+                    var empleado = context.Empleados.ToList().Where(x => x.CodigoUsuario == usuario.CodigoUsuario).SingleOrDefault();
+                    return empleado;
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
         public bool CheckEmpleadoIsInactivo(string username)
@@ -91,6 +98,25 @@ namespace Data.Services
             else
             {
                 return false;
+            }
+        }
+        public void GrantPermissionToEmpleado(int idEmpleado)
+        {
+            using (var context = GetService.GetRestauranteEntityService())
+            {
+                var empleado = context.Empleados.Find(idEmpleado);
+                empleado.CodigoEstado = 3;
+
+                context.SaveChanges();
+            }
+        }
+        public IEnumerable<Empleado> GetEmpleadosInactivos()
+        {
+            using (var context = GetService.GetRestauranteEntityService())
+            {
+                var empleadosInactivos = context.Empleados.ToList().Where(x => x.CodigoEstado == 4);
+
+                return empleadosInactivos;
             }
         }
     }

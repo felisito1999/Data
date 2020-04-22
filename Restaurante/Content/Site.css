@@ -231,3 +231,6 @@ textarea {
 /*#productoPanelBodyImage {
     background: #4B515D;
 }*/
+.form-group label{
+    color: white
+}
