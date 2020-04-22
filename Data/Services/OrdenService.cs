@@ -61,78 +61,33 @@ namespace Data.Services
         }
         public Empleado SeleccionarEmpleadoMenorCantidadOrdenPendiente(int idSucursal)
         {
-            var ordenesPendientes = ListAll().Where(x => x.CodigoEstado == 1024 & x.CodigoSucursal == idSucursal);
-            var empleadosOrdenesPendientes = GetService.GetEmpleadoService().ListAll().Where(x => x.CodigoSucursal == idSucursal);
-            List<OrdenEmpleado> ordenesEmpleados = new List<OrdenEmpleado>();
 
-            if(ordenesPendientes.Count() > 0)
+            var empleados = GetService.GetEmpleadoService().ListAll().Where(x => x.CodigoEstado == 3 & GetService.GetUsuarioService().FindById(x.CodigoUsuario).CodigoEstado == 10);
+            int iteracion = 0;
+            int minOrdenes = 0;
+            int minOrdenesCodigoEmpleado = 0;
+            foreach (var item in empleados)
             {
-                foreach (var item in ordenesPendientes)
+                int CantidadOrdenes = GetService.GetOrdenService().ListAll().Where(x => x.CodigoEstado == 1024 & x.CodigoEmpleado == item.CodigoEmpleado & x.CodigoSucursal == item.CodigoSucursal).Count();
+
+                if (iteracion == 0)
                 {
-                    var empleados = GetService.GetEmpleadoService().FindById(item.CodigoEmpleado);
-                    if (ordenesEmpleados.Where(x => x.CodigoEmpleado == item.CodigoEmpleado & empleados.CodigoSucursal == idSucursal).Count() == 0)
+                    minOrdenes = CantidadOrdenes;
+                    minOrdenesCodigoEmpleado = item.CodigoEmpleado;
+                    iteracion += 1;
+                }
+                else
+                {
+                    if (CantidadOrdenes < minOrdenes)
                     {
-                        OrdenEmpleado empleado = new OrdenEmpleado
-                        {
-                            CodigoEmpleado = item.CodigoEmpleado,
-                            CantidadOrdenes = 1
-                        };
-                        ordenesEmpleados.Add(empleado);
-                    }
-                    else if (empleados.CodigoSucursal == idSucursal)
-                    {
-                        foreach (var ordenEmpleadoItem in ordenesEmpleados.Where(x => x.CodigoEmpleado == item.CodigoEmpleado & empleados.CodigoSucursal == idSucursal))
-                        {
-                            ordenEmpleadoItem.CantidadOrdenes =+ 1;
-                        }
+                        minOrdenes = CantidadOrdenes;
+                        minOrdenesCodigoEmpleado = item.CodigoEmpleado;
                     }
                 }
-                int maxOrden = 0;
-                int maxOrdenClienteId = 0;
-                int iterator = 0;
-                foreach (var item in ordenesEmpleados)
-                {
-                    if (item.CantidadOrdenes > maxOrden & iterator == 0)
-                    {
-                        maxOrden = item.CantidadOrdenes;
-                        maxOrdenClienteId = item.CodigoEmpleado;
-                    }
-                    else if (item.CantidadOrdenes < maxOrden & iterator > 0)
-                    {
-                        maxOrden = item.CantidadOrdenes;
-                        maxOrdenClienteId = item.CodigoEmpleado;
-                    }
-                    iterator += 1; 
-                }
-                //foreach (var item in ordenesPendientes)
-                //{
-                //    if(ordenesPendientes.Where(listItem => listItem.CodigoCliente == item.CodigoCliente).Count() == 0)
-                //    {
-                //        OrdenEmpleado empleado = new OrdenEmpleado
-                //        {
-                //            CodigoEmpleado = item.CodigoEmpleado,
-                //            CantidadOrdenes = 1
-                //        };
-                //        ordenEmpleado.Add(empleado);
-                //    }
-                //    else
-                //    {
-                //        foreach( var ordenEmpleadoItem in ordenEmpleado.Where(x => x.CodigoEmpleado == item.CodigoEmpleado))
-                //        {
-                //            ordenEmpleadoItem.CodigoE += 1;
-                //        }
-                //    }
-                //}
-                var empleadoAsignar = GetService.GetEmpleadoService().FindById(maxOrdenClienteId);
-
-                return empleadoAsignar;
             }
-            else
-            {
-                var empleadoAsignar = GetService.GetEmpleadoService().ListAll().FirstOrDefault();
 
-                return empleadoAsignar;
-            }
+            var minOrdenesEmpleado = GetService.GetEmpleadoService().FindById(minOrdenesCodigoEmpleado);
+            return minOrdenesEmpleado;
         }
     }
 }

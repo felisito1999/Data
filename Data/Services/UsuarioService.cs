@@ -27,6 +27,7 @@ namespace Data.Services
                 data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
                 String hash = Encoding.ASCII.GetString(data);
                 usuario.Clave = hash;
+                usuario.CodigoUsuario = 0;
                 context.Usuarios.Add(usuario);
 
                 context.SaveChanges();
@@ -78,9 +79,10 @@ namespace Data.Services
                 byte[] data = Encoding.ASCII.GetBytes(password);
                 data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
                 String hashPassword = Encoding.ASCII.GetString(data);
+                var empleadoInactivo = GetService.GetEmpleadoService().CheckEmpleadoIsInactivo(username);
                 var loginInfo = context.Usuarios.ToList().Where(x => (x.NombreUsuario == username | x.Correo == username) & x.Clave == hashPassword & x.Estados.NombreEstado == "Usuario activo").SingleOrDefault();
 
-                if (loginInfo == null)
+                if (loginInfo == null | empleadoInactivo == true)
                 {
                     return false;
                 }
@@ -157,6 +159,16 @@ namespace Data.Services
             else
             {
                 return false;
+            }
+        }
+        public Usuario GetUsuarioByEmpleadoId(int id)
+        {
+            using (var context = GetService.GetRestauranteEntityService())
+            {
+                var empleado = context.Empleados.Find(id);
+                var usuario = context.Usuarios.Find(empleado.CodigoUsuario);
+
+                return usuario;
             }
         }
     }

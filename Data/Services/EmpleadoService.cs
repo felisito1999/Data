@@ -24,6 +24,8 @@ namespace Data.Services
         {
             using (var context = GetService.GetRestauranteEntityService())
             {
+                var lastUsuario = GetService.GetUsuarioService().FindLastUsuario();
+                empleado.CodigoUsuario = lastUsuario.CodigoUsuario;
                 context.Empleados.Add(empleado);
                 context.SaveChanges();
             }
@@ -60,6 +62,35 @@ namespace Data.Services
                 var empleadoOriginal = FindById(empleadoModificado.CodigoEmpleado);
                 empleadoOriginal = empleadoModificado;
                 context.SaveChanges();
+            }
+        }
+        public Empleado GetEmpleadoByUserName(string username)
+        {
+            using (var context = GetService.GetRestauranteEntityService())
+            {
+                var usuario = GetService.GetUsuarioService().FindUserByUsername(username);
+                var empleado = context.Empleados.Where(x => x.CodigoUsuario == usuario.CodigoUsuario).SingleOrDefault();
+
+                return empleado;
+            }
+        }
+        public bool CheckEmpleadoIsInactivo(string username)
+        {
+            var empleado = GetEmpleadoByUserName(username);
+            if (empleado != null)
+            {
+                if (empleado.CodigoEstado == 4)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
             }
         }
     }
