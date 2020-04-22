@@ -32,7 +32,7 @@ namespace Data.Services
         {
             using (var context = GetService.GetRestauranteEntityService())
             {
-                var productos = context.Productos.ToList();
+                var productos = context.Productos.ToList().Where(x => x.Borrado == false);
 
                 return productos;
             }
@@ -45,14 +45,34 @@ namespace Data.Services
 
         public void SoftDelete(int id)
         {
-            throw new NotImplementedException();
+            using (var context = GetService.GetRestauranteEntityService())
+            {
+                var producto = context.Productos.Find(id);
+                producto.Borrado = true;
+                
+                foreach(var item in producto.ProductosMenues)
+                {
+                    item.Borrado = true;
+                }
+                foreach(var item in producto.ImagenesProductos)
+                {
+                    item.Borrado = true;
+                }
+                context.SaveChanges();
+            }
         }
 
-        public void UpdateSingleObject(Producto producto)
+        public void UpdateSingleObject(Producto productoNuevo)
         {
             using (var context = GetService.GetRestauranteEntityService())
             {
+                var producto = context.Productos.Find(productoNuevo.CodigoProducto);
+                producto.NombreProducto = productoNuevo.NombreProducto;
+                producto.DescripcionProducto = productoNuevo.DescripcionProducto;
+                producto.Costo = productoNuevo.Costo;
+                producto.CodigoCategoria = productoNuevo.CodigoCategoria;
 
+                context.SaveChanges();
             }
         }
         public Producto GetLastProducto()

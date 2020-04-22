@@ -20,6 +20,9 @@
         <th>
             @Html.DisplayNameFor(model => model.DescripcionProducto)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Costo)
+        </th>
         <th></th>
     </tr>
 
@@ -38,6 +41,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DescripcionProducto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Costo)
             </td>
             <td>
                 @Html.ActionLink("Agregar imagenes a la galeria de iamgenes", "AgregarImagenesGaleria", "Producto", new { id = item.CodigoProducto }, new { @class = "btn btn-block", id = "botonFuncional"})

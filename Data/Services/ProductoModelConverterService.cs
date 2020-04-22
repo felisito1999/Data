@@ -34,6 +34,7 @@ namespace Data.Services
         {
             Producto producto = new Producto
             {
+                CodigoProducto = viewModel.CodigoProducto,
                 NombreProducto = viewModel.NombreProducto,
                 DescripcionProducto = viewModel.DescripcionProducto,
                 CodigoCategoria = viewModel.CodigoCategoria,

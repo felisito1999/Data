@@ -128,30 +128,33 @@ namespace Restaurante.Controllers
         [HttpPost]
         public ActionResult ActualizarProducto(ProductoViewModel productoView)
         {
-            if (ModelState.IsValid)
+            try
             {
-                try
-                {
-                    var producto = GetService.GetProductoModelConverterService().ConvertFromViewModel(productoView);
+                var producto = GetService.GetProductoModelConverterService().ConvertFromViewModel(productoView);
+                GetService.GetProductoService().UpdateSingleObject(producto);
 
-                    GetService.GetProductoService().UpdateSingleObject()
-                }
-                catch (Exception)
-                {
-
-                    throw;
-                }
+                return RedirectToAction("ListaProductos");
             }
-            else
+            catch (Exception)
             {
-
+                return View();
             }
         }
         [Authorize(Roles = "Administrador")]
-        [HttpPost]
         public ActionResult BorrarProducto(int id)
         {
-            return View();
+            try
+            {
+                using (var transaction = GetService.GetRestauranteEntityService().Database.BeginTransaction())
+                {
+                    GetService.GetProductoService().SoftDelete(id);
+                }
+                return RedirectToAction("ListaProductos");
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("ListaProductos");
+            }
         }
     }
 }
