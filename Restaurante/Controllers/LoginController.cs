@@ -87,5 +87,9 @@ namespace Restaurante.Controllers
                 return View();
             }
         }
+        public ActionResult RegistrarEmpleado()
+        {
+            return View();
+        }
     }
 }

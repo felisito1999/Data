@@ -36,7 +36,17 @@ namespace Restaurante.Controllers
         [HttpPost]
         public ActionResult AgregarImagenAproducto(ImagenProductoViewModel imagenProductoView)
         {
-            var imagenProducto = GetService.GetImagenViewModelConverterService().ConvertFromViewModel(imagenProductoView);
+            try
+            {
+                var imagenProducto = GetService.GetImagenViewModelConverterService().ConvertFromViewModel(imagenProductoView);
+                GetService.GetImagenService().Insert(imagenProducto);
+
+                return RedirectToAction("ListaProductos", "Producto");
+            }
+            catch (Exception)
+            {
+                return View();
+            }
         }
     }
 }

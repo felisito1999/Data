@@ -13,7 +13,9 @@ namespace Data.Services
         {
             using (var context = GetService.GetRestauranteEntityService())
             {
+                var usuario = GetService.GetUsuarioService().FindLastUsuario();
                 var empleado = context.Empleados.Find(id);
+                empleado.CodigoUsuario = usuario.CodigoUsuario;
                 return empleado;
             }
         }

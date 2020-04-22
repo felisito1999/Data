@@ -1,0 +1,37 @@
+﻿@model Data.Models.ViewModels.ImagenProductoViewModel
+
+@{
+    ViewBag.Title = "AgregarImagenAproducto";
+}
+
+<h2>AgregarImagenAproducto</h2>
+
+@using (Html.BeginForm("AgregarImagenAProducto", "Imagen", FormMethod.Post, new { enctype = "multipart/form-data" })) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <hr />
+
+    @Html.HiddenFor(model => model.CodigoProducto)
+    @Html.HiddenFor(model => model.Borrado)
+    
+    <div class="form-group">
+        @Html.LabelFor(model => model.Imagen, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Archivo, "", new { @type = "file", @multiple = "multiple" })
+            @Html.ValidationMessageFor(model => model.Archivo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

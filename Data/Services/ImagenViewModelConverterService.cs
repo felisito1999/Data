@@ -2,6 +2,7 @@
 using Data.Models.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,7 +32,16 @@ namespace Data.Services
 
         public ImagenProducto ConvertFromViewModel(ImagenProductoViewModel viewModel)
         {
-            
+            ImagenProducto imagenProducto = new ImagenProducto();
+
+            using (var memory = new MemoryStream())
+            {
+                viewModel.Archivo.InputStream.CopyTo(memory);
+                imagenProducto.Imagen = memory.ToArray();
+            }
+            imagenProducto.CodigoProducto = viewModel.CodigoProducto;
+            imagenProducto.Borrado = false;
+            return imagenProducto;
         }
 
         public IEnumerable<ImagenProducto> ConvertListFromViewModel(IEnumerable<ImagenProductoViewModel> viewModel)

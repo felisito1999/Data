@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Data.Models.ViewModels
 {
@@ -18,6 +19,9 @@ namespace Data.Models.ViewModels
         [Required]
         [Display(Name = "Imagen:")]
         public byte[] Imagen { get; set; }
+        [Required]
+        [Display(Name = "Imagen:")]
+        public HttpPostedFileBase Archivo { get; set; }
         public bool Borrado { get; set; }
         public Producto Producto { get; set; }
 

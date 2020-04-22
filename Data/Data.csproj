@@ -146,6 +146,7 @@
     <Compile Include="Models\ViewModels\ProductoViewModel.cs" />
     <Compile Include="Models\ViewModels\ProvinciaViewModel.cs" />
     <Compile Include="Models\ViewModels\RegistrarUsuarioClienteViewModel.cs" />
+    <Compile Include="Models\ViewModels\RegistrarUsuarioEmpleadoViewModel.cs" />
     <Compile Include="Models\ViewModels\RolViewModel.cs" />
     <Compile Include="Models\ViewModels\SexoSelectListViewModel.cs" />
     <Compile Include="Models\ViewModels\SucursalViewModel.cs" />
@@ -177,7 +178,9 @@
     <Compile Include="Services\ProductoService.cs" />
     <Compile Include="Services\ProvinciaService.cs" />
     <Compile Include="Services\RegistroClienteModelConverterService.cs" />
+    <Compile Include="Services\RegistroEmpleadoModelConverterService.cs" />
     <Compile Include="Services\RegistroUsuarioModelClienteConverterService.cs" />
+    <Compile Include="Services\RegistroUsuarioModelEmpleadosConverterSerivce.cs" />
     <Compile Include="Services\RolService.cs" />
     <Compile Include="Services\SexoService.cs" />
     <Compile Include="Services\SucursalModelConverterService.cs" />

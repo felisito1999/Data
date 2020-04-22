@@ -163,7 +163,7 @@
           </Key>
           <Property Name="CodigoUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NombreUsuario" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="Clave" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Clave" Type="varchar" MaxLength="1000" Nullable="false" />
           <Property Name="Correo" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="CodigoRol" Type="int" Nullable="false" />
           <Property Name="CodigoEstado" Type="int" Nullable="false" />
@@ -759,7 +759,7 @@
           </Key>
           <Property Name="CodigoUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NombreUsuario" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Clave" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Clave" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Correo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CodigoRol" Type="Int32" Nullable="false" />
           <Property Name="CodigoEstado" Type="Int32" Nullable="false" />

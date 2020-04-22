@@ -23,6 +23,10 @@ namespace Data.Services
         {
             using (var context = GetService.GetRestauranteEntityService())
             {
+                byte[] data = Encoding.ASCII.GetBytes(usuario.Clave);
+                data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
+                String hash = Encoding.ASCII.GetString(data);
+                usuario.Clave = hash;
                 context.Usuarios.Add(usuario);
 
                 context.SaveChanges();
@@ -71,7 +75,10 @@ namespace Data.Services
         {
             using (var context = GetService.GetRestauranteEntityService())
             {
-                var loginInfo = context.Usuarios.ToList().Where(x => (x.NombreUsuario == username | x.Correo == username) & x.Clave == password & x.Estados.NombreEstado == "Usuario activo").SingleOrDefault();
+                byte[] data = Encoding.ASCII.GetBytes(password);
+                data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
+                String hashPassword = Encoding.ASCII.GetString(data);
+                var loginInfo = context.Usuarios.ToList().Where(x => (x.NombreUsuario == username | x.Correo == username) & x.Clave == hashPassword & x.Estados.NombreEstado == "Usuario activo").SingleOrDefault();
 
                 if (loginInfo == null)
                 {
