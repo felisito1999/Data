@@ -64,6 +64,10 @@ namespace Restaurante.Controllers
                 var sucursal = GetService.GetSucursalService().FindById(item.CodigoSucursal);
                 var cliente = GetService.GetClienteService().FindById(item.CodigoCliente);
                 var estado = GetService.GetEstadoService().FindById(item.CodigoEstado);
+                var ordenDetalle = GetService.GetOrdenDetalleService().ListSortedByGivenCategoryId(item.CodigoOrden).FirstOrDefault();
+                var producto = GetService.GetProductoService().FindById(ordenDetalle.CodigoProducto);
+                var empleado = GetService.GetEmpleadoService().FindById(item.CodigoEmpleado);
+
                 OrdenViewModelCliente ordenViewModel = new OrdenViewModelCliente
                 {
                     CodigoOrden = item.CodigoOrden,
@@ -72,7 +76,11 @@ namespace Restaurante.Controllers
                     CodigoEstado = item.CodigoEstado,
                     Sucursal = sucursal,
                     Cliente = cliente,
-                    Estado = estado
+                    Estado = estado,
+                    OrdenDetalle = ordenDetalle,
+                    Producto = producto,
+                    Empleado = empleado,
+                    Fecha = item.FechaHora
                 };
                 ordenesView.Add(ordenViewModel);
             }
@@ -83,13 +91,44 @@ namespace Restaurante.Controllers
         {
             var empleado = GetService.GetEmpleadoService().GetEmpleadoByUserName(User.Identity.Name);
             var ordenes = GetService.GetOrdenService().ListAll().Where(x => x.CodigoEmpleado == empleado.CodigoEmpleado & x.Borrado == false);
-            
-            List<>
-            return View();
+
+            List<OrdenViewModelEmpleado> ordenesView = new List<OrdenViewModelEmpleado>();
+
+            foreach (var item in ordenes)
+            {
+                var sucursal = GetService.GetSucursalService().FindById(item.CodigoSucursal);
+                var cliente = GetService.GetClienteService().FindById(item.CodigoCliente);
+                var empleadoOrden = GetService.GetEmpleadoService().FindById(item.CodigoEmpleado);
+                var estado = GetService.GetEstadoService().FindById(item.CodigoEstado);
+                var ordenDetalle = GetService.GetOrdenDetalleService().ListSortedByGivenCategoryId(item.CodigoOrden).FirstOrDefault();
+                var producto = GetService.GetProductoService().FindById(ordenDetalle.CodigoProducto);
+
+                OrdenViewModelEmpleado ordenView = new OrdenViewModelEmpleado
+                {
+                    CodigoOrden = item.CodigoOrden,
+                    CodigoEmpleado = item.CodigoEmpleado,
+                    CodigoSucursal = item.CodigoSucursal,
+                    CodigoEstado = item.CodigoEstado,
+                    Empleado = empleadoOrden,
+                    Estado = estado,
+                    Sucursal = sucursal,
+                    Producto = producto,
+                    Cliente = cliente,
+                    Fecha = item.FechaHora,
+                    OrdenDetalle = ordenDetalle
+                };
+                ordenesView.Add(ordenView);
+            }
+            return View(ordenesView);
         }
-        public ActionResult ActualizarEstadoOrden()
+        public ActionResult ActualizarEstadoOrden(int id)
         {
-            return View();
+            using (var context = GetService.GetRestauranteEntityService())
+            {
+                var orden = context.Ordenes.Find(id);
+                orden.CodigoEstado = 1025;
+            }
+            return RedirectToAction("OrdenListaEmpleados");
         }
     }
 }

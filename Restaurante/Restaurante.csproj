@@ -306,6 +306,7 @@
     <Content Include="Views\Login\RegistrarEmpleado.cshtml" />
     <Content Include="Views\Empleado\EmpleadosEsperandoActivacion.cshtml" />
     <Content Include="Views\Orden\OrdenListaClientes.cshtml" />
+    <Content Include="Views\Orden\OrdenListaEmpleados.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

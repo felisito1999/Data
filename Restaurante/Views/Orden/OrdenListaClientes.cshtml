@@ -1,10 +1,12 @@
 ﻿@model IEnumerable<Data.Models.ViewModels.OrdenViewModelCliente>
-
+@using Data.Services
 @{
     ViewBag.Title = "OrdenListaClientes";
 }
 
-<h2>OrdenListaClientes</h2>
+    <div class="titleContainer">
+        <h2>Historial de ordenes</h2>
+    </div>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,13 +14,25 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.CodigoCliente)
+            Nombre de cliente:
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CodigoSucursal)
+            Sucursal:
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CodigoEstado)
+            Nombre de producto:
+        </th>
+        <th>
+            Precio:
+        </th>
+        <th>
+            Encargado de orden:
+        </th>
+        <th>
+            Fecha:
+        </th>
+        <th>
+            Estado:
         </th>
         <th></th>
     </tr>
@@ -26,18 +40,25 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Cliente.NombreCliente) @Html.DisplayFor(modelItem => item.Cliente.ApellidoCliente) 
+            @Html.DisplayFor(modelItem => item.Cliente.NombreCliente) @Html.DisplayFor(modelItem => item.Cliente.ApellidoCliente)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Sucursal.NombreSucursal)
         </td>
+        <th>
+            @Html.DisplayFor(modelItem => item.Producto.NombreProducto)
+        </th>
         <td>
-            @Html.DisplayFor(modelItem => item.Estado.NombreEstado)
+            @Html.DisplayFor(modelItem => item.OrdenDetalle.PrecioVenta)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CodigoOrden }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CodigoOrden }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CodigoOrden })
+            @Html.DisplayFor(modelItem => item.Empleado.NombreEmpleado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Estado.NombreEstado)
         </td>
     </tr>
 }

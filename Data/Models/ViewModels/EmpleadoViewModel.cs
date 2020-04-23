@@ -18,6 +18,7 @@ namespace Data.Models.ViewModels
         [Required]
         [Display(Name = "Apellido de empleado:")]
         public string ApellidoEmpleado { get; set; }
+        [Display(Name = "Nombre de usuario:")]
         public int CodigoUsuario { get; set; }
         public Usuario Usuario { get; set; }
     }
