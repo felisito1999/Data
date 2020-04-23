@@ -141,6 +141,7 @@
     <Compile Include="Models\ViewModels\ImagenProductoViewModel.cs" />
     <Compile Include="Models\ViewModels\OrdenesOrdenesDetallesClienteViewModel.cs" />
     <Compile Include="Models\ViewModels\OrdenViewModelCliente.cs" />
+    <Compile Include="Models\ViewModels\OrdenViewModelEmpleado.cs" />
     <Compile Include="Models\ViewModels\PaisViewModel.cs" />
     <Compile Include="Models\ViewModels\ProductoMenuListViewModel.cs" />
     <Compile Include="Models\ViewModels\ProductoMenuViewModel.cs" />
