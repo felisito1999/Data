@@ -36,7 +36,7 @@
                     <ul id="navbarUl" class="nav navbar-nav">
                         <li>@Html.ActionLink("Pagina principal", "SucursalIndex", "Sucursal")</li>
                         <li>@Html.ActionLink("Sucursales", "SucursalIndex", "Sucursal")</li>
-                        <li>@Html.ActionLink("Historial de ordenes", "HistorialOrdenes", "Orden")</li>
+                        <li>@Html.ActionLink("Historial de ordenes", "OrdenListaClientes", "Orden")</li>
                         <li>@Html.ActionLink("Sobre nosotros", "About", "Home")</li>
                         <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
                     </ul>
@@ -54,7 +54,7 @@
                 {
                     <ul id="navbarUl" class="nav navbar-nav">
                         <li>@Html.ActionLink("Pagina principal", "SucursalIndex", "Sucursal")</li>
-                        <li>@Html.ActionLink("Mis ordenes asignadas", "OrdenesEmpleado", "Orden")</li>
+                        <li>@Html.ActionLink("Mis ordenes asignadas", "OrdenListaEmpleados", "Orden")</li>
                         <li>@Html.ActionLink("Sobre nosotros", "About", "Home")</li>
                         <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
                     </ul>
@@ -72,7 +72,7 @@
                 }
                 else
                 {
-                    if (User.IsInRole("Administrador"))
+                    if (User.IsInRole("Administrador") | User.IsInRole("Empleado"))
                     {
                         <ul id="navbarRightUl" class="nav navbar-nav navbar-right">
                             <li>

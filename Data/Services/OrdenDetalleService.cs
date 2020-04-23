@@ -29,9 +29,15 @@ namespace Data.Services
             throw new NotImplementedException();
         }
 
-        public IEnumerable<OrdenDetalle> ListSortedByGivenCategoryId(int idCategory)
+        public IEnumerable<OrdenDetalle> ListSortedByGivenCategoryId(int codigoOrden)
         {
-            throw new NotImplementedException();
+
+            using (var context = GetService.GetRestauranteEntityService())
+            {
+                var ordenesDetalles = context.OrdenesDetalles.ToList().Where(x => x.CodigoOrden == codigoOrden & x.Borrado == false);
+
+                return ordenesDetalles;
+            }
         }
 
         public void SoftDelete(int id)

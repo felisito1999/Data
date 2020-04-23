@@ -1,4 +1,5 @@
 ﻿using Data.DbAccess;
+using Data.Models.ViewModels;
 using Data.Services;
 using System;
 using System.Collections.Generic;
@@ -51,9 +52,43 @@ namespace Restaurante.Controllers
                 throw;
             }
         }
+        [Authorize(Roles = "Cliente")]
         public ActionResult OrdenListaClientes()
         {
+            var clienteUser = GetService.GetClienteService().GetClienteFromUserName(User.Identity.Name);
+            var ordenes = GetService.GetOrdenService().ListAll().Where(x => x.CodigoCliente == clienteUser.CodigoCliente & x.Borrado == false);
 
+            List<OrdenViewModelCliente> ordenesView = new List<OrdenViewModelCliente>();
+            foreach (var item in ordenes)
+            {
+                var sucursal = GetService.GetSucursalService().FindById(item.CodigoSucursal);
+                var cliente = GetService.GetClienteService().FindById(item.CodigoCliente);
+                var estado = GetService.GetEstadoService().FindById(item.CodigoEstado);
+                OrdenViewModelCliente ordenViewModel = new OrdenViewModelCliente
+                {
+                    CodigoOrden = item.CodigoOrden,
+                    CodigoSucursal = item.CodigoSucursal,
+                    CodigoCliente = item.CodigoCliente,
+                    CodigoEstado = item.CodigoEstado,
+                    Sucursal = sucursal,
+                    Cliente = cliente,
+                    Estado = estado
+                };
+                ordenesView.Add(ordenViewModel);
+            }
+            return View(ordenesView);
+        }
+        [Authorize(Roles = "Empleado")]
+        public ActionResult OrdenListaEmpleados()
+        {
+            var empleado = GetService.GetEmpleadoService().GetEmpleadoByUserName(User.Identity.Name);
+            var ordenes = GetService.GetOrdenService().ListAll().Where(x => x.CodigoEmpleado == empleado.CodigoEmpleado & x.Borrado == false);
+            
+            return View();
+        }
+        public ActionResult ActualizarEstadoOrden()
+        {
+            return View();
         }
     }
 }

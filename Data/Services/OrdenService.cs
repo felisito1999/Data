@@ -35,9 +35,16 @@ namespace Data.Services
             }
         }
 
-        public IEnumerable<Orden> ListSortedByGivenCategoryId(int idCategory)
+        public IEnumerable<Orden> ListSortedByGivenCategoryId(string usernameCliente)
         {
-            throw new NotImplementedException();
+            var cliente = GetService.GetClienteService().GetClienteFromUserName(usernameCliente);
+
+            using (var context = GetService.GetRestauranteEntityService())
+            {
+                var ordenesCliente = context.Ordenes.ToList().Where(x => x.CodigoCliente == cliente.CodigoCliente & x.Borrado == false);
+
+                return ordenesCliente;
+            }
         }
 
         public void SoftDelete(int id)
@@ -88,6 +95,11 @@ namespace Data.Services
 
             var minOrdenesEmpleado = GetService.GetEmpleadoService().FindById(minOrdenesCodigoEmpleado);
             return minOrdenesEmpleado;
+        }
+
+        public IEnumerable<Orden> ListSortedByGivenCategoryId(int idCategory)
+        {
+            throw new NotImplementedException();
         }
     }
 }

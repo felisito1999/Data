@@ -153,6 +153,7 @@
     <Content Include="Content\Images\272ddb80b6378ecaf212a06d3b4663a7.jpg" />
     <Content Include="Content\Images\359-3598161_clients-svg-png-icon-free-download-451479-clients.png" />
     <Content Include="Content\Images\kisspng-fusion-cuisine-european-cuisine-restaurant-pizza-c-dining-vector-5ad9d0ef352779.1186250915242242392177.png" />
+    <Content Include="Content\Images\Meat_Header_1490713811.jpg" />
     <Content Include="Content\Images\pinpng.com-crm-icon-png-3834939.png" />
     <Content Include="Content\Images\tenderloin-crop.jpg" />
     <Content Include="favicon.ico" />
@@ -304,12 +305,12 @@
     <Content Include="Views\Imagen\AgregarImagenAproducto.cshtml" />
     <Content Include="Views\Login\RegistrarEmpleado.cshtml" />
     <Content Include="Views\Empleado\EmpleadosEsperandoActivacion.cshtml" />
+    <Content Include="Views\Orden\OrdenListaClientes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Menu\" />
-    <Folder Include="Views\Orden\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

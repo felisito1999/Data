@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Data.Models.ViewModels.OrdenViewModelCliente>
+
+@{
+    ViewBag.Title = "OrdenListaClientes";
+}
+
+<h2>OrdenListaClientes</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CodigoCliente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CodigoSucursal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CodigoEstado)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cliente.NombreCliente) @Html.DisplayFor(modelItem => item.Cliente.ApellidoCliente) 
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sucursal.NombreSucursal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Estado.NombreEstado)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CodigoOrden }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CodigoOrden }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CodigoOrden })
+        </td>
+    </tr>
+}
+
+</table>
