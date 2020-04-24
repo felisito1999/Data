@@ -4,9 +4,9 @@
     ViewBag.Title = "MenuPorSucursal";
 }
 
-<div class="jumbotron" id="fixedTitulo">
-    <div class="container-fluid">
-        <img src="img_snow_wide.jpg" alt="Snow" style="width:100%;">
+<div class="container">
+    <div class="jumbotron" id="stickyTitulo">
+        <img src="~/Content/Images/1200x-1.jpg" class="img-responsive" />
         <div id="tituloMenu">Menú</div>
     </div>
 </div>
@@ -87,7 +87,7 @@
                             </div>
                             <div id="productoPanelFooter" class="panel-footer">
                                 @Html.ActionLink("Ordenar", "OrdenarProducto", "Orden", new { idProducto = item.CodigoProducto, idSucursal = GetService.GetMenuService().FindById(GetService.GetProductoMenuService().FindById(item.CodigoProductoMenu).CodigoMenu).CodigoSucursal }, new { @class = "btn btn-primary btn-block", id = "btnOrdenarProducto" })
-                                @Html.ActionLink("Mostrar galeria de fotos", "VerGaleriaDeProducto", "Imagen", new { idProducto = item.CodigoProducto }, new { @class = "btn btn-primary btn-block", id = "btnOrdenarProducto" })
+                                @Html.ActionLink("Mostrar galeria de fotos", "VerGaleriaDeProducto", "Imagen", new { idProducto = item.CodigoProducto }, new { @class = "btn btn-primary btn-block", id = "btnVerGaleria" })
                             </div>
                         </div>
                     </div>
@@ -126,7 +126,7 @@
                             </div>
                             <div id="productoPanelFooter" class="panel-footer">
                                 @Html.ActionLink("Ordenar", "OrdenarProducto", "Orden", new { idProducto = item.CodigoProducto, idSucursal = GetService.GetMenuService().FindById(GetService.GetProductoMenuService().FindById(item.CodigoProductoMenu).CodigoMenu).CodigoSucursal }, new { @class = "btn btn-primary btn-block", id = "btnOrdenarProducto" })
-                                @Html.ActionLink("Mostrar galeria de fotos", "VerGaleriaDeProducto", "Imagen", new { idProducto = item.CodigoProducto }, new { @class = "btn btn-primary btn-block", id = "btnOrdenarProducto" })
+                                @Html.ActionLink("Mostrar galeria de fotos", "VerGaleriaDeProducto", "Imagen", new { idProducto = item.CodigoProducto }, new { @class = "btn btn-primary btn-block", id = "btnVerGaleria" })
                             </div>
                         </div>
                     </div>
@@ -165,7 +165,7 @@
                             </div>
                             <div id="productoPanelFooter" class="panel-footer">
                                 @Html.ActionLink("Ordenar", "OrdenarProducto", "Orden", new { idProducto = item.CodigoProducto, idSucursal = GetService.GetMenuService().FindById(GetService.GetProductoMenuService().FindById(item.CodigoProductoMenu).CodigoMenu).CodigoSucursal }, new { @class = "btn btn-primary btn-block", id = "btnOrdenarProducto" })
-                                @Html.ActionLink("Mostrar galeria de fotos", "VerGaleriaDeProducto", "Imagen", new { idProducto = item.CodigoProducto }, new { @class = "btn btn-primary btn-block", id = "btnOrdenarProducto" })
+                                @Html.ActionLink("Mostrar galeria de fotos", "VerGaleriaDeProducto", "Imagen", new { idProducto = item.CodigoProducto }, new { @class = "btn btn-primary btn-block", id = "btnVerGaleria" })
                             </div>
                         </div>
                     </div>

@@ -4,14 +4,13 @@
     ViewBag.Title = "OrdenListaClientes";
 }
 
-    <div class="titleContainer">
-        <h2>Historial de ordenes</h2>
+    <div class="jumbotron" id="jumbotronTitulo"> 
+        <div class="titulo">
+            <h2>Historial de ordenes</h2>
+        </div>
     </div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+<table class="table table-bordered">
     <tr>
         <th>
             Nombre de cliente:
@@ -52,13 +51,19 @@
             @Html.DisplayFor(modelItem => item.OrdenDetalle.PrecioVenta)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Empleado.NombreEmpleado)
+            @Html.DisplayFor(modelItem => item.Empleado.NombreEmpleado) @Html.DisplayFor(modelItem => item.Empleado.ApellidoEmpleado)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Fecha)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Estado.NombreEstado)
+        </td>
+        <td>
+            @if(item.Estado.CodigoEstado == 1025)
+            {
+
+            }
         </td>
     </tr>
 }

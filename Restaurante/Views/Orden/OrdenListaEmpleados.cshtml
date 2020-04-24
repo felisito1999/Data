@@ -4,15 +4,16 @@
     ViewBag.Title = "OrdenListaEmpleados";
 }
 
-<h2>OrdenListaEmpleados</h2>
+    <div class="jumbotron" id="jumbotronTitulo">
+        <div class="titulo">
+            <h2>Lista de ordenes asignadas</h2>
+        </div>
+    </div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+<table class="table-bordered">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Cliente)
+           Nombre de cliente:
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Sucursal)
@@ -36,33 +37,41 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Cliente.NombreCliente) @Html.DisplayFor(modelItem => item.Cliente.ApellidoCliente)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Sucursal.NombreSucursal)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Producto.NombreProducto)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.OrdenDetalle.PrecioVenta)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Estado.NombreEstado)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Fecha)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Empleado.NombreEmpleado) @Html.DisplayFor(modelItem => item.Empleado.ApellidoEmpleado)
+    </td>
+    @if (item.Estado.CodigoEstado == 1024)
+    {
         <td>
-            @Html.DisplayFor(modelItem => item.Empleado.NombreEmpleado)
+            @Html.ActionLink("Completar orden", "ActualizarEstadoOrden", new { id = item.CodigoOrden }, new { @class = "btn btn-block", id = "botonFuncional" })
         </td>
+    }
+    else
+    {
         <td>
-            @Html.DisplayFor(modelItem => item.Sucursal.NombreSucursal)
+            @Html.ActionLink("Completar orden", "ActualizarEstadoOrden", new { id = item.CodigoOrden }, new { @class = "btn disabled btn-block", id = "botonFuncional" })
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Producto.NombreProducto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrdenDetalle.PrecioVenta)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Estado.NombreEstado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fecha)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Empleado.NombreEmpleado)
-        </td>
-        <td>
-            @Html.ActionLink("Completar orden", "ActualizarEstadoOrden", new { id=item.CodigoOrden }, new { @class = "btn btn-block", id="botonFuncional"}) 
-\
-        </td>
-    </tr>
+    }
+</tr>
 }
 
 </table>

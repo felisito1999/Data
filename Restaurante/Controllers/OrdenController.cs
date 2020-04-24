@@ -121,12 +121,15 @@ namespace Restaurante.Controllers
             }
             return View(ordenesView);
         }
+        [Authorize(Roles="Empleado")]
         public ActionResult ActualizarEstadoOrden(int id)
         {
             using (var context = GetService.GetRestauranteEntityService())
             {
                 var orden = context.Ordenes.Find(id);
                 orden.CodigoEstado = 1025;
+
+                context.SaveChanges();
             }
             return RedirectToAction("OrdenListaEmpleados");
         }

@@ -17,7 +17,7 @@ namespace Data.Models.ViewModels
         public byte[] ImagenPrincipal { get; set; }
         [Display(Name = "Nombre de producto:")]
         public Producto Producto { get; set; }
-        [Display(Name = "Descripcion de producto:")]
+        [Display(Name = "Descripcion:")]
         public string DescripcionProducto
         {
             get

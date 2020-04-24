@@ -66,6 +66,12 @@ textarea {
     display: block;
     background-size: cover;
 }*/
+#stickyTitulo {
+    background-color: rgba(0, 0, 0, 0.7);
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
 .navbar-header a {
     color: white;
     font-weight: 400;
@@ -104,6 +110,10 @@ textarea {
     text-align: center;
     font-weight: bold;
     color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 #sucursalPanel {
     border-width: thin;
@@ -115,7 +125,7 @@ textarea {
     border-color: #3E4551;
 }
 #sucursalPanelBody {
-    background: #4B515D;
+    background: rgba(62, 69, 81, 0.7);
     color: white;
     border-color: #4B515D;
 }
@@ -133,17 +143,20 @@ textarea {
     color: white;
     font-weight: bold;
     border-color: #4B515D;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 }
 #productoPanelBody {
-    background: #4B515D;
     color: white;
-    border-color: #4B515D;
+    border-color: rgba(62, 69, 81, 0.7);
 }
 #productoPanelFooter {
     background: #3E4551;
     padding: 0px;
     color: white;
     border-color: #4B515D;
+    border-bottom-left-radius: 20px; 
+    border-bottom-right-radius: 20px;
 }
 #btnVisualizarMenu {
     background: #3E4551;
@@ -165,6 +178,22 @@ textarea {
     font-weight: bold;
     color: white;
 }
+#btnVerGaleria {
+    background: #3E4551;
+    border-color: #ddd;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+    font-weight: bold;
+    color: white;
+}
+#btnVerGaleria:hover {
+    color: whitesmoke;
+    border-color: whitesmoke;
+    background: #555a66;
+    font-weight: bolder;
+}
 #btnOrdenarProducto:hover {
     color: whitesmoke;
     border-color: whitesmoke;
@@ -178,7 +207,7 @@ textarea {
     font-weight: bolder;
 }
 #navbar {
-    background: #3E4551;
+    background: rgba(62, 69, 81,0.8);
 }
 #navbarUl a{
     color: white;
@@ -232,13 +261,19 @@ textarea {
 .card-footer{
 
 }*/
+.panel {
+    background: none;
+}
+.panel-body {
+    background: rgba(62, 69, 81, 0.7);
+}
 #productoPanelBodyImage {
-    background: #4B515D;
+    background: rgba(62, 69, 81, 0.7);
 }
 #productoListImage {
     max-width: 256px;
     max-height: 144px;
-    background: #4B515D;
+    background: rgba(62, 69, 81, 0.7);
 }
 /*#productoPanelBodyImage {
     background: #4B515D;
@@ -248,12 +283,41 @@ textarea {
 }
 #jumbotronMenu {
     color: white;
-    background: #3E4551;
+    background: rgba(62, 69, 81, 0.85);
     text-align: center;
+    border-style: solid;
+    border-top-width: 3px;
+    border-bottom-width: 3px;
+    border-right: none;
+    border-left: none;
+    border-color: rgba(255, 255, 255, 0.5);
+    border-radius: 0px;
 }
 #thumbnailImagenesProductos {
     background-color: #3E4551;
 }
 #thumbnailImagenesProductos:hover{
     border: white;
+}
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.panel-header{
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+#jumbotronTitulo {
+    color: white;
+    background: rgba(62, 69, 81, 0.85);
+    text-align: center;
+    border-style: solid;
+    border-top-width: 3px;
+    border-bottom-width: 3px;
+    border-right: none;
+    border-left: none;
+    border-color: rgba(255, 255, 255, 0.5);
+    border-radius: 0px;
 }
