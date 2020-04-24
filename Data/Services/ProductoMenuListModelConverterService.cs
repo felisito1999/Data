@@ -16,13 +16,16 @@ namespace Data.Services
 
             foreach (var item in original)
             {
+                var producto = GetService.GetProductoService().FindById(item.CodigoProducto);
+                var categoriaProducto = GetService.GetCategoriaProductoService().FindById(producto.CodigoCategoria);
                 ProductoMenuListViewModel productoMenuView = new ProductoMenuListViewModel
                 {
                     CodigoProductoMenu = item.CodigoProductoMenu,
                     CodigoProducto = item.CodigoProducto,
                     ImagenPrincipal = GetService.GetImagenService().ListSortedByGivenCategoryId(item.CodigoProducto).FirstOrDefault().Imagen,
                     Producto = GetService.GetProductoService().FindById(item.CodigoProducto),
-                    Precio = item.Precio
+                    Precio = item.Precio,
+                    Categoria = categoriaProducto
                 };
                 productosMenuesView.Add(productoMenuView);
             }

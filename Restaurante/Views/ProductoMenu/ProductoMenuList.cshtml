@@ -4,16 +4,19 @@
     ViewBag.Title = "MenuPorSucursal";
 }
 
-    <div class="titleContainer">
-        <img src="#" alt="Alternate Text" />
-        <h2 id="tituloMenu">Menú</h2>
+<div class="jumbotron" id="fixedTitulo">
+    <div class="container-fluid">
+        <img src="img_snow_wide.jpg" alt="Snow" style="width:100%;">
+        <div id="tituloMenu">Menú</div>
     </div>
+</div>
+
 
 <hr size="30" />
 @if (User.IsInRole("Administrador"))
 {
     <p>
-        @Html.ActionLink("Agregar producto existente a sucursal", "AgregarProductoSucursal","ProductoMenu", new { id = ViewBag.CodigoSucursal } , new { @class = "btn btn-block", id = "botonFuncional"})
+        @Html.ActionLink("Agregar producto existente a sucursal", "AgregarProductoSucursal", "ProductoMenu", new { id = ViewBag.CodigoSucursal }, new { @class = "btn btn-block", id = "botonFuncional" })
     </p>
     <table class="table">
         <tr>
@@ -43,7 +46,7 @@
                 </td>
                 <td>
                     @Html.ActionLink("Modificar precio de producto", "ModificarProductoMenu", new { id = item.CodigoProductoMenu }, new { @class = "btn btn-primary btn-block", id = "botonFuncional" })
-                    @Html.ActionLink("Eliminar producto de sucursal", "BorrarProductoSeleccionadoSucursal", new { id = item.CodigoProductoMenu, idSucursal = ViewBag.CodigoSucursal }, new { @class = "btn btn-block", id = "botonFuncional"})
+                    @Html.ActionLink("Eliminar producto de sucursal", "BorrarProductoSeleccionadoSucursal", new { id = item.CodigoProductoMenu, idSucursal = ViewBag.CodigoSucursal }, new { @class = "btn btn-block", id = "botonFuncional" })
                 </td>
             </tr>
         }
@@ -53,30 +56,121 @@
 
 @if (User.IsInRole("Cliente") | User.Identity.IsAuthenticated == false)
 {
-    <div class="row">
-        @foreach (var item in Model)
-        {
-
-            <div class="col-sm">
-                <div id="productoPanel" class="panel">
-                    <div id="productoPanelHeading" class="panel-heading">@Html.DisplayFor(modelItem => item.Producto.NombreProducto)</div>
-                    <div id="productoPanelBodyImage" class="panel-body">
-                        @{
-                            var base64 = Convert.ToBase64String(item.ImagenPrincipal);
-                            var imgSource = String.Format("data:image/gif;base64,{0}", base64);
-                        }
-                        <img id="productoListImage" class="img-responsive" src="@imgSource" alt="Imagen de producto" />
-                    </div>
-                    <div id="productoPanelBody" class="panel-body">
-                        <p>@Html.LabelFor(model => item.DescripcionProducto, htmlAttributes: new { @class = "label-producto" }) @Html.DisplayFor(modelItem => item.DescripcionProducto)</p>
-                        <p>@Html.LabelFor(model => item.Precio, htmlAttributes: new { @class = "label-producto" }) @Html.DisplayFor(modelItem => item.Precio)</p>
-                    </div>
-                    <div id="productoPanelFooter" class="panel-footer">
-                        @Html.ActionLink("Ordenar", "OrdenarProducto", "Orden", new { idProducto = item.CodigoProducto, idSucursal = GetService.GetMenuService().FindById(GetService.GetProductoMenuService().FindById(item.CodigoProductoMenu).CodigoMenu).CodigoSucursal }, new { @class = "btn btn-primary btn-block", id = "btnOrdenarProducto" })
-                        @Html.ActionLink("Mostrar galeria de fotos","VerGaleriaDeProducto","Imagen" , new { idProducto = item.CodigoProducto}, new { @class = "btn btn-primary btn-block", id = "btnOrdenarProducto" })
-                    </div>
-                </div>
+    <div class="container-fluid">
+        <div class="jumbotron" id="jumbotronMenu">
+            <div>
+                <h2>Entradas</h2>
             </div>
-        }
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                if (item.Categoria.CodigoCategoria == 1)
+                {
+                    <div class="col-sm">
+                        <div id="productoPanel" class="panel">
+                            <div id="productoPanelHeading" class="panel-heading">
+                                @Html.DisplayFor(modelItem => item.Producto.NombreProducto)
+                            </div>
+                            <div id="productoPanelBodyImage" class="panel-body">
+                                @{
+                                    var base64 = Convert.ToBase64String(item.ImagenPrincipal);
+                                    var imageSource = String.Format("data:image/gif;base64,{0}", base64);
+                                }
+                                <img id="productoListImage" class="img-responsive" src="@imageSource" alt="Imagen de producto" />
+                            </div>
+                            <div id="productoPanelBody" class="panel-body">
+                                <p>@Html.LabelFor(model => item.DescripcionProducto, htmlAttributes: new { @class = "label-producto" }) @Html.DisplayFor(modelItem => item.DescripcionProducto)</p>
+                                <p>@Html.LabelFor(model => item.Precio, htmlAttributes: new { @class = "label-producto" }) @Html.DisplayFor(modelItem => item.Precio)</p>
+                            </div>
+                            <div id="productoPanelFooter" class="panel-footer">
+                                @Html.ActionLink("Ordenar", "OrdenarProducto", "Orden", new { idProducto = item.CodigoProducto, idSucursal = GetService.GetMenuService().FindById(GetService.GetProductoMenuService().FindById(item.CodigoProductoMenu).CodigoMenu).CodigoSucursal }, new { @class = "btn btn-primary btn-block", id = "btnOrdenarProducto" })
+                                @Html.ActionLink("Mostrar galeria de fotos", "VerGaleriaDeProducto", "Imagen", new { idProducto = item.CodigoProducto }, new { @class = "btn btn-primary btn-block", id = "btnOrdenarProducto" })
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="jumbotron" id="jumbotronMenu">
+            <div>
+                <h2>Platos fuertes</h2>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                if (item.Categoria.CodigoCategoria == 2)
+                {
+                    <div class="col-sm">
+                        <div id="productoPanel" class="panel">
+                            <div id="productoPanelHeading" class="panel-heading">
+                                @Html.DisplayFor(modelItem => item.Producto.NombreProducto)
+                            </div>
+                            <div id="productoPanelBodyImage" class="panel-body">
+                                @{
+                                    var base64 = Convert.ToBase64String(item.ImagenPrincipal);
+                                    var imageSource = String.Format("data:image/gif;base64,{0}", base64);
+                                }
+                                <img id="productoListImage" class="img-responsive" src="@imageSource" alt="Imagen de producto" />
+                            </div>
+                            <div id="productoPanelBody" class="panel-body">
+                                <p>@Html.LabelFor(model => item.DescripcionProducto, htmlAttributes: new { @class = "label-producto" }) @Html.DisplayFor(modelItem => item.DescripcionProducto)</p>
+                                <p>@Html.LabelFor(model => item.Precio, htmlAttributes: new { @class = "label-producto" }) @Html.DisplayFor(modelItem => item.Precio)</p>
+                            </div>
+                            <div id="productoPanelFooter" class="panel-footer">
+                                @Html.ActionLink("Ordenar", "OrdenarProducto", "Orden", new { idProducto = item.CodigoProducto, idSucursal = GetService.GetMenuService().FindById(GetService.GetProductoMenuService().FindById(item.CodigoProductoMenu).CodigoMenu).CodigoSucursal }, new { @class = "btn btn-primary btn-block", id = "btnOrdenarProducto" })
+                                @Html.ActionLink("Mostrar galeria de fotos", "VerGaleriaDeProducto", "Imagen", new { idProducto = item.CodigoProducto }, new { @class = "btn btn-primary btn-block", id = "btnOrdenarProducto" })
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="jumbotron" id="jumbotronMenu">
+            <div>
+                <h2>Postres</h2>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                if (item.Categoria.CodigoCategoria == 3)
+                {
+                    <div class="col-sm">
+                        <div id="productoPanel" class="panel">
+                            <div id="productoPanelHeading" class="panel-heading">
+                                @Html.DisplayFor(modelItem => item.Producto.NombreProducto)
+                            </div>
+                            <div id="productoPanelBodyImage" class="panel-body">
+                                @{
+                                    var base64 = Convert.ToBase64String(item.ImagenPrincipal);
+                                    var imageSource = String.Format("data:image/gif;base64,{0}", base64);
+                                }
+                                <img id="productoListImage" class="img-responsive" src="@imageSource" alt="Imagen de producto" />
+                            </div>
+                            <div id="productoPanelBody" class="panel-body">
+                                <p>@Html.LabelFor(model => item.DescripcionProducto, htmlAttributes: new { @class = "label-producto" }) @Html.DisplayFor(modelItem => item.DescripcionProducto)</p>
+                                <p>@Html.LabelFor(model => item.Precio, htmlAttributes: new { @class = "label-producto" }) @Html.DisplayFor(modelItem => item.Precio)</p>
+                            </div>
+                            <div id="productoPanelFooter" class="panel-footer">
+                                @Html.ActionLink("Ordenar", "OrdenarProducto", "Orden", new { idProducto = item.CodigoProducto, idSucursal = GetService.GetMenuService().FindById(GetService.GetProductoMenuService().FindById(item.CodigoProductoMenu).CodigoMenu).CodigoSucursal }, new { @class = "btn btn-primary btn-block", id = "btnOrdenarProducto" })
+                                @Html.ActionLink("Mostrar galeria de fotos", "VerGaleriaDeProducto", "Imagen", new { idProducto = item.CodigoProducto }, new { @class = "btn btn-primary btn-block", id = "btnOrdenarProducto" })
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
     </div>
 }

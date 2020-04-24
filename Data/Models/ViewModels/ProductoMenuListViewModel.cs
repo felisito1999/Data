@@ -35,5 +35,7 @@ namespace Data.Models.ViewModels
         [Display(Name = "Precio (RD$):")]
         public decimal Precio { get; set; }
         public ImagenProducto Imagenes { get; set; }
+        [Display(Name="Tipo de plato:")]
+        public CategoriaProducto Categoria { get; set; }
     }
 }

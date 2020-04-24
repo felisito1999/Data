@@ -76,8 +76,20 @@ textarea {
 .titleContainer {
     display: inline-block;
     color: white;
+    text-align: center;
+    font-weight: bold;
+    text-decoration: wavy;
     /*background: #3E4551;*/
 }
+.titulo {
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    text-decoration: wavy;
+}
+/*#fixedTitulo{
+    position: fixed;
+}*/
 #sucursalesListImage {
     height: auto;
     width: 10%;
@@ -233,4 +245,15 @@ textarea {
 }*/
 .form-group label{
     color: white
+}
+#jumbotronMenu {
+    color: white;
+    background: #3E4551;
+    text-align: center;
+}
+#thumbnailImagenesProductos {
+    background-color: #3E4551;
+}
+#thumbnailImagenesProductos:hover{
+    border: white;
 }

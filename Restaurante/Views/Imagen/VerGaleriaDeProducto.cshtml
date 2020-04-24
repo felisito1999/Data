@@ -13,7 +13,7 @@
     @foreach (var modelItem in Model)
     {
         <div class="col-sm-6 col-md-3">
-            <a href="#" class="thumbnail">
+            <a href="#" class="thumbnail" id="thumbnailImagenesProductos">
                 @{ 
                     var base64 = Convert.ToBase64String(modelItem.Imagen);
                     var imageSource = String.Format("data:image/gif;base64,{0}", base64);

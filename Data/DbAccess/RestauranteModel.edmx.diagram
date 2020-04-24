@@ -27,17 +27,12 @@
         <AssociationConnector Association="RestauranteModel.FK_EstadosUsuarios" ManuallyRouted="false" />
         <AssociationConnector Association="RestauranteModel.FK_MenuesProductosMenues" ManuallyRouted="false" />
         <AssociationConnector Association="RestauranteModel.FK_RolesUsuarios" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="RestauranteModel.Producto" Width="1.5" PointX="3" PointY="4.125" />
-        <AssociationConnector Association="RestauranteModel.FK_CategoriasProductos" />
-        <AssociationConnector Association="RestauranteModel.FK_EstadosProductos" />
-        <AssociationConnector Association="RestauranteModel.FK_ProductosProductosMenues" />
         <EntityTypeShape EntityType="RestauranteModel.Sucursal" Width="1.5" PointX="5.75" PointY="20.875" />
         <AssociationConnector Association="RestauranteModel.FK_SucursalesEmpleados" />
         <AssociationConnector Association="RestauranteModel.FK_SucursalesMenues" />
         <AssociationConnector Association="RestauranteModel.FK_PaisesSucursales" />
         <AssociationConnector Association="RestauranteModel.FK_ProvinciasSucursales" />
         <EntityTypeShape EntityType="RestauranteModel.ImagenProducto" Width="1.5" PointX="5.25" PointY="0.75" />
-        <AssociationConnector Association="RestauranteModel.FK_ProductosImagenesProductos" />
         <EntityTypeShape EntityType="RestauranteModel.Orden" Width="1.5" PointX="8.25" PointY="14.25" />
         <EntityTypeShape EntityType="RestauranteModel.OrdenDetalle" Width="1.5" PointX="10.5" PointY="9.25" />
         <AssociationConnector Association="RestauranteModel.FK_ClientesOrdenes" />
@@ -46,7 +41,12 @@
         <AssociationConnector Association="RestauranteModel.FK_EstadosOrdenesDetalles" />
         <AssociationConnector Association="RestauranteModel.FK_OrdenesOrdenesDetalles" />
         <AssociationConnector Association="RestauranteModel.FK_SucursalesOrdenes" />
+        <EntityTypeShape EntityType="RestauranteModel.Producto" Width="1.5" PointX="3" PointY="3" />
+        <AssociationConnector Association="RestauranteModel.FK_CategoriasProductos" />
+        <AssociationConnector Association="RestauranteModel.FK_EstadosProductos" />
+        <AssociationConnector Association="RestauranteModel.FK_ProductosImagenesProductos" />
         <AssociationConnector Association="RestauranteModel.FK_ProductosOrdenesDetalles" />
+        <AssociationConnector Association="RestauranteModel.FK_ProductosProductosMenues" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

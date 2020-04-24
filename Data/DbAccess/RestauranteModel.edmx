@@ -696,9 +696,9 @@
           <NavigationProperty Name="Empleados" Relationship="Self.FK_EstadosEmpleados" FromRole="Estados" ToRole="Empleados" />
           <NavigationProperty Name="Roles" Relationship="Self.FK_EstadosRoles" FromRole="Estados" ToRole="Roles" />
           <NavigationProperty Name="Usuarios" Relationship="Self.FK_EstadosUsuarios" FromRole="Estados" ToRole="Usuarios" />
-          <NavigationProperty Name="Productos" Relationship="RestauranteModel.FK_EstadosProductos" FromRole="Estado" ToRole="Productos" />
           <NavigationProperty Name="Ordenes" Relationship="RestauranteModel.FK_EstadosOrdenes" FromRole="Estado" ToRole="Ordenes" />
           <NavigationProperty Name="OrdenesDetalles" Relationship="RestauranteModel.FK_EstadosOrdenesDetalles" FromRole="Estado" ToRole="OrdenesDetalles" />
+          <NavigationProperty Name="Productos" Relationship="RestauranteModel.FK_EstadosProductos" FromRole="Estado" ToRole="Productos" />
         </EntityType>
         <EntityType Name="Menu">
           <Key>
@@ -979,19 +979,6 @@
             <Parameter Name="PrecioVenta" Mode="In" Type="Decimal" />
             <Parameter Name="CodigoCategoria" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="Productos" EntityType="RestauranteModel.Producto" />
-          <AssociationSet Name="FK_CategoriasProductos" Association="RestauranteModel.FK_CategoriasProductos">
-            <End Role="CategoriaProducto" EntitySet="CategoriasProductos" />
-            <End Role="Productos" EntitySet="Productos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EstadosProductos" Association="RestauranteModel.FK_EstadosProductos">
-            <End Role="Estado" EntitySet="Estados" />
-            <End Role="Productos" EntitySet="Productos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProductosProductosMenues" Association="RestauranteModel.FK_ProductosProductosMenues">
-            <End Role="Productos" EntitySet="Productos" />
-            <End Role="ProductoMenu" EntitySet="ProductosMenues" />
-          </AssociationSet>
           <EntitySet Name="Sucursales" EntityType="RestauranteModel.Sucursal" />
           <AssociationSet Name="FK_SucursalesEmpleados" Association="RestauranteModel.FK_SucursalesEmpleados">
             <End Role="Sucursales" EntitySet="Sucursales" />
@@ -1010,10 +997,6 @@
             <End Role="Sucursales" EntitySet="Sucursales" />
           </AssociationSet>
           <EntitySet Name="ImagenesProductos" EntityType="RestauranteModel.ImagenProducto" />
-          <AssociationSet Name="FK_ProductosImagenesProductos" Association="RestauranteModel.FK_ProductosImagenesProductos">
-            <End Role="Producto" EntitySet="Productos" />
-            <End Role="ImagenesProductos" EntitySet="ImagenesProductos" />
-          </AssociationSet>
           <EntitySet Name="Ordenes" EntityType="RestauranteModel.Orden" />
           <EntitySet Name="OrdenesDetalles" EntityType="RestauranteModel.OrdenDetalle" />
           <AssociationSet Name="FK_ClientesOrdenes" Association="RestauranteModel.FK_ClientesOrdenes">
@@ -1040,64 +1023,28 @@
             <End Role="Sucursal" EntitySet="Sucursales" />
             <End Role="Ordenes" EntitySet="Ordenes" />
           </AssociationSet>
-          <AssociationSet Name="FK_ProductosOrdenesDetalles" Association="RestauranteModel.FK_ProductosOrdenesDetalles">
-            <End Role="Producto" EntitySet="Productos" />
-            <End Role="OrdenesDetalles" EntitySet="OrdenesDetalles" />
+          <EntitySet Name="Productos" EntityType="RestauranteModel.Producto" />
+          <AssociationSet Name="FK_CategoriasProductos" Association="RestauranteModel.FK_CategoriasProductos">
+            <End Role="CategoriaProducto" EntitySet="CategoriasProductos" />
+            <End Role="Productos" EntitySet="Productos" />
           </AssociationSet>
-        </EntityContainer>
-        <EntityType Name="Producto">
-          <Key>
-            <PropertyRef Name="CodigoProducto" />
-          </Key>
-          <Property Name="CodigoProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NombreProducto" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="DescripcionProducto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Costo" Type="Decimal" Nullable="false" Precision="12" Scale="4" />
-          <Property Name="CodigoCategoria" Type="Int32" Nullable="false" />
-          <Property Name="CodigoEstado" Type="Int32" Nullable="false" />
-          <Property Name="Borrado" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="CategoriasProductos" Relationship="RestauranteModel.FK_CategoriasProductos" FromRole="Productos" ToRole="CategoriaProducto" />
-          <NavigationProperty Name="Estados" Relationship="RestauranteModel.FK_EstadosProductos" FromRole="Productos" ToRole="Estado" />
-          <NavigationProperty Name="ProductosMenues" Relationship="RestauranteModel.FK_ProductosProductosMenues" FromRole="Productos" ToRole="ProductoMenu" />
-          <NavigationProperty Name="ImagenesProductos" Relationship="RestauranteModel.FK_ProductosImagenesProductos" FromRole="Producto" ToRole="ImagenesProductos" />
-          <NavigationProperty Name="OrdenesDetalles" Relationship="RestauranteModel.FK_ProductosOrdenesDetalles" FromRole="Producto" ToRole="OrdenesDetalles" />
-        </EntityType>
-        <Association Name="FK_CategoriasProductos">
-          <End Type="RestauranteModel.CategoriaProducto" Role="CategoriaProducto" Multiplicity="1" />
-          <End Type="RestauranteModel.Producto" Role="Productos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CategoriaProducto">
-              <PropertyRef Name="CodigoCategoria" />
-            </Principal>
-            <Dependent Role="Productos">
-              <PropertyRef Name="CodigoCategoria" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EstadosProductos">
-          <End Type="RestauranteModel.Estado" Role="Estado" Multiplicity="1" />
-          <End Type="RestauranteModel.Producto" Role="Productos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Estado">
-              <PropertyRef Name="CodigoEstado" />
-            </Principal>
-            <Dependent Role="Productos">
-              <PropertyRef Name="CodigoEstado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProductosProductosMenues">
-          <End Type="RestauranteModel.Producto" Role="Productos" Multiplicity="1" />
-          <End Type="RestauranteModel.ProductoMenu" Role="ProductoMenu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Productos">
-              <PropertyRef Name="CodigoProducto" />
-            </Principal>
-            <Dependent Role="ProductoMenu">
-              <PropertyRef Name="CodigoProducto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+          <AssociationSet Name="FK_EstadosProductos" Association="RestauranteModel.FK_EstadosProductos">
+            <End Role="Estado" EntitySet="Estados" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductosImagenesProductos" Association="RestauranteModel.FK_ProductosImagenesProductos">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="ImagenProducto" EntitySet="ImagenesProductos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductosOrdenesDetalles" Association="RestauranteModel.FK_ProductosOrdenesDetalles">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="OrdenDetalle" EntitySet="OrdenesDetalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductosProductosMenues" Association="RestauranteModel.FK_ProductosProductosMenues">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="ProductoMenu" EntitySet="ProductosMenues" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="Sucursal">
           <Key>
             <PropertyRef Name="CodigoSucursal" />
@@ -1170,20 +1117,8 @@
           <Property Name="Imagen" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
           <Property Name="CodigoProducto" Type="Int32" Nullable="false" />
           <Property Name="Borrado" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Productos" Relationship="RestauranteModel.FK_ProductosImagenesProductos" FromRole="ImagenesProductos" ToRole="Producto" />
+          <NavigationProperty Name="Productos" Relationship="RestauranteModel.FK_ProductosImagenesProductos" FromRole="ImagenProducto" ToRole="Productos" />
         </EntityType>
-        <Association Name="FK_ProductosImagenesProductos">
-          <End Type="RestauranteModel.Producto" Role="Producto" Multiplicity="1" />
-          <End Type="RestauranteModel.ImagenProducto" Role="ImagenesProductos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Producto">
-              <PropertyRef Name="CodigoProducto" />
-            </Principal>
-            <Dependent Role="ImagenesProductos">
-              <PropertyRef Name="CodigoProducto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Orden">
           <Key>
             <PropertyRef Name="CodigoOrden" />
@@ -1215,7 +1150,7 @@
           <Property Name="Borrado" Type="Boolean" />
           <NavigationProperty Name="Estados" Relationship="RestauranteModel.FK_EstadosOrdenesDetalles" FromRole="OrdenesDetalles" ToRole="Estado" />
           <NavigationProperty Name="Ordenes" Relationship="RestauranteModel.FK_OrdenesOrdenesDetalles" FromRole="OrdenesDetalles" ToRole="Ordenes" />
-          <NavigationProperty Name="Productos" Relationship="RestauranteModel.FK_ProductosOrdenesDetalles" FromRole="OrdenesDetalles" ToRole="Producto" />
+          <NavigationProperty Name="Productos" Relationship="RestauranteModel.FK_ProductosOrdenesDetalles" FromRole="OrdenDetalle" ToRole="Productos" />
         </EntityType>
         <Association Name="FK_ClientesOrdenes">
           <End Type="RestauranteModel.Cliente" Role="Cliente" Multiplicity="1" />
@@ -1289,19 +1224,84 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ProductosOrdenesDetalles">
-          <End Type="RestauranteModel.Producto" Role="Producto" Multiplicity="1" />
-          <End Type="RestauranteModel.OrdenDetalle" Role="OrdenesDetalles" Multiplicity="*" />
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="CodigoProducto" />
+          </Key>
+          <Property Name="CodigoProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreProducto" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DescripcionProducto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Costo" Type="Decimal" Nullable="false" Precision="12" Scale="4" />
+          <Property Name="CodigoCategoria" Type="Int32" Nullable="false" />
+          <Property Name="CodigoEstado" Type="Int32" Nullable="false" />
+          <Property Name="Borrado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CategoriasProductos" Relationship="RestauranteModel.FK_CategoriasProductos" FromRole="Productos" ToRole="CategoriaProducto" />
+          <NavigationProperty Name="Estados" Relationship="RestauranteModel.FK_EstadosProductos" FromRole="Productos" ToRole="Estado" />
+          <NavigationProperty Name="ImagenesProductos" Relationship="RestauranteModel.FK_ProductosImagenesProductos" FromRole="Productos" ToRole="ImagenProducto" />
+          <NavigationProperty Name="OrdenesDetalles" Relationship="RestauranteModel.FK_ProductosOrdenesDetalles" FromRole="Productos" ToRole="OrdenDetalle" />
+          <NavigationProperty Name="ProductosMenues" Relationship="RestauranteModel.FK_ProductosProductosMenues" FromRole="Productos" ToRole="ProductoMenu" />
+        </EntityType>
+        <Association Name="FK_CategoriasProductos">
+          <End Type="RestauranteModel.CategoriaProducto" Role="CategoriaProducto" Multiplicity="1" />
+          <End Type="RestauranteModel.Producto" Role="Productos" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Producto">
+            <Principal Role="CategoriaProducto">
+              <PropertyRef Name="CodigoCategoria" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="CodigoCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EstadosProductos">
+          <End Type="RestauranteModel.Estado" Role="Estado" Multiplicity="1" />
+          <End Type="RestauranteModel.Producto" Role="Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="CodigoEstado" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="CodigoEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductosImagenesProductos">
+          <End Type="RestauranteModel.Producto" Role="Productos" Multiplicity="1" />
+          <End Type="RestauranteModel.ImagenProducto" Role="ImagenProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
               <PropertyRef Name="CodigoProducto" />
             </Principal>
-            <Dependent Role="OrdenesDetalles">
+            <Dependent Role="ImagenProducto">
               <PropertyRef Name="CodigoProducto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <Association Name="FK_ProductosOrdenesDetalles">
+          <End Type="RestauranteModel.Producto" Role="Productos" Multiplicity="1" />
+          <End Type="RestauranteModel.OrdenDetalle" Role="OrdenDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="CodigoProducto" />
+            </Principal>
+            <Dependent Role="OrdenDetalle">
+              <PropertyRef Name="CodigoProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductosProductosMenues">
+          <End Type="RestauranteModel.Producto" Role="Productos" Multiplicity="1" />
+          <End Type="RestauranteModel.ProductoMenu" Role="ProductoMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="CodigoProducto" />
+            </Principal>
+            <Dependent Role="ProductoMenu">
+              <PropertyRef Name="CodigoProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1428,19 +1428,6 @@
           <FunctionImportMapping FunctionImportName="sp_IngresarClientes" FunctionName="RestauranteModel.Store.sp_IngresarClientes" />
           <FunctionImportMapping FunctionImportName="sp_IngresarEmpleados" FunctionName="RestauranteModel.Store.sp_IngresarEmpleados" />
           <FunctionImportMapping FunctionImportName="sp_IngresarProductos" FunctionName="RestauranteModel.Store.sp_IngresarProductos" />
-          <EntitySetMapping Name="Productos">
-            <EntityTypeMapping TypeName="RestauranteModel.Producto">
-              <MappingFragment StoreEntitySet="Productos">
-                <ScalarProperty Name="Borrado" ColumnName="Borrado" />
-                <ScalarProperty Name="CodigoEstado" ColumnName="CodigoEstado" />
-                <ScalarProperty Name="CodigoCategoria" ColumnName="CodigoCategoria" />
-                <ScalarProperty Name="Costo" ColumnName="Costo" />
-                <ScalarProperty Name="DescripcionProducto" ColumnName="DescripcionProducto" />
-                <ScalarProperty Name="NombreProducto" ColumnName="NombreProducto" />
-                <ScalarProperty Name="CodigoProducto" ColumnName="CodigoProducto" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Sucursales">
             <EntityTypeMapping TypeName="RestauranteModel.Sucursal">
               <MappingFragment StoreEntitySet="Sucursales">
@@ -1487,6 +1474,19 @@
                 <ScalarProperty Name="CodigoProducto" ColumnName="CodigoProducto" />
                 <ScalarProperty Name="CodigoOrden" ColumnName="CodigoOrden" />
                 <ScalarProperty Name="CodigoOrdenDetalle" ColumnName="CodigoOrdenDetalle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Productos">
+            <EntityTypeMapping TypeName="RestauranteModel.Producto">
+              <MappingFragment StoreEntitySet="Productos">
+                <ScalarProperty Name="Borrado" ColumnName="Borrado" />
+                <ScalarProperty Name="CodigoEstado" ColumnName="CodigoEstado" />
+                <ScalarProperty Name="CodigoCategoria" ColumnName="CodigoCategoria" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="DescripcionProducto" ColumnName="DescripcionProducto" />
+                <ScalarProperty Name="NombreProducto" ColumnName="NombreProducto" />
+                <ScalarProperty Name="CodigoProducto" ColumnName="CodigoProducto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
