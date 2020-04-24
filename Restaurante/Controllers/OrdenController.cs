@@ -92,9 +92,9 @@ namespace Restaurante.Controllers
         {
             var empleado = GetService.GetEmpleadoService().GetEmpleadoByUserName(User.Identity.Name);
             var ordenes = GetService.GetOrdenService().ListAll().Where(x => x.CodigoEmpleado == empleado.CodigoEmpleado & x.Borrado == false);
+            var ordenesView = GetService.GetOrdenOrdenEmpleadModelConverterService().ConvertfromListToViewModel(ordenes);
 
-            
-            return View(ordenesDesdeMasNueva);
+            return View(ordenesView);
         }
         [Authorize(Roles="Empleado")]
         public ActionResult ActualizarEstadoOrden(int id)
