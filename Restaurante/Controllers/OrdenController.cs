@@ -93,34 +93,7 @@ namespace Restaurante.Controllers
             var empleado = GetService.GetEmpleadoService().GetEmpleadoByUserName(User.Identity.Name);
             var ordenes = GetService.GetOrdenService().ListAll().Where(x => x.CodigoEmpleado == empleado.CodigoEmpleado & x.Borrado == false);
 
-            List<OrdenViewModelEmpleado> ordenesView = new List<OrdenViewModelEmpleado>();
-
-            foreach (var item in ordenes)
-            {
-                var sucursal = GetService.GetSucursalService().FindById(item.CodigoSucursal);
-                var cliente = GetService.GetClienteService().FindById(item.CodigoCliente);
-                var empleadoOrden = GetService.GetEmpleadoService().FindById(item.CodigoEmpleado);
-                var estado = GetService.GetEstadoService().FindById(item.CodigoEstado);
-                var ordenDetalle = GetService.GetOrdenDetalleService().ListSortedByGivenCategoryId(item.CodigoOrden).FirstOrDefault();
-                var producto = GetService.GetProductoService().FindById(ordenDetalle.CodigoProducto);
-
-                OrdenViewModelEmpleado ordenView = new OrdenViewModelEmpleado
-                {
-                    CodigoOrden = item.CodigoOrden,
-                    CodigoEmpleado = item.CodigoEmpleado,
-                    CodigoSucursal = item.CodigoSucursal,
-                    CodigoEstado = item.CodigoEstado,
-                    Empleado = empleadoOrden,
-                    Estado = estado,
-                    Sucursal = sucursal,
-                    Producto = producto,
-                    Cliente = cliente,
-                    Fecha = item.FechaHora,
-                    OrdenDetalle = ordenDetalle
-                };
-                ordenesView.Add(ordenView);
-            }
-            var ordenesDesdeMasNueva = ordenesView.OrderByDescending(x => x.CodigoOrden);
+            
             return View(ordenesDesdeMasNueva);
         }
         [Authorize(Roles="Empleado")]
