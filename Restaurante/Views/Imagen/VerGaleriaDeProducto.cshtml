@@ -18,7 +18,7 @@
                     var base64 = Convert.ToBase64String(modelItem.Imagen);
                     var imageSource = String.Format("data:image/gif;base64,{0}", base64);
                 }
-                <img class="img-responsive" id="productoListImage" src="@imageSource" alt="Generic placeholder thumbnail">
+                <img class="img-thumbnail" id="productoListImage" src="@imageSource" alt="Generic placeholder thumbnail">
             </a>
         </div>
     }
