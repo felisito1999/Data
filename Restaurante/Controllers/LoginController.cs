@@ -28,8 +28,15 @@ namespace Restaurante.Controllers
                 if (authentication == true)
                 {
                     FormsAuthentication.SetAuthCookie(userInfo.NombreUsuario, false);
-                    
-                    return RedirectToAction("SucursalIndex", "Sucursal");
+
+                    if(User.IsInRole("Empleado"))
+                    {
+                        return RedirectToAction("OrdenListaEmpleados", "Orden");
+                    }
+                    else
+                    {
+                        return RedirectToAction("SucursalIndex", "Sucursal");
+                    }
                 }
                 else
                 {

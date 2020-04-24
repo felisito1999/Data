@@ -84,7 +84,8 @@ namespace Restaurante.Controllers
                 };
                 ordenesView.Add(ordenViewModel);
             }
-            return View(ordenesView);
+            var ordenesDesdeMasNueva = ordenesView.OrderByDescending(x => x.CodigoOrden);
+            return View(ordenesDesdeMasNueva);
         }
         [Authorize(Roles = "Empleado")]
         public ActionResult OrdenListaEmpleados()
@@ -119,7 +120,8 @@ namespace Restaurante.Controllers
                 };
                 ordenesView.Add(ordenView);
             }
-            return View(ordenesView);
+            var ordenesDesdeMasNueva = ordenesView.OrderByDescending(x => x.CodigoOrden);
+            return View(ordenesDesdeMasNueva);
         }
         [Authorize(Roles="Empleado")]
         public ActionResult ActualizarEstadoOrden(int id)

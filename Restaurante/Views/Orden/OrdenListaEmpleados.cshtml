@@ -10,7 +10,7 @@
         </div>
     </div>
 
-<table class="table-bordered">
+<table class="table">
     <tr>
         <th>
            Nombre de cliente:
@@ -22,7 +22,7 @@
             @Html.DisplayNameFor(model => model.Producto)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.OrdenDetalle)
+            Precio:
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Estado)
@@ -30,9 +30,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Fecha)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Empleado)
-        </th>
+        <th></th>
         <th></th>
     </tr>
 
@@ -56,9 +54,6 @@
     <td>
         @Html.DisplayFor(modelItem => item.Fecha)
     </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Empleado.NombreEmpleado) @Html.DisplayFor(modelItem => item.Empleado.ApellidoEmpleado)
-    </td>
     @if (item.Estado.CodigoEstado == 1024)
     {
         <td>
@@ -69,6 +64,18 @@
     {
         <td>
             @Html.ActionLink("Completar orden", "ActualizarEstadoOrden", new { id = item.CodigoOrden }, new { @class = "btn disabled btn-block", id = "botonFuncional" })
+        </td>
+    }
+    @if (item.Estado.CodigoEstado == 1024)
+    {
+        <td>
+            <input class="checkbox" type="checkbox" disabled="" />
+        </td>
+    }
+    else
+    {
+        <td>
+            <input class="checkbox" type="checkbox" disabled="" checked=""/>
         </td>
     }
 </tr>
