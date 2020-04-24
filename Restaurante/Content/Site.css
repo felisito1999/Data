@@ -206,6 +206,9 @@ textarea {
     background: #555a66;
     font-weight: bolder;
 }
+#imagen{
+    width:100%;
+}
 #navbar {
     background: rgba(62, 69, 81,0.8);
 }
