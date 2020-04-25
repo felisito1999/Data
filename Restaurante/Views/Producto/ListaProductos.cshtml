@@ -4,7 +4,8 @@
     ViewBag.Title = "ListaProductos";
 }
 
-    <div class="titleContainer">
+    <div class="jumbotron" id="jumbotronTitulo">
+        <img class="img-responsive img-title-center"src="~/Content/Images/kisspng-hamburger-black-and-white-vector-burger-5a7005d08ecb94.1893478915172909605849.png" />
         <h2>Lista de productos disponibles</h2>
     </div>
 
@@ -14,7 +15,7 @@
 <table class="table">
     <tr>
         <th>
-            <p>Imagen principal:</p>
+            Imagen principal:
         </th>
         <th>
             @Html.DisplayNameFor(model => model.NombreProducto)

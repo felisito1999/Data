@@ -3,10 +3,12 @@
     ViewBag.Title = "SeleccionRegistro";
 }
 
-<h2 id="TituloSeleccionRegistro">Seleccion Registro</h2>
+    <div class="jumbotron" id="jumbotronTitulo">
+        <h2>Seleccion Registro</h2>
+    </div>
 
-<div class="container">
-    <ul>
+<div class="container-fluid">
+    <ul class="list-unstyled">
         <li class="seleccionRegistro" id="linkRegistroCliente">@Html.ActionLink("Registrarse como un cliente", "RegistrarCliente", "Login", new { @class = "btn btn-lg btn-block", id = "botonFuncionalSeleccionRegistro" })</li>
         <li class="seleccionRegistro" id="linkRegistroEmpleado">@Html.ActionLink("Registrarse para solicitar acceso como empleado", "RegistrarEmpleado", "Login", new { @class = "btn btn-lg btn-block", id = "botonFuncionalSeleccionRegistro" })</li>
     </ul>

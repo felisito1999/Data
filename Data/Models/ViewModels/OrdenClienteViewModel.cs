@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Data.Models.ViewModels
 {
-    public class OrdenViewModelCliente
+    public class OrdenClienteViewModel
     {
         [Key]
         public int CodigoOrden { get; set; }

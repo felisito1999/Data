@@ -3,14 +3,14 @@
 @{
     ViewBag.Title = "UpdateSucursal";
 }
-<h2>UpdateSucursal</h2>
-
+    <div class="jumbotron" id="jumbotronTitulo">
+        <h2>Update sucursal</h2>
+    </div>
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
 <div class="form-horizontal">
-    <h4>SucursalViewModel</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">

@@ -133,7 +133,13 @@ namespace Data.Services
         {
             return new EmpleadoModelConverterService();
         }
-        public static OrdenOrdenEmpleadoViewModelConverterService GetOrdenOrdenEmpleadModelConverterService()
-
+        public static OrdenOrdenEmpleadoModelConverterService GetOrdenOrdenEmpleadoModelConverterService()
+        {
+            return new OrdenOrdenEmpleadoModelConverterService();
+        }
+        public static OrdenOrdenClienteModelConverterService GetOrdenOrdenClienteModelConverterService()
+        {
+            return new OrdenOrdenClienteModelConverterService();
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Data.Models.ViewModels.OrdenViewModelCliente>
+﻿@model IEnumerable<Data.Models.ViewModels.OrdenClienteViewModel>
 @using Data.Services
 @{
     ViewBag.Title = "OrdenListaClientes";
@@ -6,6 +6,7 @@
 
     <div class="jumbotron" id="jumbotronTitulo"> 
         <div class="titulo">
+            <img class="img-title-center"src="~/Content/Images/kisspng-invoice-payment-bookkeeping-accounting-computer-ic-save-png-invoices-5ab1109e4137b1.6855386115215535662671.png" />
             <h2>Historial de ordenes</h2>
         </div>
     </div>
@@ -44,9 +45,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.Sucursal.NombreSucursal)
         </td>
-        <th>
+        <td>
             @Html.DisplayFor(modelItem => item.Producto.NombreProducto)
-        </th>
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.OrdenDetalle.PrecioVenta)
         </td>

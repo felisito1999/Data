@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "VisualizarImagenOriginal";
+}
+
+    <div class="jumbotron" id="jumbotronTitulo">
+        <h2>Visualizar imagen original</h2>
+    </div>
+
+@{ 
+    var base64 = Convert.ToBase64String(ViewBag.Imagen);
+    var imageSource = String.Format("data:image/gif;base64,{0}", base64);
+}
+<img class="img-responsive" src="@imageSource" alt="Imagen original de producto" />
+

@@ -52,7 +52,7 @@ textarea {
     border-radius: 3px,3px;
 }
 .table tr:hover {
-    background: rgba(62, 69, 81, 1)
+    background: rgba(0, 0, 0, 0.7);
 }
 .table th {
     background: rgba(62, 69, 81, 0.7);
@@ -123,12 +123,12 @@ textarea {
     transform: translate(-50%, -50%);
     font-size: 48px;
     font-weight: bolder;
-    background: rgba(62, 69, 81, 1);
+    background: rgba(62, 69, 81, 0.9);
     border-radius: 10px;
 }
-#sucursalPanel {
+/*#sucursalPanel {
     border-width: thin;
-}
+}*/
 #sucursalPanelHeading {
     background: #3E4551;
     color: white;
@@ -234,7 +234,7 @@ textarea {
     font-weight: bolder;
 }
 #navbar {
-    background: rgba(62, 69, 81,0.8);
+    background: rgba(62, 69, 81,0.9);
 }
 #navbarUl a{
     color: white;
@@ -332,9 +332,10 @@ textarea {
     left: 50%;
     transform: translate(-50%, -50%);
 }
-.panel-header{
+.panel-header {
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
+    border-top: 2px solid rgba(255, 255, 255, 0.5);
 }
 #jumbotronTitulo {
     color: white;
@@ -347,4 +348,14 @@ textarea {
     border-left: none;
     border-color: rgba(255, 255, 255, 0.5);
     border-radius: 0px;
+    text-shadow: 5px 10px 8px black;
+}
+.btn-responsive {
+    white-space: normal !important;
+    word-wrap: break-word;
+}
+.img-title-center {
+    height: auto;
+    width: 15%;
+    display: inline;
 }

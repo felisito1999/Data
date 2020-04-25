@@ -4,7 +4,7 @@
     ViewBag.Title = "VerGaleriaDeProducto";
 }
 
-    <div class="titleContainer">
+    <div class="jumbotron" id="jumbotronTitulo">
         <h2>Ver galeria de producto</h2>
     </div>
 <hr size="10"/>
@@ -13,7 +13,7 @@
     @foreach (var modelItem in Model)
     {
         <div class="col-sm-6 col-md-3">
-            <a href="#" class="thumbnail" id="thumbnailImagenesProductos">
+            <a href="/Imagen/VisualizarImagenOriginal/@modelItem.CodigoImagenProducto" class="thumbnail" id="thumbnailImagenesProductos">
                 @{ 
                     var base64 = Convert.ToBase64String(modelItem.Imagen);
                     var imageSource = String.Format("data:image/gif;base64,{0}", base64);

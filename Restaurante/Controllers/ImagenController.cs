@@ -48,5 +48,12 @@ namespace Restaurante.Controllers
                 return View();
             }
         }
+        public ActionResult VisualizarImagenOriginal(int id)
+        {
+            var imagen = GetService.GetImagenService().FindById(id);
+            ViewBag.Imagen = imagen.Imagen;
+
+            return View();
+        }
     }
 }

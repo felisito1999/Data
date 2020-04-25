@@ -154,6 +154,8 @@
     <Content Include="Content\Images\272ddb80b6378ecaf212a06d3b4663a7.jpg" />
     <Content Include="Content\Images\359-3598161_clients-svg-png-icon-free-download-451479-clients.png" />
     <Content Include="Content\Images\kisspng-fusion-cuisine-european-cuisine-restaurant-pizza-c-dining-vector-5ad9d0ef352779.1186250915242242392177.png" />
+    <Content Include="Content\Images\kisspng-hamburger-black-and-white-vector-burger-5a7005d08ecb94.1893478915172909605849.png" />
+    <Content Include="Content\Images\kisspng-invoice-payment-bookkeeping-accounting-computer-ic-save-png-invoices-5ab1109e4137b1.6855386115215535662671.png" />
     <Content Include="Content\Images\Meat_Header_1490713811.jpg" />
     <Content Include="Content\Images\pinpng.com-crm-icon-png-3834939.png" />
     <Content Include="Content\Images\Screen Shot 2020-04-24 at 2.25.13 AM.png" />
@@ -310,6 +312,7 @@
     <Content Include="Views\Empleado\EmpleadosEsperandoActivacion.cshtml" />
     <Content Include="Views\Orden\OrdenListaClientes.cshtml" />
     <Content Include="Views\Orden\OrdenListaEmpleados.cshtml" />
+    <Content Include="Views\Imagen\VisualizarImagenOriginal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

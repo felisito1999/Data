@@ -57,42 +57,16 @@ namespace Restaurante.Controllers
         {
             var clienteUser = GetService.GetClienteService().GetClienteFromUserName(User.Identity.Name);
             var ordenes = GetService.GetOrdenService().ListAll().Where(x => x.CodigoCliente == clienteUser.CodigoCliente & x.Borrado == false);
-
-            List<OrdenViewModelCliente> ordenesView = new List<OrdenViewModelCliente>();
-            foreach (var item in ordenes)
-            {
-                var sucursal = GetService.GetSucursalService().FindById(item.CodigoSucursal);
-                var cliente = GetService.GetClienteService().FindById(item.CodigoCliente);
-                var estado = GetService.GetEstadoService().FindById(item.CodigoEstado);
-                var ordenDetalle = GetService.GetOrdenDetalleService().ListSortedByGivenCategoryId(item.CodigoOrden).FirstOrDefault();
-                var producto = GetService.GetProductoService().FindById(ordenDetalle.CodigoProducto);
-                var empleado = GetService.GetEmpleadoService().FindById(item.CodigoEmpleado);
-
-                OrdenViewModelCliente ordenViewModel = new OrdenViewModelCliente
-                {
-                    CodigoOrden = item.CodigoOrden,
-                    CodigoSucursal = item.CodigoSucursal,
-                    CodigoCliente = item.CodigoCliente,
-                    CodigoEstado = item.CodigoEstado,
-                    Sucursal = sucursal,
-                    Cliente = cliente,
-                    Estado = estado,
-                    OrdenDetalle = ordenDetalle,
-                    Producto = producto,
-                    Empleado = empleado,
-                    Fecha = item.FechaHora
-                };
-                ordenesView.Add(ordenViewModel);
-            }
-            var ordenesDesdeMasNueva = ordenesView.OrderByDescending(x => x.CodigoOrden);
-            return View(ordenesDesdeMasNueva);
+            var ordenesView = GetService.GetOrdenOrdenClienteModelConverterService().ConvertfromListToViewModel(ordenes);
+           
+            return View(ordenesView);
         }
         [Authorize(Roles = "Empleado")]
         public ActionResult OrdenListaEmpleados()
         {
             var empleado = GetService.GetEmpleadoService().GetEmpleadoByUserName(User.Identity.Name);
             var ordenes = GetService.GetOrdenService().ListAll().Where(x => x.CodigoEmpleado == empleado.CodigoEmpleado & x.Borrado == false);
-            var ordenesView = GetService.GetOrdenOrdenEmpleadModelConverterService().ConvertfromListToViewModel(ordenes);
+            var ordenesView = GetService.GetOrdenOrdenEmpleadoModelConverterService().ConvertfromListToViewModel(ordenes);
 
             return View(ordenesView);
         }

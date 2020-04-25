@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Data.Services
 {
-    public class OrdenOrdenEmpleadoModelConverterService : IModelViewModelConverter<Orden, OrdenEmpleadoViewModel>
+    public class OrdenOrdenClienteModelConverterService : IModelViewModelConverter<Orden, OrdenClienteViewModel>
     {
-        public IEnumerable<OrdenEmpleadoViewModel> ConvertfromListToViewModel(IEnumerable<Orden> ordenes)
+        public IEnumerable<OrdenClienteViewModel> ConvertfromListToViewModel(IEnumerable<Orden> ordenes)
         {
-            List<OrdenEmpleadoViewModel> ordenesView = new List<OrdenEmpleadoViewModel>();
+            List<OrdenClienteViewModel> ordenesView = new List<OrdenClienteViewModel>();
 
             foreach (var item in ordenes)
             {
@@ -23,10 +23,10 @@ namespace Data.Services
                 var ordenDetalle = GetService.GetOrdenDetalleService().ListSortedByGivenCategoryId(item.CodigoOrden).FirstOrDefault();
                 var producto = GetService.GetProductoService().FindById(ordenDetalle.CodigoProducto);
 
-                OrdenEmpleadoViewModel ordenView = new OrdenEmpleadoViewModel
+                OrdenClienteViewModel ordenView = new OrdenClienteViewModel
                 {
                     CodigoOrden = item.CodigoOrden,
-                    CodigoEmpleado = item.CodigoEmpleado,
+                    CodigoCliente = item.CodigoCliente,
                     CodigoSucursal = item.CodigoSucursal,
                     CodigoEstado = item.CodigoEstado,
                     Empleado = empleadoOrden,
@@ -44,17 +44,17 @@ namespace Data.Services
             return ordenesDesdeMasNueva;
         }
 
-        public Orden ConvertFromViewModel(OrdenEmpleadoViewModel viewModel)
+        public Orden ConvertFromViewModel(OrdenClienteViewModel viewModel)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Orden> ConvertListFromViewModel(IEnumerable<OrdenEmpleadoViewModel> viewModel)
+        public IEnumerable<Orden> ConvertListFromViewModel(IEnumerable<OrdenClienteViewModel> viewModel)
         {
             throw new NotImplementedException();
         }
 
-        public OrdenEmpleadoViewModel ConvertToViewModel(Orden original)
+        public OrdenClienteViewModel ConvertToViewModel(Orden original)
         {
             throw new NotImplementedException();
         }
