@@ -234,15 +234,17 @@ textarea {
     font-weight: bolder;
 }
 #navbar {
-    background: rgba(62, 69, 81,0.9);
+    background: rgba(62, 69, 81,0.95);
 }
 #navbarUl a{
     color: white;
     font-weight: 400;
+    text-shadow: 2px 5px 4px black;
 }
 #navbarRightUl a {
     color: white;
     font-weight: 400;
+    text-shadow: 2px 5px 4px black;
 }
 #navbarRightUl a:hover {
     background: #555a66;
@@ -309,6 +311,7 @@ textarea {
     color: white
 }
 #jumbotronMenu {
+    margin-top: 10px;
     color: white;
     background: rgba(62, 69, 81, 0.85);
     text-align: center;
@@ -338,6 +341,7 @@ textarea {
     border-top: 2px solid rgba(255, 255, 255, 0.5);
 }
 #jumbotronTitulo {
+    margin-top: 10px;
     color: white;
     background: rgba(62, 69, 81, 0.85);
     text-align: center;
@@ -358,4 +362,13 @@ textarea {
     height: auto;
     width: 15%;
     display: inline;
+}
+#label-info{
+    color: white;
+}
+#tituloPagina{
+    font-family: cursive;
+    color: white;
+    font-weight: bolder;
+    text-shadow:0px 8px 4px black;
 }

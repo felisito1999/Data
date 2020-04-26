@@ -47,8 +47,8 @@
                     @Html.DisplayFor(modelItem => item.DireccionSucursal)
                 </td>
                 <td>
-                    @Html.ActionLink("Ver menu", "ProductoMenuList", "ProductoMenu", new { id = item.CodigoSucursal }, new { @class = "btn btn-block", id= "botonFuncional"})
-                    @Html.ActionLink("Modificar sucursal", "UpdateSucursal", "Sucursal", new { id = item.CodigoSucursal }, new { @class = "btn btn-block", id= "botonFuncional" })
+                    @Html.ActionLink("Administrar menú", "ProductoMenuList", "ProductoMenu", new { id = item.CodigoSucursal }, new { @class = "btn btn-block", id= "botonFuncional"})
+                    @Html.ActionLink("Modificar datos del local", "UpdateSucursal", "Sucursal", new { id = item.CodigoSucursal }, new { @class = "btn btn-block", id= "botonFuncional" })
                     @Html.ActionLink("Eliminar", "DeleteSucursal", "Sucursal", new { id = item.CodigoSucursal }, new { @class = "btn btn-block", id= "botonFuncional" })
                 </td>
             </tr>

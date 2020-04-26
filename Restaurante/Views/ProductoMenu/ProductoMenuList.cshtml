@@ -16,10 +16,12 @@
 @if (User.IsInRole("Administrador"))
 {
     <p>
-        @Html.ActionLink("Agregar producto existente a sucursal", "AgregarProductoSucursal", "ProductoMenu", new { id = ViewBag.CodigoSucursal }, new { @class = "btn btn-block", id = "botonFuncional" })
+        @Html.ActionLink("Agregar productos al menú", "AgregarProductoSucursal", "ProductoMenu", new { id = ViewBag.CodigoSucursal }, new { @class = "btn btn-block", id = "botonFuncional" })
     </p>
     <table class="table">
         <tr>
+            <th>
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Producto)
             </th>
@@ -35,6 +37,13 @@
         @foreach (var item in Model)
         {
             <tr>
+                <td>
+                    @{ 
+                        var base64 = Convert.ToBase64String(item.ImagenPrincipal);
+                        var imageSource = String.Format("data:image/gif;base64,{0}", base64);
+                    }
+                    <img id="productoListImage" src="@imageSource" alt="imagen del producto" />
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Producto.NombreProducto)
                 </td>

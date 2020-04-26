@@ -34,6 +34,7 @@ namespace Restaurante.Controllers
             var menu = GetService.GetMenuService().GetMenuBySucursalId(id);
             var productoMenuNotInSucursalMenu = GetService.GetProductoService().GetProductosNotInSucursalMenu(menu.CodigoMenu);
             var productosView = GetService.GetProductoProductoMenuModelConverterService().ConvertfromListToViewModel(productoMenuNotInSucursalMenu);
+
             ViewBag.CodigoSucursal = GetService.GetSucursalService().FindById(id).CodigoSucursal;
             return View(productosView);
         }
