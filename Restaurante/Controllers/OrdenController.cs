@@ -21,7 +21,7 @@ namespace Restaurante.Controllers
                 var producto = GetService.GetProductoService().FindById(idProducto);
                 var menu = GetService.GetMenuService().GetMenuBySucursalId(idSucursal);
                 var productoMenu = GetService.GetProductoMenuService().GetProductoMenuByMenuIdProductoId(menu.CodigoMenu, producto.CodigoProducto);
-                var empleadoAsignado = GetService.GetOrdenService().SeleccionarEmpleadoMenorCantidadOrdenPendiente(idSucursal);
+                var empleadoAsignado = GetService.GetEmpleadoService().SeleccionarEmpleadoMenorCantidadOrdenPendiente(idSucursal);
                 var cliente = GetService.GetClienteService().GetClienteFromUserName(User.Identity.Name);
                 Orden orden = new Orden
                 {
@@ -41,7 +41,8 @@ namespace Restaurante.Controllers
                     CodigoOrden = GetService.GetOrdenService().FindLastOrden().CodigoOrden,
                     Cantidad = 1,
                     CodigoProducto = idProducto,
-                    PrecioVenta = productoMenu.Precio
+                    PrecioVenta = productoMenu.Precio,
+                    SubTotal = productoMenu.Precio
                 };
                 GetService.GetOrdenDetalleService().Insert(ordenDetalle);
                 return RedirectToAction("SucursalIndex", "Sucursal");
@@ -52,16 +53,70 @@ namespace Restaurante.Controllers
                 throw;
             }
         }
-        public ActionResult OrdenarCarrito(ProductoMenuListViewModel productoList)
+        [Authorize(Roles = "Cliente")]
+        public ActionResult OrdenarCarrito()
         {
             try
             {
-                List<OrdenDetalle> ordenDetalle = new List<OrdenDetalle>();
+                var productoListView = (List<ProductoMenu>)Session["Carrito"];
+                var productoList = GetService.GetProductoMenuListModelConverter().ConvertfromListToViewModel(productoListView);
+                List<OrdenDetalle> ordenDetalles = new List<OrdenDetalle>();
+
+                var cliente = GetService.GetClienteService().GetClienteFromUserName(User.Identity.Name);
+                var menu = GetService.GetMenuService().GetMenuByProductoMenu(productoList.ToList()[0].CodigoProductoMenu);
+                var sucursal = GetService.GetSucursalService().FindById(menu.CodigoSucursal);
+                var empleadoAsignado = GetService.GetEmpleadoService().SeleccionarEmpleadoMenorCantidadOrdenPendiente(sucursal.CodigoSucursal);
+
+                Orden orden = new Orden
+                {
+                    CodigoCliente = cliente.CodigoCliente,
+                    CodigoEmpleado = empleadoAsignado.CodigoEmpleado,
+                    CodigoSucursal = sucursal.CodigoSucursal,
+                    CodigoEstado = 1024,
+                    FechaHora = DateTime.Now,
+                    Borrado = false
+                };
+
+                GetService.GetOrdenService().Insert(orden);
+                var lastOrden = GetService.GetOrdenService().FindLastOrden();
+
+                foreach (var item in productoList)
+                {
+                    var producto = GetService.GetProductoService().FindById(item.CodigoProducto);
+
+                    if (ordenDetalles.Exists(x => x.CodigoProducto == item.CodigoProducto) == false)
+                    {
+                        OrdenDetalle ordenDetalle = new OrdenDetalle
+                        {
+                            CodigoOrden = lastOrden.CodigoOrden,
+                            CodigoProducto = producto.CodigoProducto,
+                            CodigoEstado = 1026,
+                            Cantidad = item.Cantidad,
+                            Costo = producto.Costo,
+                            Borrado = false,
+                            PrecioVenta = item.Precio,
+                            SubTotal = item.Precio * item.Cantidad
+                        };
+                        ordenDetalles.Add(ordenDetalle);
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+
+                if (ordenDetalles.Count() > 0)
+                {
+                    foreach (var item in ordenDetalles)
+                    {
+                        GetService.GetOrdenDetalleService().Insert(item);
+                    }
+                }
+                return RedirectToAction("OrdenListaClientes");
             }
             catch (Exception)
             {
-
-                throw;
+                return RedirectToAction("ListarCarrito", "Carrito");
             }
         }
         [Authorize(Roles = "Cliente")]

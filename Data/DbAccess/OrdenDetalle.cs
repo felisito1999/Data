@@ -22,6 +22,7 @@ namespace Data.DbAccess
         public decimal PrecioVenta { get; set; }
         public int CodigoEstado { get; set; }
         public Nullable<bool> Borrado { get; set; }
+        public Nullable<decimal> SubTotal { get; set; }
     
         public virtual Estado Estados { get; set; }
         public virtual Orden Ordenes { get; set; }

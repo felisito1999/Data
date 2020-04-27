@@ -60,9 +60,16 @@ namespace Restaurante.Controllers
                 listaCarrito = (List<ProductoMenu>)Session["Carrito"];
 
                 var listaCarritoView = GetService.GetProductoMenuListModelConverter().ConvertfromListToViewModel(listaCarrito);
+
                 return View(listaCarritoView);
             }
             return View();
+        }
+        [Authorize]
+        [HttpPost]
+        public ActionResult ListarCarrito(List<ProductoMenuListViewModel> productoListView)
+        {
+            return RedirectToAction("OrdenarCarrito", "Orden", new { productoList = productoListView });
         }
         public ActionResult EliminarProducto(int id)
         {

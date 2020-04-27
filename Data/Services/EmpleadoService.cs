@@ -119,5 +119,35 @@ namespace Data.Services
                 return empleadosInactivos;
             }
         }
+        public Empleado SeleccionarEmpleadoMenorCantidadOrdenPendiente(int idSucursal)
+        {
+
+            var empleados = GetService.GetEmpleadoService().ListAll().Where(x => x.CodigoEstado == 3 & GetService.GetUsuarioService().FindById(x.CodigoUsuario).CodigoEstado == 10 & x.CodigoSucursal == idSucursal & x.CodigoEstado == 3);
+            int iteracion = 0;
+            int minOrdenes = 0;
+            int minOrdenesCodigoEmpleado = 0;
+            foreach (var item in empleados)
+            {
+                int CantidadOrdenes = GetService.GetOrdenService().ListAll().Where(x => x.CodigoEstado == 1024 & x.CodigoEmpleado == item.CodigoEmpleado & x.CodigoSucursal == item.CodigoSucursal).Count();
+
+                if (iteracion == 0)
+                {
+                    minOrdenes = CantidadOrdenes;
+                    minOrdenesCodigoEmpleado = item.CodigoEmpleado;
+                    iteracion += 1;
+                }
+                else
+                {
+                    if (CantidadOrdenes < minOrdenes)
+                    {
+                        minOrdenes = CantidadOrdenes;
+                        minOrdenesCodigoEmpleado = item.CodigoEmpleado;
+                    }
+                }
+            }
+
+            var minOrdenesEmpleado = GetService.GetEmpleadoService().FindById(minOrdenesCodigoEmpleado);
+            return minOrdenesEmpleado;
+        }
     }
 }

@@ -9,75 +9,105 @@
     <h2>Carrito</h2>
 </div>
 
-<table class="table table-responsive">
-    <tr>
-        <th></th>
-        <th>
-            @Html.DisplayNameFor(model => model.DescripcionProducto)
-        </th>
-        <th>
-            Sucursal:
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cantidad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Precio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Subtotal)
-        </th>
-        <th></th>
-    </tr>
-    @{ 
-        decimal total = 0;
-    }
-@foreach (var item in Model) {
-    <tr>
-        <td>
+    @if (Model != null)
+    {
+        <table class="table table-responsive">
+            <tr>
+                <th></th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DescripcionProducto)
+                </th>
+                <th>
+                    Sucursal:
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cantidad)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Precio)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Subtotal)
+                </th>
+                <th></th>
+            </tr>
             @{
-                var base64 = Convert.ToBase64String(item.ImagenPrincipal);
-                var imageSource = String.Format("data:image/gif;base64,{0}", base64);
+                decimal total = 0;
             }
-            <img id="productoListImage" class="img-responsive" src="@imageSource" alt="Imagen de producto" />
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DescripcionProducto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelitem => GetService.GetSucursalService().GetSucursalByMenuId(GetService.GetMenuService().GetMenuByProductoMenu(item.CodigoProductoMenu).CodigoSucursal).NombreSucursal)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cantidad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Precio)
-        </td>
-        <td>
-            @{
-                total += item.Subtotal;
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @{
+                            var base64 = Convert.ToBase64String(item.ImagenPrincipal);
+                            var imageSource = String.Format("data:image/gif;base64,{0}", base64);
+                        }
+                        <img id="productoListImage" class="img-responsive" src="@imageSource" alt="Imagen de producto" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DescripcionProducto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelitem => GetService.GetSucursalService().GetSucursalByMenuId(GetService.GetMenuService().GetMenuByProductoMenu(item.CodigoProductoMenu).CodigoSucursal).NombreSucursal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cantidad)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Precio)
+                    </td>
+                    <td>
+                        @{
+                            total += item.Subtotal;
+                        }
+                        @Html.DisplayFor(modelItem => item.Subtotal)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Remover producto", "EliminarProducto", "Carrito", new { id = item.CodigoProductoMenu }, new { @class = "btn btn-block btn-responsive", id = "botonFuncional" })
+                    </td>
+                </tr>
             }
-            @Html.DisplayFor(modelItem => item.Subtotal)
-        </td>
-        <td>
-            @Html.ActionLink("Remover producto", "EliminarProducto", "Carrito", new { id = item.CodigoProductoMenu}, new { @class = "btn btn-block btn-responsive", id = "botonFuncional"})
-        </td>
-    </tr>
-}
-    <tr>
-        <td></td>
-        <td></td>
-        <td>
-        </td>
-        <td>
-        </td>
-        <td>
-            Total:
-        </td>
-        <td>
-            @Decimal.Round(total,2) RD$
-        </td>
-        <td>@Html.ActionLink("Realizar orden", "OrdenarCarrito", "Orden", new { Model }, new { @class = "btn btn-block", id = "botonFuncional" })</td>
-    </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                    Total:
+                </td>
+                <td>
+                    @if (Model.Count() > 0)
+                    {
+                        <p>@Decimal.Round(total, 2) RD$</p>
+                    }
+                    else
+                    {
+                        <p>0.00 RD$</p>
+                    }
+                </td>
+                <td>
+                    @if (Model.Count() > 0)
+                    {
+                        @Html.ActionLink("Realizar orden", "OrdenarCarrito", "Orden", new { Model }, new { @class = "btn btn-block", id = "botonFuncional" })
+                        @Html.ActionLink("Submit", "ListarCarrito", "Carrito", Model, new { @id = "submit" })
+                        <input type="submit" class="btn btn-block" id="botonFuncional" />
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Realizar orden", "OrdenarCarrito", "Orden", new { productoList = ViewBag.Lista }, new { @class = "btn btn-block btn-disabled", id = "botonFuncional" })
+                    }
 
-</table>
+                </td>
+            </tr>
+
+        </table>
+    }
+    else
+    {
+        <div class="jumbotron" id="jumbotronMenu">
+            <h2>No hay platos en el carrito</h2>
+        </div>
+    }
+

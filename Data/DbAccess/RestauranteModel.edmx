@@ -99,6 +99,7 @@
           <Property Name="PrecioVenta" Type="decimal" Precision="12" Scale="4" Nullable="false" />
           <Property Name="CodigoEstado" Type="int" Nullable="false" />
           <Property Name="Borrado" Type="bit" />
+          <Property Name="SubTotal" Type="decimal" Precision="12" Scale="4" />
         </EntityType>
         <EntityType Name="Paises">
           <Key>
@@ -1151,6 +1152,7 @@
           <NavigationProperty Name="Estados" Relationship="RestauranteModel.FK_EstadosOrdenesDetalles" FromRole="OrdenesDetalles" ToRole="Estado" />
           <NavigationProperty Name="Ordenes" Relationship="RestauranteModel.FK_OrdenesOrdenesDetalles" FromRole="OrdenesDetalles" ToRole="Ordenes" />
           <NavigationProperty Name="Productos" Relationship="RestauranteModel.FK_ProductosOrdenesDetalles" FromRole="OrdenDetalle" ToRole="Productos" />
+          <Property Name="SubTotal" Type="Decimal" Precision="12" Scale="4" />
         </EntityType>
         <Association Name="FK_ClientesOrdenes">
           <End Type="RestauranteModel.Cliente" Role="Cliente" Multiplicity="1" />
@@ -1466,6 +1468,7 @@
           <EntitySetMapping Name="OrdenesDetalles">
             <EntityTypeMapping TypeName="RestauranteModel.OrdenDetalle">
               <MappingFragment StoreEntitySet="OrdenesDetalles">
+                <ScalarProperty Name="SubTotal" ColumnName="SubTotal" />
                 <ScalarProperty Name="Borrado" ColumnName="Borrado" />
                 <ScalarProperty Name="CodigoEstado" ColumnName="CodigoEstado" />
                 <ScalarProperty Name="PrecioVenta" ColumnName="PrecioVenta" />
