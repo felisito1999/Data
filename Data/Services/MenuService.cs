@@ -67,5 +67,15 @@ namespace Data.Services
                 return menuSucursal;
             }
         }
+        public Menu GetMenuByProductoMenu(int idProductoMenu)
+        {
+            using (var context = GetService.GetRestauranteEntityService())
+            {
+                var productoMenu = context.ProductosMenues.ToList().Where(x => x.CodigoProductoMenu == idProductoMenu).FirstOrDefault();
+                var menu = context.Menues.ToList().Where(x => x.CodigoMenu == productoMenu.CodigoMenu).SingleOrDefault();
+
+                return menu;
+            }
+        }
     }
 }

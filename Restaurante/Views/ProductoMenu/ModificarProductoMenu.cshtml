@@ -4,8 +4,8 @@
     ViewBag.Title = "ModificarProductoMenu";
 }
 
-    <div class ="titleContainer">
-        <h2>ModificarProductoMenu</h2>
+    <div class ="jumbotron" id="jumbotronTitulo">
+        <h2>Modificar precio del producto en la sucursal</h2>
     </div>
 
 @using (Html.BeginForm()) 
@@ -44,7 +44,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Precio, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Precio, new { htmlAttributes = new { @class = "form-control", id = "label-info" } })
+                @Html.EditorFor(model => model.Precio, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Precio, "", new { @class = "text-danger" })
             </div>
         </div>

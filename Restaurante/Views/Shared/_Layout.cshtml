@@ -1,4 +1,5 @@
 ﻿@using Data.Services
+@using Data.DbAccess
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +18,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Felix's Gorditos Place", "SucursalIndex", "Sucursal", new { area = "" }, new { @class = "navbar-brand", id = "tituloPagina" })
+                @Html.ActionLink("Felix's Gorditos", "SucursalIndex", "Sucursal", new { area = "" }, new { @class = "navbar-brand", id = "tituloPagina" })
                 @*<a href="~/Views/Sucursal/SucursalIndex.cshtml"><img class="img-responsive" src="~/Content/Images/Screen Shot 2020-04-24 at 2.25.13 AM.png" /></a>*@
             </div>
             <div class="navbar-collapse collapse">
@@ -29,7 +30,6 @@
                         <li>@Html.ActionLink("Sucursales", "SucursalIndex", "Sucursal")</li>
                         <li>@Html.ActionLink("Productos", "ListaProductos", "Producto")</li>
                         <li>@Html.ActionLink("Sobre nosotros", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
                     </ul>
                 }
                 else if (User.IsInRole("Cliente"))
@@ -37,9 +37,9 @@
                     <ul id="navbarUl" class="nav navbar-nav">
                         <li>@Html.ActionLink("Pagina principal", "SucursalIndex", "Sucursal")</li>
                         <li>@Html.ActionLink("Sucursales", "SucursalIndex", "Sucursal")</li>
+                        <li>@Html.ActionLink("Platos", "ListaProductos", "Producto")</li>
                         <li>@Html.ActionLink("Historial de ordenes", "OrdenListaClientes", "Orden")</li>
                         <li>@Html.ActionLink("Sobre nosotros", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
                     </ul>
                 }
                 else if (User.Identity.IsAuthenticated == false)
@@ -47,8 +47,8 @@
                     <ul id="navbarUl" class="nav navbar-nav">
                         <li>@Html.ActionLink("Pagina principal", "SucursalIndex", "Sucursal")</li>
                         <li>@Html.ActionLink("Sucursales", "SucursalIndex", "Sucursal")</li>
+                        <li>@Html.ActionLink("Platos", "ListaProductos", "Producto")</li>
                         <li>@Html.ActionLink("Sobre nosotros", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
                     </ul>
                 }
                 else if (User.IsInRole("Empleado"))
@@ -88,21 +88,32 @@
                     {
                         <ul id="navbarRightUl" class="nav navbar-nav navbar-right">
                             <li>
-                                <img height="15" width="15" src="image.svg" />
+                                @{ 
+                                    //Contar la cantidad de objetos que estan en el carrito
+                                    List<ProductoMenu> carrito = new List<ProductoMenu>();
+                                    carrito = (List<ProductoMenu>)Session["Carrito"];
+                                    int productosEnCarrito;
+
+                                    if(carrito == null)
+                                    {
+                                        productosEnCarrito = 0;
+                                    }
+                                    else
+                                    {
+                                        productosEnCarrito = carrito.Count();
+                                    }
+                                }
+                                <a href="/Carrito/ListarCarrito"><img height="20" width="20" src="~/Content/Images/shopping-cart.svg" /> @productosEnCarrito</a>
                             </li>
                             <li>
                                 @{
                                     var cliente = GetService.GetClienteService().GetClienteFromUserName(User.Identity.Name);
-                                    string NombreCompletoUsuario = cliente.NombreCliente + " "
+                                    string nombreCompletoUsuario = cliente.NombreCliente + " "
                                         + GetService.GetClienteService().GetClienteFromUserName(User.Identity.Name).ApellidoCliente;
 
-                                    if (cliente.Sexo == "Masculino")
+                                    if (nombreCompletoUsuario != null)
                                     {
-                                        @Html.ActionLink("Bienvenido " + NombreCompletoUsuario, "DetalleUsuario", "Login");
-                                    }
-                                    else
-                                    {
-                                        @Html.ActionLink("Bienvenida " + NombreCompletoUsuario, "DetalleUsuario", "Login");
+                                        @Html.ActionLink(nombreCompletoUsuario, "DetalleUsuario", "Login");
                                     }
                                 }
                             </li>

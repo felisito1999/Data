@@ -1,60 +1,134 @@
 ﻿@model IEnumerable<Data.Models.ViewModels.ProductoViewModel>
-
+@using Data.DbAccess
+@using Data.Services
 @{
     ViewBag.Title = "ListaProductos";
 }
 
-    <div class="jumbotron" id="jumbotronTitulo">
-        <img class="img-responsive img-title-center"src="~/Content/Images/kisspng-hamburger-black-and-white-vector-burger-5a7005d08ecb94.1893478915172909605849.png" />
-        <h2>Lista de productos disponibles</h2>
-    </div>
+<div class="jumbotron" id="jumbotronTitulo">
+    <img class="img-responsive img-title-center" src="~/Content/Images/kisspng-hamburger-black-and-white-vector-burger-5a7005d08ecb94.1893478915172909605849.png" />
+    <h2>Lista de productos disponibles</h2>
+</div>
 
-<p>
-    @Html.ActionLink("Agregar producto", "AgregarProducto", "", new { @class = "btn btn-block", id = "botonFuncional" })
-</p>
-<table class="table">
+@if(User.IsInRole("Administrador"))
+{
+    <p>
+        @Html.ActionLink("Agregar producto", "AgregarProducto", "", new { @class = "btn btn-block", id = "botonFuncional" })
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                Imagen principal:
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreProducto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescripcionProducto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Costo)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @{
+                        var base64 = Convert.ToBase64String(item.Imagen);
+                        var imgSource = String.Format("data:image/gif;base64,{0}", base64);
+                    }
+                    <img class="img-responsive" id="productoListImage" src="@imgSource" alt="Imagen de producto" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreProducto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescripcionProducto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Costo)
+                </td>
+                <td>
+                    @Html.ActionLink("Agregar una imagen a la galeria del producto", "AgregarImagenAproducto", "Imagen", new { idProducto = item.CodigoProducto }, new { @class = "btn btn-block", id = "botonFuncional" })
+                    @Html.ActionLink("Actualizar información del producto", "ActualizarProducto", new { id = item.CodigoProducto }, new { @class = "btn btn-block", id = "botonFuncional" })
+                    @Html.ActionLink("Eliminar producto", "BorrarProducto", new { id = item.CodigoProducto }, new { @class = "btn btn-block", id = "botonFuncional" })
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+@if(User.IsInRole("Cliente") | User.Identity.IsAuthenticated == false)
+{
+<table class="table table-responsive">
     <tr>
         <th>
-            Imagen principal:
+            Imagen del plato:
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NombreProducto)
+            Nombre del plato:
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DescripcionProducto)
+            Descripción del plato:
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Costo)
+            Sucursales en las que este plato está disponible:
         </th>
-        <th></th>
     </tr>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @{
+                        var base64 = Convert.ToBase64String(item.Imagen);
+                        var imageSource = String.Format("data:image/gif;base64, {0}", base64);
+                    }
+                    <img class="img-responsive" id="productoListImage" src="@imageSource" alt="Imagen del producto" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreProducto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescripcionProducto)
+                </td>
+                <td>
+                    @{
+                        List<Menu> menues = new List<Menu>();
+                        List<Sucursal> sucursales = new List<Sucursal>();
+                        var productoMenu = GetService.GetRestauranteEntityService().ProductosMenues.ToList().Where(x => x.CodigoProducto == item.CodigoProducto).ToList();
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @{
-                    var base64 = Convert.ToBase64String(item.Imagen);
-                    var imgSource = String.Format("data:image/gif;base64,{0}", base64);
-                }
-                <img class="img-responsive" id="productoListImage" src="@imgSource" alt="Imagen de producto" />
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreProducto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DescripcionProducto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Costo)
-            </td>
-            <td>
-                @Html.ActionLink("Agregar una imagen a la galeria del producto", "AgregarImagenAproducto", "Imagen", new { idProducto = item.CodigoProducto }, new { @class = "btn btn-block", id = "botonFuncional"})
-                @Html.ActionLink("Actualizar información del producto", "ActualizarProducto", new { id = item.CodigoProducto }, new { @class = "btn btn-block", id = "botonFuncional" })
-                @Html.ActionLink("Eliminar producto", "BorrarProducto", new { id = item.CodigoProducto }, new { @class = "btn btn-block", id = "botonFuncional" })
-            </td>
-        </tr>
-    }
+                        foreach (var producto in productoMenu)
+                        {
+                            var menu = GetService.GetMenuService().FindById(producto.CodigoMenu);
 
+                            menues.Add(menu);
+                        }
+                        foreach (var menu in menues)
+                        {
+                            var sucursal = GetService.GetSucursalService().GetSucursalByMenuId(menu.CodigoSucursal);
+
+                            sucursales.Add(sucursal);
+                        }
+                        foreach (var sucursal in sucursales)
+                        {
+                            @Html.ActionLink(sucursal.NombreSucursal, "ProductoMenuList", "ProductoMenu", new { id = sucursal.CodigoSucursal }, new { @class = "btn btn-block btn-responsive", id = "botonFuncional" })
+                        }
+                        menues.Clear();
+                        sucursales.Clear();
+                        productoMenu.Clear();
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+}
+
+
+
+
 

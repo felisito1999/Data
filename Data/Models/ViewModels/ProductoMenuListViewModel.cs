@@ -15,6 +15,8 @@ namespace Data.Models.ViewModels
         public int CodigoProducto { get; set; }
         [Display(Name = "Imagen principal:")]
         public byte[] ImagenPrincipal { get; set; }
+        [Display(Name = "Cantidad:")]
+        public int Cantidad { get; set; }
         [Display(Name = "Nombre de producto:")]
         public Producto Producto { get; set; }
         [Display(Name = "Descripcion:")]

@@ -11,7 +11,7 @@ namespace Restaurante.Controllers
     public class ProductoController : Controller
     {
         // GET: Producto
-        [Authorize(Roles = "Administrador")]
+        //[Authorize(Roles = "Administrador, Cliente")]
         public ActionResult ListaProductos()
         {
             try

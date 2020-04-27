@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Data.Models.ViewModels.ProductoMenuListViewModel>
+@using Data.Services
+
+@{
+    ViewBag.Title = "ListarCarrito";
+}
+
+<div class="jumbotron" id="jumbotronTitulo">
+    <h2>Carrito</h2>
+</div>
+
+<table class="table table-responsive">
+    <tr>
+        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.DescripcionProducto)
+        </th>
+        <th>
+            Sucursal:
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cantidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Precio)
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+    @{ 
+        decimal total = 0;
+    }
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @{
+                var base64 = Convert.ToBase64String(item.ImagenPrincipal);
+                var imageSource = String.Format("data:image/gif;base64,{0}", base64);
+            }
+            <img id="productoListImage" class="img-responsive" src="@imageSource" alt="Imagen de producto" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DescripcionProducto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelitem => GetService.GetSucursalService().GetSucursalByMenuId(GetService.GetMenuService().GetMenuByProductoMenu(item.CodigoProductoMenu).CodigoSucursal).NombreSucursal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Precio)
+            @{
+                total += item.Precio;
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Remover producto", "EliminarProducto", "Carrito", new { id = item.CodigoProductoMenu}, new { @class = "btn btn-block btn-responsive", id = "botonFuncional"})
+        </td>
+    </tr>
+}
+    <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>
+            Total:
+        </th>
+        <th>
+            @Decimal.Round(total,2)
+        </th>
+    </tr>
+    <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>@Html.ActionLink("Realizar orden", "Agregar", "Orden")</th>
+    </tr>
+
+</table>

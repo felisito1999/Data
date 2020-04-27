@@ -134,6 +134,8 @@ textarea {
     color: white;
     font-weight: bold;
     border-color: #3E4551;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 }
 #sucursalPanelBody {
     background: rgba(62, 69, 81, 0.7);
@@ -141,10 +143,12 @@ textarea {
     border-color: #4B515D;
 }
 #sucursalPanelFooter {
-    background: #3E4551;
+    background: rgba(0, 0, 0, 0.7);
     padding: 0px;
     color: white;
     border-color: #4B515D;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 #productoPanel {
     border-width: thin;
@@ -162,19 +166,19 @@ textarea {
     border-color: rgba(62, 69, 81, 0.7);
 }
 #productoPanelFooter {
-    background: #3E4551;
+    background: rgba(0, 0, 0, 0.7);
     padding: 0px;
     color: white;
     border-color: #4B515D;
-    border-bottom-left-radius: 20px; 
+    border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
 }
 #btnVisualizarMenu {
     background: #3E4551;
     color: white;
     border-color: #ddd;
-    border-bottom-right-radius: 3px;
-    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
     border-top-right-radius: 0px;
     border-top-left-radius: 0px;
     font-weight: bold;
