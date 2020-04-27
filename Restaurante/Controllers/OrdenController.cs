@@ -52,6 +52,18 @@ namespace Restaurante.Controllers
                 throw;
             }
         }
+        public ActionResult OrdenarCarrito(ProductoMenuListViewModel productoList)
+        {
+            try
+            {
+                List<OrdenDetalle> ordenDetalle = new List<OrdenDetalle>();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         [Authorize(Roles = "Cliente")]
         public ActionResult OrdenListaClientes()
         {

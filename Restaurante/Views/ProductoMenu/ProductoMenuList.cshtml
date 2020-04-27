@@ -7,7 +7,7 @@
 <div class="container">
     <div class="jumbotron" id="stickyTitulo">
         <img src="~/Content/Images/1200x-1.jpg" class="img-responsive" />
-        <div id="tituloMenu">Menú</div>
+        <div id="tituloMenu">@GetService.GetSucursalService().FindById(ViewBag.CodigoSucursal).NombreSucursal</div>
     </div>
 </div>
 

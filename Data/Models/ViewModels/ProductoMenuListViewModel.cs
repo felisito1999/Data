@@ -36,6 +36,20 @@ namespace Data.Models.ViewModels
         }
         [Display(Name = "Precio (RD$):")]
         public decimal Precio { get; set; }
+        [Display(Name = "Subtotal:")]
+        public decimal Subtotal { 
+            get
+            {
+                if (Cantidad > 0 & Precio > 0)
+                {
+                    return Cantidad * Precio;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+                }
         public ImagenProducto Imagenes { get; set; }
         [Display(Name="Tipo de plato:")]
         public CategoriaProducto Categoria { get; set; }

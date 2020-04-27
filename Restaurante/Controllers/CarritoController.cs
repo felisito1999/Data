@@ -31,9 +31,16 @@ namespace Restaurante.Controllers
                     List<ProductoMenu> carrito = new List<ProductoMenu>();
 
                     carrito = (List<ProductoMenu>)Session["Carrito"];
-                    carrito.Add(productoMenu);
 
-                    Session["Carrito"] = carrito;
+
+                    if (carrito.Exists(x => x.CodigoMenu == productoMenu.CodigoMenu))
+                    {
+                        carrito.Add(productoMenu);
+
+                        Session["Carrito"] = carrito;
+
+                        return RedirectToAction("ListarCarrito");
+                    }
                 }
                 return RedirectToAction("ListarCarrito");
             }

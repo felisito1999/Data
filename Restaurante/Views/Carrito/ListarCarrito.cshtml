@@ -24,7 +24,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Precio)
         </th>
-        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.Subtotal)
+        </th>
         <th></th>
     </tr>
     @{ 
@@ -46,10 +48,16 @@
             @Html.DisplayFor(modelitem => GetService.GetSucursalService().GetSucursalByMenuId(GetService.GetMenuService().GetMenuByProductoMenu(item.CodigoProductoMenu).CodigoSucursal).NombreSucursal)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.Cantidad)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Precio)
+        </td>
+        <td>
             @{
-                total += item.Precio;
+                total += item.Subtotal;
             }
+            @Html.DisplayFor(modelItem => item.Subtotal)
         </td>
         <td>
             @Html.ActionLink("Remover producto", "EliminarProducto", "Carrito", new { id = item.CodigoProductoMenu}, new { @class = "btn btn-block btn-responsive", id = "botonFuncional"})
@@ -57,22 +65,19 @@
     </tr>
 }
     <tr>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th>
+        <td></td>
+        <td></td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
             Total:
-        </th>
-        <th>
-            @Decimal.Round(total,2)
-        </th>
-    </tr>
-    <tr>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th>@Html.ActionLink("Realizar orden", "Agregar", "Orden")</th>
+        </td>
+        <td>
+            @Decimal.Round(total,2) RD$
+        </td>
+        <td>@Html.ActionLink("Realizar orden", "OrdenarCarrito", "Orden", new { Model }, new { @class = "btn btn-block", id = "botonFuncional" })</td>
     </tr>
 
 </table>

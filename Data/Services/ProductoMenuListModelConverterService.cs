@@ -21,13 +21,21 @@ namespace Data.Services
                 ProductoMenuListViewModel productoMenuView = new ProductoMenuListViewModel
                 {
                     CodigoProductoMenu = item.CodigoProductoMenu,
+                    Cantidad = original.Where(x => x.CodigoProductoMenu == item.CodigoProductoMenu).Count(),
                     CodigoProducto = item.CodigoProducto,
                     ImagenPrincipal = GetService.GetImagenService().ListSortedByGivenCategoryId(item.CodigoProducto).FirstOrDefault().Imagen,
                     Producto = GetService.GetProductoService().FindById(item.CodigoProducto),
                     Precio = item.Precio,
                     Categoria = categoriaProducto
                 };
-                productosMenuesView.Add(productoMenuView);
+                if(productosMenuesView.Exists(x => x.CodigoProductoMenu == productoMenuView.CodigoProductoMenu))
+                {
+                    continue;
+                }
+                else
+                {
+                    productosMenuesView.Add(productoMenuView);
+                }
             }
             return productosMenuesView;
         }
@@ -44,7 +52,20 @@ namespace Data.Services
 
         public ProductoMenuListViewModel ConvertToViewModel(ProductoMenu original)
         {
-            throw new NotImplementedException();
+            var producto = GetService.GetProductoService().FindById(original.CodigoProducto);
+            var categoriaProducto = GetService.GetCategoriaProductoService().FindById(producto.CodigoCategoria);
+
+            ProductoMenuListViewModel productoMenuView = new ProductoMenuListViewModel
+            {
+                CodigoProducto = original.CodigoProducto,
+                CodigoProductoMenu = original.CodigoProductoMenu,
+                Cantidad = 1,
+                Categoria = categoriaProducto,
+                ImagenPrincipal = GetService.GetImagenService().ListSortedByGivenCategoryId(original.CodigoProducto).FirstOrDefault().Imagen,
+                Producto = producto,
+                Precio = original.Precio
+            };
+            return productoMenuView;
         }
     }
 }
