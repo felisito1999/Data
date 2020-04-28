@@ -56,7 +56,7 @@
             }
         </td>
         <td>
-            @Html.ActionLink("Ver detalle de orden", "DetallarOrdenCliente", "OrdenDetalle", new { id=item.CodigoOrden}, new { @class = "btn btn-block btn-responsive", id = "botonFuncional" })
+            @Html.ActionLink("Ver detalle de orden", "DetallarOrden", "OrdenDetalle", new { idOrden = item.CodigoOrden }, new { @class = "btn btn-block btn-responsive", id = "botonFuncional" })
         </td>
     </tr>
 }

@@ -81,8 +81,16 @@ namespace Restaurante.Controllers
                 var producto = listaCarrito.Where(x => x.CodigoProductoMenu == id).FirstOrDefault();
                 listaCarrito.Remove(producto);
 
-                Session["Carrito"] = listaCarrito;
+                if(listaCarrito.Count() < 1)
+                {
+                    Session.Clear();
+                }
+                else
+                {
+                    Session["Carrito"] = listaCarrito;
+                }
                 return RedirectToAction("ListarCarrito");
+
             }
             catch (Exception)
             {

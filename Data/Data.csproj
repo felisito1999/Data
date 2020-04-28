@@ -139,7 +139,7 @@
     <Compile Include="Models\ViewModels\EmpleadoViewModel.cs" />
     <Compile Include="Models\ViewModels\EstadoViewModel.cs" />
     <Compile Include="Models\ViewModels\ImagenProductoViewModel.cs" />
-    <Compile Include="Models\ViewModels\OrdenesOrdenesDetallesClienteViewModel.cs" />
+    <Compile Include="Models\ViewModels\OrdenDetalleViewModel.cs" />
     <Compile Include="Models\ViewModels\OrdenClienteViewModel.cs" />
     <Compile Include="Models\ViewModels\OrdenEmpleadoViewModel.cs" />
     <Compile Include="Models\ViewModels\PaisViewModel.cs" />
@@ -169,6 +169,7 @@
     <Compile Include="Services\IModelViewModelConverter.cs" />
     <Compile Include="Services\ISingleModelSystemService.cs" />
     <Compile Include="Services\MenuService.cs" />
+    <Compile Include="Services\OrdenDetalleModelConverterService.cs" />
     <Compile Include="Services\OrdenDetalleService.cs" />
     <Compile Include="Services\OrdenOrdenClienteModelConverterService.cs" />
     <Compile Include="Services\OrdenOrdenEmpleadoViewModelConverterService.cs" />

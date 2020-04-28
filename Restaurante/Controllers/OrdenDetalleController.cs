@@ -11,22 +11,19 @@ namespace Restaurante.Controllers
     {
         // GET: OrdenDetalle
         [Authorize(Roles = "Cliente,Empleado")]
-        public ActionResult DetallarOrdenCliente(int idOrden)
+        public ActionResult DetallarOrden(int idOrden)
         {
             try
             {
                 var ordenDetalle = GetService.GetOrdenDetalleService().ListSortedByGivenCategoryId(idOrden);
+                var ordenDetalleView = GetService.GetOrdenDetalleModelConverterService().ConvertfromListToViewModel(ordenDetalle);
 
-                return View(ordenDetalle);
+                return View(ordenDetalleView);
             }
             catch (Exception)
             {
                 return RedirectToAction("OrdenListaClientes", "Orden");
             }
-        }
-        public ActionResult DetallarOrdenEmpleado(int idOrden)
-        {
-            return View();
         }
     }
 }

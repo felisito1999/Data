@@ -90,9 +90,7 @@
                 <td>
                     @if (Model.Count() > 0)
                     {
-                        @Html.ActionLink("Realizar orden", "OrdenarCarrito", "Orden", new { Model }, new { @class = "btn btn-block", id = "botonFuncional" })
-                        @Html.ActionLink("Submit", "ListarCarrito", "Carrito", Model, new { @id = "submit" })
-                        <input type="submit" class="btn btn-block" id="botonFuncional" />
+                        @Html.ActionLink("Realizar orden", "OrdenarCarrito", "Orden","" ,new { @class = "btn btn-block", id = "botonFuncional" })
                     }
                     else
                     {

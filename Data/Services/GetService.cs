@@ -141,5 +141,9 @@ namespace Data.Services
         {
             return new OrdenOrdenClienteModelConverterService();
         }
+        public static OrdenDetalleModelConverterService GetOrdenDetalleModelConverterService()
+        {
+            return new OrdenDetalleModelConverterService();
+        }
     }
 }

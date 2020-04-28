@@ -112,6 +112,7 @@ namespace Restaurante.Controllers
                         GetService.GetOrdenDetalleService().Insert(item);
                     }
                 }
+                Session.Clear();
                 return RedirectToAction("OrdenListaClientes");
             }
             catch (Exception)

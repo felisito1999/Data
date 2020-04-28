@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Data.Models.ViewModels.OrdenDetalleViewModel>
+
+@{
+    ViewBag.Title = "DetallarOrden";
+}
+
+    <div class="jumbotron" id="jumbotronTitulo">
+        <h2>Detalle de orden</h2>
+    </div>
+
+<table class="table">
+    <tr>
+        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.NombreProducto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cantidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Precio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SubTotal)
+        </th>
+    </tr>
+    @{
+        decimal subtotal = 0;
+    }
+        @foreach (var item in Model) {
+        <tr>
+            <td>
+                @{ 
+                    var base64 = Convert.ToBase64String(item.ImagenPrincipal);
+                    var imageSource = String.Format("data:image/gif;base64,{0}", base64);
+                }
+                <img class="img-responsive" id="productoListImage"src="@imageSource" alt="Imagen del producto" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreProducto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cantidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+                @{ 
+                    subtotal += item.SubTotal;
+                }
+                @Html.DisplayFor(modelItem => item.SubTotal)
+            </td>
+        </tr>
+}
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+            Total:
+        </td>
+        <td>
+            @Decimal.Round(subtotal,2) RD$
+        </td>
+    </tr>
+
+</table>
